@@ -1,3 +1,6 @@
+build/
+
+## github node.js gitignore template
 # Logs
 logs
 *.log
