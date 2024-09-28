@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "InternetEnemies",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "sinon": "^19.0.2"
+  }
 }
