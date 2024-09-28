@@ -12,6 +12,7 @@
   "type": "module",
   "devDependencies": {
     "mocha": "^10.7.3",
-    "sinon": "^19.0.2"
+    "sinon": "^19.0.2",
+    "ts-node": "^10.9.2"
   }
 }
