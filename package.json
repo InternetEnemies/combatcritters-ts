@@ -9,8 +9,9 @@
   "keywords": [],
   "author": "InternetEnemies",
   "license": "",
+  "type": "module",
   "devDependencies": {
-    "jest": "^29.7.0",
+    "mocha": "^10.7.3",
     "sinon": "^19.0.2"
   }
 }
