@@ -1,3 +1,3 @@
-import * as API from "./types"
+import * as API from "./payloads"
 
 export class REST {}
