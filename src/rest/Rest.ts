@@ -1,3 +1,3 @@
 import * as API from "./payloads"
 
-export class REST {}
+export class Rest {}

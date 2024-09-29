@@ -1,4 +1,4 @@
-import {REST} from "../src/rest/REST"
+import {Rest} from "../src/rest/Rest.js"
 import * as assert from "assert"
 
 describe( "client test", () => {
