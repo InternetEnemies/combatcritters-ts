@@ -1,3 +1,4 @@
+import {ICard} from "./ICard";
 
 export interface IDeck {
     /**
