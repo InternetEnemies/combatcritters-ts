@@ -1,7 +1,8 @@
 import {IClient} from "./IClient";
 import {CardsManager, ICardsManager, IUserManager, UserManger} from "./managers";
-import {Rest, IRest} from "./rest";
+import {Rest, IRest, Routes} from "./rest";
 import {IUser} from "./objects";
+import {UserPayload} from "./rest/payloads";
 
 export class Client implements IClient{
     
@@ -30,7 +31,8 @@ export class Client implements IClient{
     }
     
     public async login(username:string, password:string):Promise<void> {
-        
+        const userRes:UserPayload = await this.rest.post(Routes.Auth.login(),{ username, password });
+        //todo set user from UserPayload
     }
     public async register(username: string, password: string): Promise<void> {
     }
