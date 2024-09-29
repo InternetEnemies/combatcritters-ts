@@ -1,4 +1,3 @@
-import * as Payloads from "./payloads"
 import {IRest} from "./IRest";
 import axios, {AxiosInstance, AxiosRequestConfig} from "axios"
 
@@ -13,7 +12,7 @@ export class Rest  implements IRest {
     }
     private async request(config:AxiosRequestConfig) {
         // todo at some point this function should also handle/wrap errors
-        let res = (await this.Axios.request(config)).data
+        return (await this.Axios.request(config)).data
     }
 
     async get(resource: string) {
