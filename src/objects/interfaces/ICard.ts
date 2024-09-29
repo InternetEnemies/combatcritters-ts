@@ -4,7 +4,7 @@
  */
 
 
-interface ICard {
+export interface ICard {
     cardid:number;
     name: string;
     playcost: number;
@@ -13,12 +13,12 @@ interface ICard {
     description: string;
 }
 
-interface ICardCritter extends ICard {
+export interface ICardCritter extends ICard {
     damage: number;
     health: number;
     abilities: number[];
 }
 
-interface ICardItem extends ICard {
+export interface ICardItem extends ICard {
     abilityid: number;
 }
