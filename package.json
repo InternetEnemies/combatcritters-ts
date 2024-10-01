@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo TODO",
     "build": "rm -rf ./build/* && tsc",
-    "publsh": "npm run build && npm publish"
+    "publish": "npm run build && npm publish"
   },
   "keywords": [],
   "author": "InternetEnemies",
