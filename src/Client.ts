@@ -38,7 +38,6 @@ export class Client implements IClient{
     }
     public async register(username: string, password: string): Promise<void> {
         await this.rest.post(Routes.Auth.register(),{ username, password });
-        await this.login(username, password);
     }
     
     // properties
