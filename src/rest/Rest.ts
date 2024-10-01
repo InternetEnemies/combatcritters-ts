@@ -14,7 +14,6 @@ export class Rest  implements IRest {
         }))
     }
     private async request(config:AxiosRequestConfig) {
-        // todo at some point this function should also handle/wrap errors
         return (await this.Axios.request(config)).data
     }
 
