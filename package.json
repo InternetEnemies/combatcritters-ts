@@ -1,10 +1,13 @@
 {
   "name": "combatcritters-ts",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
-  "main": "index.js",
+  "main": "./build/src/index.js",
+  "types": "./src/index.ts",
   "scripts": {
-    "test": "echo TODO"
+    "test": "echo TODO",
+    "build": "rm -rf ./build/* && tsc",
+    "publsh": "npm run build && npm publish"
   },
   "keywords": [],
   "author": "InternetEnemies",
