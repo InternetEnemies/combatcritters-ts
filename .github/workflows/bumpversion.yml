@@ -5,6 +5,8 @@ on:
     branches:
       - 'main'
 
+permissions:
+  contents: 'write'
 jobs:
   bump-version:
     name: 'Bump Version on master'
@@ -23,7 +25,7 @@ jobs:
         with:
           tag-prefix: 'v'
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'cat package.json'
         run: cat ./package.json
       - name: 'Output Step'
