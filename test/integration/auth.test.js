@@ -1,12 +1,18 @@
 import {Client} from "../../src/index.ts"
 
-let client = Client.fromApi("http://localhost:8080");
+let client;
 
 
 
+beforeEach(() => {
+    client = Client.fromApi("http://localhost:8080");
+})
 describe("Auth test", () => {
-    it("should login", async () => {
-        await client.login("jackal","jackal")
+    
+    // ! this test will fail the second time
+    it("should register, login, and access privileged route", async () => {
+        await client.register("username","password")
+        await client.login("username","password")
         await client.rest.get("/ping");
     })
 })
