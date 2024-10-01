@@ -5,7 +5,8 @@
   "main": "./build/src/index.js",
   "types": "./src/index.ts",
   "scripts": {
-    "test": "echo TODO"
+    "test": "echo TODO",
+    "build": "rm -rf ./build/* && tsc"
   },
   "keywords": [],
   "author": "InternetEnemies",
