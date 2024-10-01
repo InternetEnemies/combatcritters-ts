@@ -3,22 +3,24 @@
  * @Brief this file contains interfaces for handling both critter and item cards. 
  */
 
+import { ICardVisitor } from "../../ICardVisitor";
 
 export interface ICard {
-    cardid:number;
-    name: string;
-    playcost: number;
-    rarity: number;
-    image: string;
-    description: string;
+  cardid: number;
+  name: string;
+  playcost: number;
+  rarity: number;
+  image: string;
+  description: string;
+  accept(visitor: ICardVisitor): void;
 }
 
 export interface ICardCritter extends ICard {
-    damage: number;
-    health: number;
-    abilities: number[];
+  damage: number;
+  health: number;
+  abilities: number[];
 }
 
 export interface ICardItem extends ICard {
-    abilityid: number;
+  abilityid: number;
 }
