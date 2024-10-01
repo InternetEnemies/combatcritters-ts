@@ -1,6 +1,8 @@
 import {ICard} from "./ICard";
 
 export interface IDeck {
+    deckid: number;
+    name: string;
     /**
      * ordered list of the cards in the deck
      */
