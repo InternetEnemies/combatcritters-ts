@@ -16,6 +16,8 @@
     "ts-node": "^10.9.2"
   },
   "dependencies": {
-    "axios": "^1.7.7"
+    "axios": "^1.7.7",
+    "axios-cookiejar-support": "^5.0.3",
+    "tough-cookie": "^5.0.0"
   }
 }
