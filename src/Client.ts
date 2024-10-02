@@ -1,5 +1,5 @@
 import {IClient} from "./IClient";
-import {CardsManager, ICardsManager, IUserManager, UserManger} from "./managers";
+import {CardsManager, ICardsManager, IUserManager, UserManager} from "./managers";
 import {Rest, IRest, Routes} from "./rest";
 import {IUser} from "./objects";
 import {UserPayload} from "./rest/payloads";
@@ -18,9 +18,9 @@ export class Client implements IClient{
      */
     static fromApi(api:string):IClient{
         return new Client(
-            new UserManger(),
+            new CardsManager(),
             new Rest(api),
-            new CardsManager()
+            new UserManager()
         )
     }
     

@@ -6,11 +6,11 @@ import {IUserCardsManager} from "./interfaces";
 
 export class UserCardsManager implements IUserCardsManager {
     private readonly _user : UserPayload;
-    private readonly _rest: IRest;
+    private readonly rest: IRest;
 
     constructor(user:UserPayload, rest:IRest) {
         this._user = user;
-        this._rest = rest;
+        this.rest = rest;
     }
 
     addCard(card: ICard): Promise<void> {
@@ -18,7 +18,8 @@ export class UserCardsManager implements IUserCardsManager {
     }
 
     public async getCards(): Promise<ICard[]> {
-        const userCards:ICard[] = await this._rest.get(Routes.Cards.User.cards(this._user.id));
+        const userCards:ICard[] = await this.rest.get(Routes.Cards.User.cards(this._user.id));
+        //TODO: need to translate the payload to the object
         return userCards;
     }
 

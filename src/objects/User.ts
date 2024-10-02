@@ -13,7 +13,7 @@ export class User implements IUser {
     static fromUserPayload(client:IClient,payload:UserPayload) {
         return new User(
             client,
-            new DeckManager(),
+            new DeckManager(payload, client.rest),
             new UserCardsManager(payload, client.rest)
         )
     }
