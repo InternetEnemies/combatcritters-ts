@@ -1,8 +1,6 @@
 import {IDeck} from "../../objects";
 
 export interface IDeckManager {
-    decks: IDeck[];
-
     /**
      * get the decks for the user
      */
