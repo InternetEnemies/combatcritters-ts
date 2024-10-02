@@ -1,8 +1,6 @@
 import { ICard } from "../../objects/interfaces/ICard";
 
 export interface IUserCardsManager {
-    cards: ICard[];
-
     /**
      * get the cards for the user
      */

@@ -1,4 +1,4 @@
-import {ICardsManager, IDeckManager, IUserCardsManager} from "../managers";
+import {IDeckManager, IUserCardsManager} from "../managers";
 import {IUser} from "./interfaces";
 import {UserPayload} from "../rest/payloads";
 import {IClient} from "../IClient";
@@ -14,7 +14,7 @@ export class User implements IUser {
         return new User(
             client,
             new DeckManager(),
-            new UserCardsManager()
+            new UserCardsManager(payload, client.rest)
         )
     }
     
@@ -24,11 +24,11 @@ export class User implements IUser {
         this._cards = cards;
     }
     
-    
     public get decks() :IDeckManager {
         return this._decks;
     }
-    public get cards():ICardsManager {
+
+    public get cards():IUserCardsManager {
         return this._cards;
     }
 }
