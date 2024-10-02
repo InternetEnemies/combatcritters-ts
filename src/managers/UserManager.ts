@@ -1,5 +1,5 @@
 import {IUserManager} from "./interfaces";
 
-export class UserManger implements IUserManager{
+export class UserManager implements IUserManager{
     //todo
 }
