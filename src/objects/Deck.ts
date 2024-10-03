@@ -26,7 +26,11 @@ export class Deck implements IDeck {
     }
     
     public async removeCard(position: number): Promise<DeckValidity> {
-        throw new Error("Method not implemented.");
+        var temp_cards = this._cards;
+        temp_cards.splice(position, 1);
+        const response = await this._client.rest.put(Routes.User.deckCards(this._client.user.userid ,this._deckid), { cards: temp_cards });
+        this._cards = Object.freeze(response.data.deck);
+        return response.data.validity;
     }
 
     public async delete(): Promise<void> {
