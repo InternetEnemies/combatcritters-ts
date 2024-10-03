@@ -34,7 +34,7 @@ export class User implements IUser {
     public get decks() :IDeckManager {
         return this._decks;
     }
-    public get cards():ICardsManager {
+    public get cards():IUserCardsManager {
         return this._cards;
     }
     public get username():string {
