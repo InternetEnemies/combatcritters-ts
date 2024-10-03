@@ -3,7 +3,7 @@ import { Card } from "../objects/Card";
 import { ICardQuery } from "../objects/interfaces/ICardQuery";
 import { ICardQueryBuilder } from "../objects/interfaces/ICardQueryBuilder";
 import { IRest, Routes } from "../rest";
-import  {ICardsManager } from "./interfaces";
+import { ICardsManager } from "./interfaces";
 import { Card as CardPayload } from "../rest/payloads";
 import { CardQueryBuilder } from "../objects/CardQueryBuilder";
 
