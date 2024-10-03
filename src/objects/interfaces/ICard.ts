@@ -4,6 +4,7 @@
  */
 
 import { ICardVisitor } from "../../visitor/ICardVisitor";
+import { Card as CardPayload } from "../../rest/payloads/cards";
 
 export interface ICard {
   cardid: number;
@@ -13,6 +14,7 @@ export interface ICard {
   image: string;
   description: string;
   accept(visitor: ICardVisitor): void;
+  fromCardPayload(payload: CardPayload): ICardCritter | ICardItem;
 }
 
 export interface ICardCritter extends ICard {
