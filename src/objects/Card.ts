@@ -1,6 +1,6 @@
 import { ICardVisitor } from "../visitor/ICardVisitor";
 import { ICard, ICardCritter, ICardItem } from "./interfaces";
-import { Card as CardPayload } from "../rest/payloads/cards";
+import { Card as CardPayload, CardCritter as CritterPayload, CardItem as ItemPayload } from "../rest/payloads/cards";
 
 /**
  * @Created 2024-09-28
@@ -69,7 +69,7 @@ export class CardCritter extends Card implements ICardCritter {
     private readonly _abilities: number[];
 
     public static fromCardPayload(payload: CardPayload): ICardCritter {
-        const typeSpecificParameters = payload.type_specific as { damage: number; health: number; abilities: number[] };
+        const typeSpecificParameters = payload.type_specific as CritterPayload;
         return new CardCritter(
             payload.cardid,
             payload.name,
@@ -118,7 +118,7 @@ export class CardItem extends Card implements ICardItem {
             payload.rarity,
             payload.image,
             payload.description,
-            (payload.type_specific as { abilityid: number }).abilityid
+            (payload.type_specific as ItemPayload).abilityid
         );
     }
 
