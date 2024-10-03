@@ -1,3 +1,7 @@
+import { ICard } from "../../objects";
+import { ICardQuery } from "../../objects/interfaces/ICardQuery";
+
 export interface ICardsManager {
-    //todo
+    getCard(id: number): Promise<ICard>;
+    getCards(query: ICardQuery): Promise<ICard[]>;
 }
