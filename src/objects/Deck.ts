@@ -3,12 +3,22 @@ import { Rest } from "../rest";
 import { Routes } from "../rest/routes/decks";
 import { ICard } from "./interfaces";
 import { DeckValidity, IDeck } from "./interfaces/IDeck";
+import { Deck as DeckPayload, DeckDetails } from "../rest/payloads/decks";
 
 export class Deck implements IDeck {
     private _deckid: number;
     private _name: string;
     private _cards: ICard[];
     private readonly _client: Client;
+
+    public static fromDeckPayload(detailsPayload:DeckDetails , deckPayload: DeckPayload, client: Client): Deck {
+        return new Deck(
+            detailsPayload.deckid,
+            detailsPayload.name,
+            deckPayload.cards, 
+            client
+        );
+    }
 
     constructor(deckid: number, name: string, cards: ICard[], client: Client) {
         this._deckid = Object.freeze(deckid);
