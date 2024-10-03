@@ -69,6 +69,7 @@ export class CardCritter extends Card implements ICardCritter {
     private readonly _abilities: number[];
 
     public static fromCardPayload(payload: CardPayload): ICardCritter {
+        const typeSpecificParameters = payload.type_specific as { damage: number; health: number; abilities: number[] };
         return new CardCritter(
             payload.cardid,
             payload.name,
@@ -76,9 +77,9 @@ export class CardCritter extends Card implements ICardCritter {
             payload.rarity,
             payload.image,
             payload.description,
-            (payload.type_specific as { damage: number }).damage,
-            (payload.type_specific as { health: number }).health,
-            (payload.type_specific as { abilities: number[] }).abilities
+            typeSpecificParameters.damage,
+            typeSpecificParameters.health,
+            typeSpecificParameters.abilities
         );
     }
 
