@@ -9,8 +9,8 @@ export class CardQueryBuilder {
     private ids: number[];
     private order: CardOrder;
     private owned: boolean;
-    private rarityExclude: string;
-    private rarityInclude: string;
+    private rarities: number[];
+    private isInclude: boolean;
 
     constructor() {
         this.costGreater = -1;
@@ -18,8 +18,8 @@ export class CardQueryBuilder {
         this.ids = [];
         this.order = CardOrder.ID;
         this.owned = false;
-        this.rarityExclude = "";
-        this.rarityInclude = "";
+        this.rarities = [];
+        this.isInclude = true;
     }
 
     public build(): ICardQuery {
@@ -29,8 +29,8 @@ export class CardQueryBuilder {
             this.ids,
             this.order,
             this.owned ? "true" : "false",
-            this.rarityExclude.trim(),
-            this.rarityInclude.trim()
+            this.isInclude ? "" : this.rarities.join(","),
+            this.isInclude ? this.rarities.join(",") : ""
         );
     }
 
@@ -40,8 +40,8 @@ export class CardQueryBuilder {
         this.ids = [];
         this.order = CardOrder.ID;
         this.owned = false;
-        this.rarityExclude = "";
-        this.rarityInclude = "";
+        this.rarities = [];
+        this.isInclude = true;
     }
 
     public setCostGreater(cost: number): void {
@@ -59,11 +59,11 @@ export class CardQueryBuilder {
     public setOwned(owned: boolean): void {
         this.owned = owned;
     }
-    public setRarityExclude(limit: CardRarity): void {
-        this.rarityExclude += (" "+CardRarity[limit]+",");
+    public setRarities(limits: number[]): void {
+        this.rarities = limits;
     }
-    public setRarityInclude(limit: CardRarity): void {
-        this.rarityInclude += (" "+CardRarity[limit]+",");
+    public setInclude(isInclude: boolean): void {
+        this.isInclude = isInclude;
     }
 
     get CostGreater() {
@@ -81,10 +81,10 @@ export class CardQueryBuilder {
     get Owned() {
         return this.owned;
     }
-    get RarityExclude() {
-        return this.rarityExclude.trim();
+    get Rarities() {
+        return this.rarities;
     }
-    get RarityInclude() {
-        return this.rarityInclude.trim();
+    get IsInclude() {
+        return this.isInclude;
     }
 }

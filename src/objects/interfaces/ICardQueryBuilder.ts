@@ -7,8 +7,8 @@ export interface ICardQueryBuilder {
     setIds(ids: number[]): void;
     setOrder(order: CardOrder): void;
     setOwned(owned:boolean): void;
-    setRarityExclude(limit: CardRarity): void;
-    setRarityInclude(limit: CardRarity): void;
+    setRarities(limits: number[]): void;
+    setInclude(isInclude: boolean): void;
     build(): ICardQuery;
     reset(): void;
 }
