@@ -33,9 +33,6 @@ export abstract class Card implements ICard {
         this._image = image;
         this._description = description;
     }
-    fromCardPayload(payload: CardPayload): ICardCritter | ICardItem {
-        throw new Error("Method not implemented.");
-    }
 
     public get cardid(): number {
         return this._cardid;

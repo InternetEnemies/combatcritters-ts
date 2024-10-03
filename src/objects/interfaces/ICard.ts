@@ -14,7 +14,6 @@ export interface ICard {
   image: string;
   description: string;
   accept(visitor: ICardVisitor): void;
-  fromCardPayload(payload: CardPayload): ICardCritter | ICardItem;
 }
 
 export interface ICardCritter extends ICard {
