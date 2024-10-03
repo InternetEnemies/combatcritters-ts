@@ -3,7 +3,7 @@
  * @Brief this file contains interfaces for handling both critter and item cards. 
  */
 
-import { ICardVisitor } from "../../ICardVisitor";
+import { ICardVisitor } from "../../visitor/ICardVisitor";
 
 export interface ICard {
   cardid: number;
