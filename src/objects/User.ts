@@ -8,20 +8,26 @@ import {UserCardsManager} from "../managers/UserCardsManager";
 export class User implements IUser {
     private readonly _decks: IDeckManager;
     private readonly _cards: IUserCardsManager;
+    private readonly _username: string;
+    private readonly _id: number;
     private readonly client;
     
     static fromUserPayload(client:IClient,payload:UserPayload) {
         return new User(
             client,
             new DeckManager(),
-            new UserCardsManager()
+            new UserCardsManager(client),
+            payload.username,
+            payload.id
         )
     }
     
-    constructor(client:IClient, decks: IDeckManager, cards: IUserCardsManager) {
+    constructor(client:IClient, decks: IDeckManager, cards: IUserCardsManager, username: string, id: number) {
         this.client = client;
         this._decks = decks;
         this._cards = cards;
+        this._username = username;
+        this._id = id;
     }
     
     
@@ -30,5 +36,11 @@ export class User implements IUser {
     }
     public get cards():ICardsManager {
         return this._cards;
+    }
+    public get username():string {
+        return this._username;
+    }
+    public get id():number {
+        return this._id;
     }
 }
