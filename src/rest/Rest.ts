@@ -1,17 +1,14 @@
 import {IRest} from "./IRest";
 import axios, {AxiosInstance, AxiosRequestConfig} from "axios"
-import {wrapper} from 'axios-cookiejar-support'
-import {CookieJar} from "tough-cookie";
 
 export class Rest  implements IRest {
     private Axios:AxiosInstance;
     
     constructor(private readonly api: string) {
-        this.Axios = wrapper(axios.create({
+        this.Axios = axios.create({
             baseURL:api,
-            withCredentials: true,
-            jar: new CookieJar()
-        }))
+            withCredentials: true
+        })
     }
     private async request(config:AxiosRequestConfig) {
         return (await this.Axios.request(config)).data
