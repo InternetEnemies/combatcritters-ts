@@ -2,8 +2,8 @@
   "name": "combatcritters-ts",
   "version": "0.1.4",
   "description": "combatcritters ts wrapper",
-  "main": "./dist/main.js",
-  "types": "./src/index.ts",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
   "scripts": {
     "test": "echo TODO",
     "build": "webpack --mode=production --node-env=production",
