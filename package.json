@@ -1,17 +1,13 @@
 {
   "name": "combatcritters-ts",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "combatcritters ts wrapper",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "scripts": {
     "test": "echo TODO",
-    "build": "webpack --mode=production --node-env=production",
-    "publish": "npm run build && npm publish",
-    "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production",
-    "watch": "webpack --watch",
-    "serve": "webpack serve"
+    "build": "tsc",
+    "publish": "npm run build && npm publish"
   },
   "keywords": [],
   "author": "InternetEnemies",
