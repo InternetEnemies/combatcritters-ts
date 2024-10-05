@@ -1,2 +1,2 @@
 export {Client} from "./Client";
-export {IClient} from "./IClient";
+export type {IClient} from "./IClient";
