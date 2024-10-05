@@ -3,10 +3,13 @@ import {ICard} from "./ICard";
 export interface IDeck {
     deckid: number;
     name: string;
+    
     /**
-     * ordered list of the cards in the deck
+     * get the cards in the
+     * @returns list of cards in the deck
      */
-    cards:ICard[];
+    getCards():Promise<ICard[]>;
+
     /**
      * add a card at a specific position
      * @param card card to add
