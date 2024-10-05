@@ -21,9 +21,10 @@ export interface IDeck {
     removeCard(position:number):Promise<DeckValidity>;
 
     /**
-     * delete this deck
+     * set the cards in the deck
+     * @param cards list of cards to set
      */
-    delete():Promise<void>;
+    setCards(cards:ICard[]):Promise<DeckValidity>;
 
     /**
      * get the validity of this deck
