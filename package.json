@@ -1,6 +1,6 @@
 {
   "name": "combatcritters-ts",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "combatcritters ts wrapper",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
