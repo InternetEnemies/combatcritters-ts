@@ -19,6 +19,18 @@ export class CardQuery implements ICardQuery {
         this.rarityInclude = rarityInclude;
     }
 
+    public getQueryString(): string {
+        return [
+            "costGreater=" + this.costGreater,
+            "costLess=" + this.costLess,
+            "id=" + this.ids.join(","),
+            "order=" + this.order,
+            "owned=" + this.owned,
+            "rarityExclude=" + this.rarityExclude,
+            "rarityInclude=" + this.rarityInclude
+        ].join("&");
+    }
+
     public get CostGreater(): number {
         return this.costGreater;
     }

@@ -20,16 +20,7 @@ export class CardsManager implements ICardsManager {
     }
 
     public async getCards(query: ICardQuery): Promise<ICard[]> {
-        const queryParams = [
-            "costGreater=" + query.costGreater,
-            "costLess=" + query.costLess,
-            "id=" + query.ids.join(","),
-            "order=" + query.order,
-            "owned=" + query.owned,
-            "rarityExclude=" + query.rarityExclude,
-            "rarityInclude=" + query.rarityInclude
-        ].join("&");
-        const userRes:CardPayload[] = await this._rest.get(Routes.Cards.cards(queryParams));
+        const userRes:CardPayload[] = await this._rest.get(Routes.Cards.cards(query.getQueryString()));
         const cards: ICard[] = [];
         for (let i = 0; i < userRes.length; i++) {
             cards.push(Card.fromCardPayload(userRes[i]));

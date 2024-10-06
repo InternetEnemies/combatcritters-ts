@@ -6,6 +6,7 @@ export interface ICardQuery {
     owned: string;
     rarityExclude: string;
     rarityInclude: string;
+    getQueryString(): string;
 }
 
 export enum CardOrder {
