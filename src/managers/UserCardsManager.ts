@@ -7,6 +7,8 @@ import { IClient } from "../IClient";
 import { CardQueryBuilder } from "../objects/CardQueryBuilder";
 import { Card as CardPayload } from "../rest/payloads";
 import { Routes } from "../rest";
+import { ICardStack } from "../objects/interfaces/ICardStack";
+import { CardStack } from "../objects/CardStack";
 
 export class UserCardsManager implements IUserCardsManager {
     private readonly _client: IClient;
@@ -15,22 +17,22 @@ export class UserCardsManager implements IUserCardsManager {
         this._client = client;
     }
 
-    public async getCards(query: ICardQuery): Promise<ICard[]> {
-        const queryParams = [
-            "costGreater=" + query.costGreater,
-            "costLess=" + query.costLess,
-            "id=" + query.ids.join(","),
-            "order=" + query.order,
-            "owned=" + query.owned,
-            "rarityExclude=" + query.rarityExclude,
-            "rarityInclude=" + query.rarityInclude
-        ].join("&");
-        const userRes:CardPayload[] = await this._client.rest.get(Routes.Cards.User.cards(this._client.user.id, queryParams));
-        const cards: ICard[] = [];
+    public async getCards(query: ICardQuery): Promise<ICardStack<ICard>[]> {
+        const userRes: CardPayload[] = await this._client.rest.get(Routes.Cards.User.cards(this._client.user.id, query.getQueryString()));
+        const cardStacks: ICardStack<ICard>[] = [];
+        const cardCountMap: Map<CardPayload, number> = new Map();
         for (let i = 0; i < userRes.length; i++) {
-            cards.push(Card.fromCardPayload(userRes[i]));
+            const cardPayload = userRes[i];
+            if (cardCountMap.has(cardPayload)) {
+                cardCountMap.set(cardPayload, cardCountMap.get(cardPayload)! + 1);
+            } else {
+                cardCountMap.set(cardPayload, 1);
+            }
         }
-        return cards;
+        cardCountMap.forEach((amount, cardPayload) => {
+            cardStacks.push(new CardStack(Card.fromCardPayload(cardPayload), amount));
+        });
+        return cardStacks;
     }
 
     public getBuilder(): ICardQueryBuilder {
