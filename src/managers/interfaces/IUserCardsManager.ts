@@ -1,9 +1,9 @@
 import { ICard } from "../../objects";
 import { ICardQuery } from "../../objects/interfaces/ICardQuery";
 import { ICardQueryBuilder } from "../../objects/interfaces/ICardQueryBuilder";
-import { ICardStack } from "../../objects/interfaces/ICardStack";
+import { IItemStack } from "../../objects/interfaces/IItemStack";
 
 export interface IUserCardsManager {
-    getCards(query: ICardQuery): Promise<ICardStack<ICard>[]>;
+    getCards(query: ICardQuery): Promise<IItemStack<ICard>[]>;
     getBuilder(): ICardQueryBuilder;
 }

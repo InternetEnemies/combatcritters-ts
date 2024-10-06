@@ -18,3 +18,8 @@ export type CardCritter = {
 export type CardItem = {
     abilityid:number
 }
+
+export type CardQuery = {
+    count:number,
+    item: Card
+}

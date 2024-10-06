@@ -6,9 +6,11 @@ export interface ICardQueryBuilder {
     setCostLess(cost: number): void;
     setIds(ids: number[]): void;
     setOrder(order: CardOrder): void;
-    setOwned(owned:boolean): void;
+    setOwned(): void;
+    setNotOwned(): void; //default
     setRarities(limits: number[]): void;
-    setInclude(isInclude: boolean): void;
+    setInclude(): void; //default
+    setExclude(): void;
     build(): ICardQuery;
     reset(): void;
 }

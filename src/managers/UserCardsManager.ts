@@ -1,37 +1,30 @@
-import { ICard } from "../objects";
+import { CardQuery, ICard, IUser } from "../objects";
 import { Card } from "../objects/Card";
 import { ICardQuery } from "../objects/interfaces/ICardQuery";
 import { ICardQueryBuilder } from "../objects/interfaces/ICardQueryBuilder";
 import { IUserCardsManager } from "./interfaces";
 import { IClient } from "../IClient";
 import { CardQueryBuilder } from "../objects/CardQueryBuilder";
-import { Card as CardPayload } from "../rest/payloads";
+import { Card as CardPayload, CardQuery as CardQueryPayload } from "../rest/payloads";
 import { Routes } from "../rest";
-import { ICardStack } from "../objects/interfaces/ICardStack";
-import { CardStack } from "../objects/CardStack";
+import { IItemStack } from "../objects/interfaces/IItemStack";
+import { ItemStack } from "../objects/ItemStack";
 
 export class UserCardsManager implements IUserCardsManager {
     private readonly _client: IClient;
+    private readonly _user: IUser;
 
-    constructor(client:IClient){
+    constructor(client: IClient, user: IUser) {
         this._client = client;
+        this._user = user;
     }
 
-    public async getCards(query: ICardQuery): Promise<ICardStack<ICard>[]> {
-        const userRes: CardPayload[] = await this._client.rest.get(Routes.Cards.User.cards(this._client.user.id, query.getQueryString()));
-        const cardStacks: ICardStack<ICard>[] = [];
-        const cardCountMap: Map<CardPayload, number> = new Map();
+    public async getCards(query: ICardQuery): Promise<IItemStack<ICard>[]> {
+        const userRes: CardQueryPayload[] = await this._client.rest.get(Routes.Cards.User.cards(this._user.id, query.getQueryString()));
+        const cardStacks: IItemStack<ICard>[] = [];
         for (let i = 0; i < userRes.length; i++) {
-            const cardPayload = userRes[i];
-            if (cardCountMap.has(cardPayload)) {
-                cardCountMap.set(cardPayload, cardCountMap.get(cardPayload)! + 1);
-            } else {
-                cardCountMap.set(cardPayload, 1);
-            }
+            cardStacks.push(new ItemStack(Card.fromCardPayload(userRes[i].item), userRes[i].count));
         }
-        cardCountMap.forEach((amount, cardPayload) => {
-            cardStacks.push(new CardStack(Card.fromCardPayload(cardPayload), amount));
-        });
         return cardStacks;
     }
 

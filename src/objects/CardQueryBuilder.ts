@@ -56,14 +56,20 @@ export class CardQueryBuilder {
     public setOrder(order: CardOrder): void {
         this.order = order;
     }
-    public setOwned(owned: boolean): void {
-        this.owned = owned;
+    public setOwned(): void {
+        this.owned = true;
+    }
+    public setNotOwned(): void {
+        this.owned = false;
     }
     public setRarities(limits: number[]): void {
         this.rarities = limits;
     }
-    public setInclude(isInclude: boolean): void {
-        this.isInclude = isInclude;
+    public setInclude(): void {
+        this.isInclude = true;
+    }
+    public setExclude(): void {
+        this.isInclude = false;
     }
 
     get CostGreater() {

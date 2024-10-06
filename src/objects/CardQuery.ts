@@ -24,7 +24,7 @@ export class CardQuery implements ICardQuery {
             "costGreater=" + this.costGreater,
             "costLess=" + this.costLess,
             "id=" + this.ids.join(","),
-            "order=" + this.order,
+            "order=" + CardOrder[this.order],
             "owned=" + this.owned,
             "rarityExclude=" + this.rarityExclude,
             "rarityInclude=" + this.rarityInclude
