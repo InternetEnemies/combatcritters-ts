@@ -3,7 +3,7 @@
  * @Brief Generic visitor class for item objects.
  */
 
-import { ICardCritter, ICardItem } from "../objects";
+import { ICardCritter, ICardItem } from "../index";
 
 export interface ICardVisitor {
   visitCritter(critter: ICardCritter): void;
