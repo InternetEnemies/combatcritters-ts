@@ -1,13 +1,13 @@
 import { ICardQuery, CardOrder } from "./interfaces/ICardQuery";
 
 export class CardQuery implements ICardQuery {
-    costGreater: number;
-    costLess: number;
-    ids: number[];
-    order: CardOrder;
-    owned: string;
-    rarityExclude: string;
-    rarityInclude: string;
+    private costGreater: number;
+    private costLess: number;
+    private ids: number[];
+    private order: CardOrder;
+    private owned: string;
+    private rarityExclude: string;
+    private rarityInclude: string;
 
     constructor(costGreater: number, costLess: number, ids: number[], order: CardOrder, owned: string, rarityExclude: string, rarityInclude: string) {
         this.costGreater = costGreater;
