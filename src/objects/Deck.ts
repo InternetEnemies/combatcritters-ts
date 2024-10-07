@@ -2,7 +2,7 @@ import { Client } from "../Client";
 import { Routes } from "../rest/routes/decks";
 import { ICard, IUser } from "./interfaces";
 import { DeckValidity, IDeck } from "./interfaces/IDeck";
-import { Deck as DeckPayload, DeckDetails as DeckDetailsPayload } from "../rest/payloads/decks";
+import { Deck as DeckPayload, DeckDetails as DeckDetailsPayload, DeckValidity as DeckValidityPayload } from "../rest/payloads/decks";
 import { Card as CardPayload } from "../rest/payloads/cards";
 import { Card } from "./Card";
 
@@ -37,11 +37,7 @@ export class Deck implements IDeck {
     }
 
     public async addCard(card: ICard, position: number): Promise<DeckValidity> {
-        var temp_cards = this._cards;
-        temp_cards.splice(position, 0, card);
-        const response = await this._client.rest.put(Routes.User.deckCards(this._client.user.userid ,this._deckid), { cards: temp_cards });
-        this._cards = Object.freeze(response.data.deck);
-        return response.data.validity;
+
     }
     
     public async removeCard(position: number): Promise<DeckValidity> {
@@ -59,7 +55,11 @@ export class Deck implements IDeck {
     }
 
     public async getValidity(): Promise<DeckValidity> {
-        throw new Error("Method not implemented.");
+        const response:DeckValidityPayload = await this._client.rest.get(Routes.User.deckValidity(this._user.userid ,this._deckid));
+        return {
+            isValid: response.isvalid,
+            issues: response.issues
+        };
     }
 
     public get deckid(): number {
