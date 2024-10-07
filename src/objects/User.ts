@@ -22,7 +22,7 @@ export class User implements IUser {
     
     constructor(client:IClient, username: string, id: number) {
         this.client = client;
-        this._decks = new DeckManager();
+        this._decks = new DeckManager(client, this);
         this._cards = new UserCardsManager(client, this);
         this._username = username;
         this._id = id;

@@ -1,7 +1,7 @@
 import { IClient } from "../IClient";
 import { IDeck, IUser } from "../objects";
 import { Routes } from "../rest";
-import { DeckRules, DeckDetails, Deck} from "../rest/payloads";
+import { DeckRules, DeckDetails} from "../rest/payloads";
 import { IDeckManager } from "./interfaces";
 
 export class DeckManager implements IDeckManager {
