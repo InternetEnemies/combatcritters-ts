@@ -1,7 +1,8 @@
 import { IClient } from "../IClient";
 import { IDeck, IUser } from "../objects";
-import { DeckRules } from "../rest/payloads";
-import {IDeckManager} from "./interfaces";
+import { Routes } from "../rest";
+import { DeckRules, DeckDetails, Deck} from "../rest/payloads";
+import { IDeckManager } from "./interfaces";
 
 export class DeckManager implements IDeckManager {
     private readonly _client: IClient;
@@ -12,16 +13,26 @@ export class DeckManager implements IDeckManager {
         this._user = user;
     }
 
-    getDecks(): Promise<IDeck[]> {
-        throw new Error("Method not implemented.");
+    public async getDecks(): Promise<IDeck[]> {
+        const userRes: DeckDetails[] = await this._client.rest.get(Routes.Decks.User.decks(this._user.id));
+        const decks: IDeck[] = [];
+        for (let i = 0; i < userRes.length; i++) {
+            decks.push(Deck.fromDeckDetailsPayload(userRes[i], this._client, this._user));
+        }
+        return decks;
     }
-    createDeck(deckName: string): Promise<IDeck> {
-        throw new Error("Method not implemented.");
+
+    public async createDeck(deckName: string): Promise<IDeck> {
+        const userRes: DeckDetails = await this._client.rest.post(Routes.Decks.User.decks(this._user.id), { name: deckName });
+        return Deck.fromDeckDetailsPayload(userRes, this._client, this._user);
     }
-    deleteDeck(deck: IDeck): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    public async deleteDeck(deck: IDeck): Promise<void> {
+        await this._client.rest.delete(Routes.Decks.User.singleDeck(this._user.id, deck.deckid));
     }
-    getDeckRules(): Promise<DeckRules> {
-        throw new Error("Method not implemented.");
+
+    public async getDeckRules(): Promise<DeckRules> {
+        const userRes: DeckRules = await this._client.rest.get(Routes.Decks.validity());
+        return userRes;
     }
 }
