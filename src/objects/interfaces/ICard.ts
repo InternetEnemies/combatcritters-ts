@@ -24,3 +24,11 @@ export interface ICardCritter extends ICard {
 export interface ICardItem extends ICard {
   abilityid: number;
 }
+
+export enum CardRarity {
+  COMMON,
+  UNCOMMON,
+  RARE,
+  EPIC,
+  LEGENDARY
+}
