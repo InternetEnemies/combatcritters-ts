@@ -1,3 +1,6 @@
 export * from "./IUser"
 export * from "./IDeck"
 export * from "./ICard"
+export * from "./IItemStack"
+export * from "./ICardQuery"
+export * from "./ICardQueryBuilder"

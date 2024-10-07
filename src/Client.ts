@@ -17,15 +17,16 @@ export class Client implements IClient{
      * @param api URI of the api
      */
     static fromApi(api:string):IClient{
+        var passingRest = new Rest(api)
         return new Client(
+            passingRest,
             new UserManger(),
-            new Rest(api),
-            new CardsManager()
+            new CardsManager(passingRest)
         )
     }
     
     
-    constructor(cards:ICardsManager, rest:IRest, users:IUserManager){
+    constructor(rest:IRest, users:IUserManager, cards:ICardsManager){
         this._cards = cards;
         this._rest = rest;
         this._users = users;

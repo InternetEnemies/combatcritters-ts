@@ -8,39 +8,37 @@ import {UserCardsManager} from "../managers/UserCardsManager";
 export class User implements IUser {
     private readonly _decks: IDeckManager;
     private readonly _cards: IUserCardsManager;
-    private readonly _userid:number;
-    private readonly _username:string;
+    private readonly _username: string;
+    private readonly _id: number;
     private readonly client;
     
     static fromUserPayload(client:IClient,payload:UserPayload) {
         return new User(
             client,
-            new DeckManager(),
-            new UserCardsManager(),
-            payload.id,
-            payload.username
+            payload.username,
+            payload.id
         )
     }
     
-    constructor(client:IClient, decks: IDeckManager, cards: IUserCardsManager, userid:number, username:string) {
+    constructor(client:IClient, username: string, id: number) {
         this.client = client;
-        this._decks = decks;
-        this._cards = cards;
-        this._userid = userid;
+        this._decks = new DeckManager();
+        this._cards = new UserCardsManager(client, this);
         this._username = username;
+        this._id = id;
     }
     
     
     public get decks() :IDeckManager {
         return this._decks;
     }
-    public get cards():ICardsManager {
+    public get cards():IUserCardsManager {
         return this._cards;
-    }
-    public get userid():number {
-        return this._userid;
     }
     public get username():string {
         return this._username;
+    }
+    public get id():number {
+        return this._id;
     }
 }
