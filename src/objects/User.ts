@@ -15,17 +15,15 @@ export class User implements IUser {
     static fromUserPayload(client:IClient,payload:UserPayload) {
         return new User(
             client,
-            new DeckManager(),
-            new UserCardsManager(client),
             payload.username,
             payload.id
         )
     }
     
-    constructor(client:IClient, decks: IDeckManager, cards: IUserCardsManager, username: string, id: number) {
+    constructor(client:IClient, username: string, id: number) {
         this.client = client;
-        this._decks = decks;
-        this._cards = cards;
+        this._decks = new DeckManager();
+        this._cards = new UserCardsManager(client, this);
         this._username = username;
         this._id = id;
     }
