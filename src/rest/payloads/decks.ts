@@ -20,3 +20,8 @@ export type DeckRules = {
     limit_rare: number,
     limit_item: number
 }
+
+export type UpdateDeck = {
+    deck: Deck
+    deck_validity: DeckValidity
+}
