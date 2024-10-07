@@ -3,8 +3,7 @@
  * @Brief this file contains interfaces for handling both critter and item cards. 
  */
 
-import { ICardVisitor } from "../../visitor/ICardVisitor";
-import { Card as CardPayload } from "../../rest/payloads/cards";
+import { ICardVisitor } from "../visitor";
 
 export interface ICard {
   cardid: number;
@@ -24,4 +23,12 @@ export interface ICardCritter extends ICard {
 
 export interface ICardItem extends ICard {
   abilityid: number;
+}
+
+export enum CardRarity {
+  COMMON,
+  UNCOMMON,
+  RARE,
+  EPIC,
+  LEGENDARY
 }
