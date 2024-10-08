@@ -40,6 +40,14 @@ export class Client implements IClient{
     public async register(username: string, password: string): Promise<void> {
         await this.rest.post(Routes.Auth.register(),{ username, password });
     }
+
+    public isLoggedIn(): boolean {
+        if(this._user) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     // properties
     public get cards(): ICardsManager{
