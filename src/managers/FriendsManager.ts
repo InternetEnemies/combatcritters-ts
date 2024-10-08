@@ -14,11 +14,7 @@ export class FriendsManager implements IFriendsManager {
 
     public async getFriends(): Promise<IUser[]> {
         const response:Payloads.UserPayload[] = await this._client.rest.get(Routes.Friends.User.friends(this._user.id));
-        let users: IUser[] = [];
-        for (let i = 0; i < response.length; i++) {
-            users.push(User.fromUserPayload(this._client, response[i]));
-        }
-        return users;
+        return this.fromUserPayloadsToUsers(response);
     }
 
     public async addFriend(user: IUser): Promise<void> {
@@ -26,7 +22,21 @@ export class FriendsManager implements IFriendsManager {
         await this._client.rest.post(Routes.Friends.User.friends(this._user.id), friend);
     }
 
-    getFriendsRequests(): Promise<IUser[]> {
-        
+    public async getFriendsRequests(): Promise<IUser[]> {
+        const response:Payloads.UserPayload[] = await this._client.rest.get(Routes.Friends.User.friendRequests(this._user.id));
+        return this.fromUserPayloadsToUsers(response);
+    }
+
+    /**
+     * Converts an array of UserPayloads to an array of IUser
+     * @param response array of UserPayloads
+     * @returns an array of IUser
+     */
+    private fromUserPayloadsToUsers(response:Payloads.UserPayload[]):IUser[]{
+        let users: IUser[] = [];
+        for (let i = 0; i < response.length; i++) {
+            users.push(User.fromUserPayload(this._client, response[i]));
+        }
+        return users;
     }
 }
