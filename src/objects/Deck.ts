@@ -8,9 +8,9 @@ import { Card } from "./Card";
 
 export class Deck implements IDeck {
     private readonly _deckid: number;
-    private _name: string;
+    private readonly _name: string;
     private readonly _user: IUser;
-    private _cards: ICard[];
+    private localcards: ICard[];
     private readonly _client: Client;
 
     public static fromDeckDetailsPayload(payload: DeckDetailsPayload, client: Client, user:IUser): Deck {
@@ -25,55 +25,23 @@ export class Deck implements IDeck {
         this._name = name;
         this._client = client;
         this._user = user;
-        this._cards = [];
+        this.localcards = [];
     }
 
     public async getCards(): Promise<ICard[]> {
-        const response:CardPayload[] = await this._client.rest.get(Routes.User.deckCards(this._user.id ,this._deckid));
-        let cardsObj: ICard[] = [];
-        response.forEach((card) => {
-            cardsObj.push(Card.fromCardPayload(card));
-        });
-        this._cards = cardsObj;
-        return cardsObj;
-    }
-
-    public async addCard(card: ICard, position: number): Promise<DeckValidity> {
-        if (this._cards.length == 0) {
-            await this.getCards();
-        }
-        let cardsIDArray = this.getCardsIDArray();
-        cardsIDArray.splice(position, 0, card.cardid);
-        const response:UpdateDeckPayload = await this._client.rest.put(Routes.User.deckCards(this._user.id ,this._deckid), { cards: cardsIDArray });
-        this._cards = [];
-        return{
-            isValid: response.deck_validity.isvalid,
-            issues: response.deck_validity.issues
-        };
-    }
-    
-    public async removeCard(position: number): Promise<DeckValidity> {
-        if (this._cards.length == 0) {
-            await this.getCards();
-        }
-        let cardsIDArray = this.getCardsIDArray();
-        cardsIDArray.splice(position, 1);
-        const response:UpdateDeckPayload = await this._client.rest.put(Routes.User.deckCards(this._user.id ,this._deckid), { cards: cardsIDArray });
-        this._cards = [];
-        return{
-            isValid: response.deck_validity.isvalid,
-            issues: response.deck_validity.issues
-        };
+        
     }
 
     public async setCards(cards: ICard[]): Promise<DeckValidity> {
-        let cardsIDArray = this.getCardsIDArray();
-        const response:UpdateDeckPayload = await this._client.rest.put(Routes.User.deckCards(this._user.id ,this._deckid), { cards: cardsIDArray });
-        this._cards = [];
-        return{
-            isValid: response.deck_validity.isvalid,
-            issues: response.deck_validity.issues
-        };
+    
+    }
+
+    public async commit(): Promise<void> {
+        
+    }
+
+    public async reset(): Promise<void> {
+        
     }
 
     public async getValidity(): Promise<DeckValidity> {
@@ -90,13 +58,5 @@ export class Deck implements IDeck {
 
     public get name(): string {
         return this._name;
-    }
-
-    private getCardsIDArray(): number[] {
-        let cardsIDArray:number[] = [];
-        this._cards.forEach((card) => {
-            cardsIDArray.push(card.cardid);
-        });
-        return cardsIDArray;
     }
 }
