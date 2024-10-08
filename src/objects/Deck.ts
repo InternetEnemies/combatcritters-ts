@@ -1,4 +1,3 @@
-import { Client } from "../Client";
 import { Routes } from "../rest/routes/decks";
 import { ICard, IUser } from "./interfaces";
 import { DeckValidity, IDeck } from "./interfaces/IDeck";
@@ -11,7 +10,8 @@ export class Deck implements IDeck {
     private readonly _deckid: number;
     private readonly _name: string;
     private readonly _user: IUser;
-    private localcards: ICard[] | null;
+    private localcards: ICard[];
+    private cardsCached: boolean;
     private readonly _client: IClient;
 
     public static fromDeckDetailsPayload(payload: DeckDetailsPayload, client: IClient, user:IUser): Deck {
@@ -26,12 +26,14 @@ export class Deck implements IDeck {
         this._name = name;
         this._client = client;
         this._user = user;
-        this.localcards = null;
+        this.localcards = [];
+        this.cardsCached = false;
     }
 
     public async getCards(): Promise<ICard[]> {
-        if (this.localcards === null) {
+        if (!this.cardsCached) {
             await this.fetch();
+            this.cardsCached = true;
         }
         return this.localcards;
     }
