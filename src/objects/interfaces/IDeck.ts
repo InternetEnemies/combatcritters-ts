@@ -1,6 +1,9 @@
 import {ICard} from "./ICard";
 
 export interface IDeck {
+    deckid:number;
+    name:string;
+    
     /**
      * get the cards in the
      * @returns list of cards in the deck
@@ -29,22 +32,6 @@ export interface IDeck {
      * get the validity of this deck
      */
     getValidity():Promise<DeckValidity>;
-
-    /**
-     * get the local copy of the cards in the deck
-     * @returns the list of local cards in the deck
-     */
-    getLocalCards():ICard[];
-
-    /**
-     * get the deck id
-     */
-    getDeckId():number;
-
-    /**
-     * get the name of the deck
-     */
-    getName():string;
 }
 
 export type DeckValidity = {

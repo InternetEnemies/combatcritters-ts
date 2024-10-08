@@ -10,7 +10,7 @@ export class Deck implements IDeck {
     private readonly _deckid: number;
     private readonly _name: string;
     private readonly _user: IUser;
-    private localcards: ICard[];
+    private localcards: ICard[] | null;
     private readonly _client: Client;
 
     public static fromDeckDetailsPayload(payload: DeckDetailsPayload, client: Client, user:IUser): Deck {
@@ -25,19 +25,14 @@ export class Deck implements IDeck {
         this._name = name;
         this._client = client;
         this._user = user;
-        this.localcards = [];
+        this.localcards = null;
     }
 
     public async getCards(): Promise<ICard[]> {
-        const response:CardPayload[] = await this._client.rest.get(Routes.User.deckCards(this._user.id, this._deckid));
-        let cards: ICard[] = [];
-        for (let i = 0; i < response.length; i++) {
-            cards.push(Card.fromCardPayload(response[i]));
+        if (this.localcards === null) {
+            await this.fetch();
         }
-        if(this.localcards.length == 0){
-            this.localcards = cards;
-        }
-        return cards;
+        return this.localcards;
     }
 
     public setCards(cards: ICard[]): ICard[] {
@@ -54,8 +49,7 @@ export class Deck implements IDeck {
     }
 
     public async reset(): Promise<void> {
-        this.localcards = [];
-        await this.getCards();
+        await this.fetch();
     }
 
     public async getValidity(): Promise<DeckValidity> {
@@ -66,15 +60,19 @@ export class Deck implements IDeck {
         };
     }
 
-    public getLocalCards(): ICard[] {
-        return this.localcards;
+    private async fetch(): Promise<void>{
+        const response:CardPayload[] = await this._client.rest.get(Routes.User.deckCards(this._user.id, this._deckid));
+        this.localcards = [];
+        for (let i = 0; i < response.length; i++) {
+            this.localcards.push(Card.fromCardPayload(response[i]));
+        }
     }
 
-    public getDeckId(): number {
+    public get deckid(): number {
         return this._deckid;
     }
 
-    public getName(): string {
+    public get name(): string {
         return this._name;
     }
 }
