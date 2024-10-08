@@ -11,17 +11,21 @@ export class Profile implements IProfile {
         this._user = user;
     }
 
-    public async getProfile(): Promise<IDeck|null> {
-        const response = await this._client.rest.get(Routes.Profiles.User.profile(this._user.id));
-        if(response.length() == 0){
+    public async getDeck(): Promise<IDeck|null> {
+        const response:Payloads.ProfilesPayload = await this.fetch();
+        if(Object.keys(response.featured_deck).length === 0){
             return null;
         }
-        const profilePayload = response as Payloads.ProfilesPayload;
-        return Deck.fromDeckDetailsPayload(profilePayload.featured_deck, this._client, this._user);
+        return Deck.fromDeckDetailsPayload(response.featured_deck, this._client, this._user);
     }
 
-    public async setProfile(deck: IDeck): Promise<void> {
+    public async setDeck(deck: IDeck): Promise<void> {
         let deckPayload:Payloads.ProfilesPayload = {featured_deck:{deckid:deck.deckid,name:deck.name}};
         await this._client.rest.put(Routes.Profiles.User.profile(this._user.id), deckPayload);
+    }
+
+    private async fetch(): Promise<Payloads.ProfilesPayload> {
+        const response:Payloads.ProfilesPayload = await this._client.rest.get(Routes.Profiles.User.profile(this._user.id));
+        return response;
     }
 }
