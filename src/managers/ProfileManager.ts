@@ -8,13 +8,13 @@ export class ProfileManager implements IProfileManager {
 
     constructor(client: IClient, user: IUser) {
         this._client = client;
-        this._user
+        this._user = user;
     }
 
     getProfile(): Promise<IDeck> {
         throw new Error('Method not implemented.');
     }
-    
+
     setProfile(deck: IDeck): Promise<void> {
         throw new Error('Method not implemented.');
     }
