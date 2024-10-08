@@ -12,6 +12,11 @@ export interface IClient {
     rest:IRest;
 
     /**
+     * Is the user logged in?
+     */
+    isLoggedIn(): boolean;
+
+    /**
      * login as a user
      */
     login(username: string, password: string): Promise<void>;
