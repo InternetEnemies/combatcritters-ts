@@ -42,7 +42,8 @@ export class Deck implements IDeck {
     }
 
     public async commit(): Promise<DeckValidity> {
-        const response:UpdateDeckPayload = await this._client.rest.put(Routes.User.deckCards(this._user.id, this._deckid), this.localcards.map(card => card.cardid));
+        let deck:DeckPayload ={cards:this.localcards.map(card => card.cardid)};
+        const response:UpdateDeckPayload = await this._client.rest.put(Routes.User.deckCards(this._user.id, this._deckid), deck);
         return {
             isValid: response.deck_validity.isvalid,
             issues: response.deck_validity.issues
