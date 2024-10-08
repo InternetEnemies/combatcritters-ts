@@ -1,5 +1,6 @@
 import { IClient } from "../index";
-import { IUser } from "../objects/index";
+import { IUser, User } from "../objects/index";
+import { Payloads, Routes } from "../rest/index";
 import { IFriendsManager } from "./index";
 
 export class FriendsManager implements IFriendsManager {
@@ -11,14 +12,20 @@ export class FriendsManager implements IFriendsManager {
         this._user = user;
     }
 
-    getFriends(): Promise<IUser[]> {
-        throw new Error("Method not implemented.");
+    public async getFriends(): Promise<IUser[]> {
+        const response:Payloads.UserPayload[] = await this._client.rest.get(Routes.Friends.User.friends(this._user.id));
+        let users: IUser[] = [];
+        for (let i = 0; i < response.length; i++) {
+            users.push(User.fromUserPayload(this._client, response[i]));
+        }
+        return users;
     }
+
     addFriend(user: IUser): Promise<void> {
         throw new Error("Method not implemented.");
     }
+    
     getFriendsRequests(): Promise<IUser[]> {
         throw new Error("Method not implemented.");
     }
-    
 }
