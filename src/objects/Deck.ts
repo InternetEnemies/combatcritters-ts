@@ -5,22 +5,23 @@ import { DeckValidity, IDeck } from "./interfaces/IDeck";
 import { Deck as DeckPayload, DeckDetails as DeckDetailsPayload, DeckValidity as DeckValidityPayload, UpdateDeck as UpdateDeckPayload } from "../rest/payloads/decks";
 import { Card as CardPayload } from "../rest/payloads/cards";
 import { Card } from "./Card";
+import { IClient } from "../IClient";
 
 export class Deck implements IDeck {
     private readonly _deckid: number;
     private readonly _name: string;
     private readonly _user: IUser;
     private localcards: ICard[] | null;
-    private readonly _client: Client;
+    private readonly _client: IClient;
 
-    public static fromDeckDetailsPayload(payload: DeckDetailsPayload, client: Client, user:IUser): Deck {
+    public static fromDeckDetailsPayload(payload: DeckDetailsPayload, client: IClient, user:IUser): Deck {
         return new Deck(payload.deckid, 
                         payload.name, 
                         client,
                         user);
     }
 
-    constructor(deckid: number, name: string, client: Client, user:IUser) {
+    constructor(deckid: number, name: string, client: IClient, user:IUser) {
         this._deckid = deckid;
         this._name = name;
         this._client = client;
