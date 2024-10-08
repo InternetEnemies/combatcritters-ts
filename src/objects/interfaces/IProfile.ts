@@ -1,6 +1,6 @@
-import { IDeck } from "../../objects/index";
+import { IDeck } from "../index";
 
-export interface IProfileManager {
+export interface IProfile {
     /**
      * Get the profile of the user, which is the feature deck
      * @returns Promise<IDeck> the feature deck of the user

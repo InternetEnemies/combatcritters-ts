@@ -1,9 +1,8 @@
-import { IProfileManager } from "./index";
-import { Deck, IDeck, IUser } from "../objects/index";
+import { Deck, IDeck, IUser, IProfile } from "./index";
 import { IClient } from "../index";
 import { Payloads, Routes } from "../rest/index";
 
-export class ProfileManager implements IProfileManager {
+export class Profile implements IProfile {
     private readonly _client: IClient;
     private readonly _user: IUser;
 
