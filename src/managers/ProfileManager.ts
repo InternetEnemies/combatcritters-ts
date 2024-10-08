@@ -1,6 +1,7 @@
 import { IProfileManager } from "./index";
-import { IDeck, IUser } from "../objects/index";
+import { Deck, IDeck, IUser } from "../objects/index";
 import { IClient } from "../index";
+import { Payloads, Routes } from "../rest/index";
 
 export class ProfileManager implements IProfileManager {
     private readonly _client: IClient;
@@ -11,8 +12,13 @@ export class ProfileManager implements IProfileManager {
         this._user = user;
     }
 
-    getProfile(): Promise<IDeck> {
-        throw new Error('Method not implemented.');
+    public async getProfile(): Promise<IDeck|null> {
+        const response = await this._client.rest.get(Routes.Profiles.User.profile(this._user.id));
+        if(response.length() == 0){
+            return null;
+        }
+        const profilePayload = response as Payloads.ProfilesPayload;
+        return Deck.fromDeckDetailsPayload(profilePayload.featured_deck, this._client, this._user);
     }
 
     setProfile(deck: IDeck): Promise<void> {
