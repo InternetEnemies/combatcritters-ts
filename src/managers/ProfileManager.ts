@@ -21,7 +21,8 @@ export class ProfileManager implements IProfileManager {
         return Deck.fromDeckDetailsPayload(profilePayload.featured_deck, this._client, this._user);
     }
 
-    setProfile(deck: IDeck): Promise<void> {
-        throw new Error('Method not implemented.');
+    public async setProfile(deck: IDeck): Promise<void> {
+        let deckPayload:Payloads.ProfilesPayload = {featured_deck:{deckid:deck.deckid,name:deck.name}};
+        await this._client.rest.put(Routes.Profiles.User.profile(this._user.id), deckPayload);
     }
 }
