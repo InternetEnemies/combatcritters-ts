@@ -23,10 +23,10 @@ export class FriendsManager implements IFriendsManager {
 
     public async addFriend(user: IUser): Promise<void> {
         let friend:Payloads.FriendPayload = {username:user.username};
-        const response:Payloads.UserPayload[] = await this._client.rest.post(Routes.Friends.User.friends(this._user.id), friend);
+        await this._client.rest.post(Routes.Friends.User.friends(this._user.id), friend);
     }
 
     getFriendsRequests(): Promise<IUser[]> {
-        throw new Error("Method not implemented.");
+        
     }
 }
