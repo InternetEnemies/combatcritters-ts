@@ -13,14 +13,15 @@ export interface IDeck {
     /**
      * set the cards in the deck
      * @param cards list of cards to set
+     * @returns the list of local cards in the deck after setting
      */
-    setCards(cards:ICard[]):Promise<DeckValidity>;
+    setCards(cards:ICard[]):ICard[];
 
     /**
      * set the local copy of the cards to the api
-     * 
+     * @returns the validity of the deck
      */
-    commit():Promise<void>;
+    commit():Promise<DeckValidity>;
 
     /**
      * reset the local copy of the cards to the api
@@ -31,6 +32,12 @@ export interface IDeck {
      * get the validity of this deck
      */
     getValidity():Promise<DeckValidity>;
+
+    /**
+     * get the local copy of the cards in the deck
+     * @returns the list of local cards in the deck
+     */
+    getLocalCards():ICard[];
 
     /**
      * get the deck id

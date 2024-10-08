@@ -29,19 +29,33 @@ export class Deck implements IDeck {
     }
 
     public async getCards(): Promise<ICard[]> {
-        
+        const response:CardPayload[] = await this._client.rest.get(Routes.User.deckCards(this._user.id, this._deckid));
+        let cards: ICard[] = [];
+        for (let i = 0; i < response.length; i++) {
+            cards.push(Card.fromCardPayload(response[i]));
+        }
+        if(this.localcards.length == 0){
+            this.localcards = cards;
+        }
+        return cards;
     }
 
-    public async setCards(cards: ICard[]): Promise<DeckValidity> {
-    
+    public setCards(cards: ICard[]): ICard[] {
+        this.localcards = cards;
+        return this.localcards;
     }
 
-    public async commit(): Promise<void> {
-        
+    public async commit(): Promise<DeckValidity> {
+        const response:UpdateDeckPayload = await this._client.rest.put(Routes.User.deckCards(this._user.id, this._deckid), this.localcards.map(card => card.cardid));
+        return {
+            isValid: response.deck_validity.isvalid,
+            issues: response.deck_validity.issues
+        };
     }
 
     public async reset(): Promise<void> {
-        
+        this.localcards = [];
+        await this.getCards();
     }
 
     public async getValidity(): Promise<DeckValidity> {
@@ -52,11 +66,15 @@ export class Deck implements IDeck {
         };
     }
 
-    public get deckid(): number {
+    public getLocalCards(): ICard[] {
+        return this.localcards;
+    }
+
+    public getDeckid(): number {
         return this._deckid;
     }
 
-    public get name(): string {
+    public getName(): string {
         return this._name;
     }
 }
