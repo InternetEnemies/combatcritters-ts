@@ -1,29 +1,32 @@
 import {ICard} from "./ICard";
 
 export interface IDeck {
-    deckid: number;
-    name: string;
+    deckid:number;
+    name:string;
+    
     /**
-     * ordered list of the cards in the deck
+     * get the cards in the
+     * @returns list of cards in the deck
      */
-    cards:ICard[];
-    /**
-     * add a card at a specific position
-     * @param card card to add
-     * @param position position to add the card
-     */
-    addCard(card:ICard, position:number):Promise<DeckValidity>;
+    getCards():Promise<ICard[]>;
 
     /**
-     * remove a card from the given position
-     * @param position position to remove the card from 
+     * set the cards in the deck
+     * @param cards list of cards to set
+     * @returns the list of local cards in the deck after setting
      */
-    removeCard(position:number):Promise<DeckValidity>;
+    setCards(cards:ICard[]):ICard[];
 
     /**
-     * delete this deck
+     * set the local copy of the cards to the api
+     * @returns the validity of the deck
      */
-    delete():Promise<void>;
+    commit():Promise<DeckValidity>;
+
+    /**
+     * reset the local copy of the cards to the api
+     */
+    reset():Promise<void>;
 
     /**
      * get the validity of this deck
