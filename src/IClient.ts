@@ -1,5 +1,5 @@
 import {IUser} from "./objects";
-import {ICardsManager, IUserManager} from "./managers";
+import {ICardsManager} from "./managers";
 import {IRest} from "./rest/IRest";
 
 export interface IClient {
@@ -7,7 +7,6 @@ export interface IClient {
      * the user logged in
      */
     user:IUser;
-    users:IUserManager;
     cards:ICardsManager;
     rest:IRest;
 
