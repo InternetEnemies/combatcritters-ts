@@ -18,7 +18,7 @@ describe('test query', () => {
         builder.setOwned();
         builder.setRarities([1,2])
         builder.setRaritiesInclude()
-        let expected = `cost=10&ids=1,2,3&order=${critter.CardOrder.NAME}&owned=true&rarities=1,2&raritiesInclude=true`;// there must be a better way to test this
+        let expected = `cost=10&ids=1,2,3&order=${critter.CardOrder.NAME}&owned=true&rarities=1,2&rarityInclude=true`;// there must be a better way to test this
         assert.equal(builder.build().getQueryString(), expected);
     });
 });

@@ -27,7 +27,7 @@ export class CardQuery implements ICardQuery {
         if (this.order) queryStrings.push(`order=${this.order}`)
         if (this.owned) queryStrings.push(`owned=${this.owned}`)
         if (this.rarities.length > 0) queryStrings.push(`rarities=${this.rarities.join(',')}`)
-        if (this.raritiesInclude) queryStrings.push(`raritiesInclude=${this.raritiesInclude}`)
+        if (this.raritiesInclude) queryStrings.push(`rarityInclude=${this.raritiesInclude}`)
         
         return queryStrings.join("&")
     }
