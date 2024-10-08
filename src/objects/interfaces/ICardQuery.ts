@@ -3,6 +3,7 @@ export interface ICardQuery {
 }
 
 export enum CardOrder {
+    NONE = "",
     ID = "ID",
     NAME = "NAME",
     PLAY_COST = "PLAY_COST",

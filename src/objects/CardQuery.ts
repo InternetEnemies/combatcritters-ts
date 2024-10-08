@@ -1,40 +1,41 @@
-import { ICardQuery, CardOrder } from "./interfaces/ICardQuery";
+import { ICardQuery, CardOrder } from "./interfaces";
 
 export class CardQuery implements ICardQuery {
-    private costGreater: number;
-    private costLess: number;
-    private ids: number[];
-    private order: CardOrder;
-    private owned: string;
-    private rarityExclude: string;
-    private rarityInclude: string;
+    private readonly cost!: number;
+    private readonly costLess!: boolean;
+    private readonly ids!: number[];
+    private readonly order!: CardOrder;
+    private readonly owned!: boolean;
+    private readonly rarities!: number[];
+    private readonly raritiesInclude!: boolean;
 
-    constructor(costGreater: number, costLess: number, ids: number[], order: CardOrder, owned: string, rarityExclude: string, rarityInclude: string) {
-        this.costGreater = costGreater;
+    constructor(cost: number, costLess: boolean, ids: number[], order: CardOrder, owned: boolean, rarities: number[], rarityInclude: boolean) {
+        this.cost = cost;
         this.costLess = costLess;
         this.ids = ids;
         this.order = order;
         this.owned = owned;
-        this.rarityExclude = rarityExclude;
-        this.rarityInclude = rarityInclude;
+        this.rarities = rarities;
+        this.raritiesInclude = rarityInclude;
     }
 
     public getQueryString(): string {
-        return [
-            "costGreater=" + this.costGreater,
-            "costLess=" + this.costLess,
-            "id=" + this.ids.join(","),
-            "order=" + CardOrder[this.order],
-            "owned=" + this.owned,
-            "rarityExclude=" + this.rarityExclude,
-            "rarityInclude=" + this.rarityInclude
-        ].join("&");
+        let queryStrings:string[] = [];
+        if (this.cost) queryStrings.push(`cost=${this.cost}`)
+        if (this.costLess) queryStrings.push(`costLess=${this.costLess}`)
+        if (this.ids.length > 0) queryStrings.push(`ids=${this.ids.join(',')}`) 
+        if (this.order) queryStrings.push(`order=${this.order}`)
+        if (this.owned) queryStrings.push(`owned=${this.owned}`)
+        if (this.rarities.length > 0) queryStrings.push(`rarities=${this.rarities.join(',')}`)
+        if (this.raritiesInclude) queryStrings.push(`raritiesInclude=${this.raritiesInclude}`)
+        
+        return queryStrings.join("&")
     }
 
-    public get CostGreater(): number {
-        return this.costGreater;
+    public get Cost(): number {
+        return this.cost;
     }
-    public get CostLess(): number {
+    public get CostLess(): boolean {
         return this.costLess;
     }
     public get Ids(): number[] {
@@ -43,13 +44,13 @@ export class CardQuery implements ICardQuery {
     public get Order(): CardOrder {
         return this.order;
     }
-    public get Owned(): string {
+    public get Owned(): boolean {
         return this.owned;
     }
-    public get RarityExclude(): string {
-        return this.rarityExclude;
+    public get Rarities(): number[] {
+        return this.rarities;
     }
-    public get RarityInclude(): string {
-        return this.rarityInclude;
+    public get RarityInclude(): boolean {
+        return this.raritiesInclude;
     }
 }

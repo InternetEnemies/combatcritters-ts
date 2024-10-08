@@ -1,54 +1,46 @@
-import { ICardQuery, CardOrder } from "./interfaces/ICardQuery";
-import { CardQuery } from "./CardQuery";
-import { CardRarity } from "./interfaces";
+import {CardOrder, ICardQuery, ICardQueryBuilder} from "./interfaces";
+import {CardQuery} from "./CardQuery";
 
-export class CardQueryBuilder {
+export class CardQueryBuilder implements ICardQueryBuilder{
 
-    private costGreater: number;
-    private costLess: number;
-    private ids: number[];
-    private order: CardOrder;
-    private owned: boolean;
-    private rarities: number[];
-    private isInclude: boolean;
+    private cost!: number;
+    private costLess!: boolean;
+    private ids!: number[];
+    private order!: CardOrder;
+    private owned!: boolean;
+    private rarities!: number[];
+    private isInclude!: boolean;
 
     constructor() {
-        this.costGreater = -1;
-        this.costLess = Number.MAX_VALUE;
-        this.ids = [];
-        this.order = CardOrder.ID;
-        this.owned = false;
-        this.rarities = [];
-        this.isInclude = true;
+        this.reset()
     }
-
     public build(): ICardQuery {
         return new CardQuery(
-            this.costGreater,
+            this.cost,
             this.costLess,
             this.ids,
             this.order,
-            this.owned ? "true" : "false",
-            this.isInclude ? "" : this.rarities.join(","),
-            this.isInclude ? this.rarities.join(",") : ""
+            this.owned,
+            this.rarities,
+            this.isInclude
         );
     }
-
-    public reset(): void {
-        this.costGreater = -1;
-        this.costLess = Number.MAX_VALUE;
+    
+    public reset():void {
+        this.cost = 0;
+        this.costLess = false;
         this.ids = [];
-        this.order = CardOrder.ID;
+        this.order = CardOrder.NONE;
         this.owned = false;
         this.rarities = [];
-        this.isInclude = true;
+        this.isInclude = false;
     }
 
-    public setCostGreater(cost: number): void {
-        this.costGreater = cost;
+    public setCost(cost: number): void {
+        this.cost= cost;
     }
-    public setCostLess(cost: number): void {
-        this.costLess = cost;
+    public setCostLess(costLess:boolean = true): void {
+        this.costLess = costLess;
     }
     public setIds(ids: number[]): void {
         this.ids = ids;
@@ -56,41 +48,13 @@ export class CardQueryBuilder {
     public setOrder(order: CardOrder): void {
         this.order = order;
     }
-    public setOwned(): void {
-        this.owned = true;
+    public setOwned(owned:boolean=true): void {
+        this.owned = owned;
     }
-    public setNotOwned(): void {
-        this.owned = false;
+    public setRarities(rarities: number[]): void {
+        this.rarities = rarities;
     }
-    public setRarities(limits: number[]): void {
-        this.rarities = limits;
-    }
-    public setInclude(): void {
-        this.isInclude = true;
-    }
-    public setExclude(): void {
-        this.isInclude = false;
-    }
-
-    get CostGreater() {
-        return this.costGreater;
-    }
-    get CostLess() {
-        return this.costLess;
-    }
-    get Ids() {
-        return this.ids;
-    }
-    get Order() {
-        return this.order;
-    }
-    get Owned() {
-        return this.owned;
-    }
-    get Rarities() {
-        return this.rarities;
-    }
-    get IsInclude() {
-        return this.isInclude;
+    public setRaritiesInclude(include:boolean = true): void {
+        this.isInclude = include;
     }
 }
