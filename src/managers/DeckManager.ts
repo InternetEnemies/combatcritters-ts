@@ -1,5 +1,5 @@
 import { IClient } from "../IClient";
-import { IDeck, IUser } from "../objects";
+import { Deck, IDeck, IUser } from "../objects";
 import { Routes } from "../rest";
 import { DeckRules, DeckDetails} from "../rest/payloads";
 import { IDeckManager } from "./interfaces";
