@@ -11,28 +11,36 @@ export interface IDeck {
     getCards():Promise<ICard[]>;
 
     /**
-     * add a card at a specific position
-     * @param card card to add
-     * @param position position to add the card
-     */
-    addCard(card:ICard, position:number):Promise<DeckValidity>;
-
-    /**
-     * remove a card from the given position
-     * @param position position to remove the card from 
-     */
-    removeCard(position:number):Promise<DeckValidity>;
-
-    /**
      * set the cards in the deck
      * @param cards list of cards to set
      */
     setCards(cards:ICard[]):Promise<DeckValidity>;
 
     /**
+     * set the local copy of the cards to the api
+     * 
+     */
+    commit():Promise<void>;
+
+    /**
+     * reset the local copy of the cards to the api
+     */
+    reset():Promise<void>;
+
+    /**
      * get the validity of this deck
      */
     getValidity():Promise<DeckValidity>;
+
+    /**
+     * get the deck id
+     */
+    getDeckId():number;
+
+    /**
+     * get the name of the deck
+     */
+    getName():string;
 }
 
 export type DeckValidity = {
