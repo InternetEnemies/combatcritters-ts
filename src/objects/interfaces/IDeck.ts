@@ -1,9 +1,6 @@
 import {ICard} from "./ICard";
 
 export interface IDeck {
-    deckid: number;
-    name: string;
-    
     /**
      * get the cards in the
      * @returns list of cards in the deck

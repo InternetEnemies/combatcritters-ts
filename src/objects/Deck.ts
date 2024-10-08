@@ -70,7 +70,7 @@ export class Deck implements IDeck {
         return this.localcards;
     }
 
-    public getDeckid(): number {
+    public getDeckId(): number {
         return this._deckid;
     }
 
