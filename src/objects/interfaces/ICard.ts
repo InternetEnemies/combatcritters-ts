@@ -12,6 +12,10 @@ export interface ICard {
   rarity: number;
   image: string;
   description: string;
+  /**
+   * Accept a visitor
+   * @param visitor the visitor to accept
+   */
   accept(visitor: ICardVisitor): void;
 }
 
@@ -24,7 +28,9 @@ export interface ICardCritter extends ICard {
 export interface ICardItem extends ICard {
   abilityid: number;
 }
-
+/**
+ * Rarity of a card
+ */
 export enum CardRarity {
   COMMON,
   UNCOMMON,

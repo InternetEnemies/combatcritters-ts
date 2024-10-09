@@ -14,6 +14,13 @@ export class Deck implements IDeck {
     private cardsCached: boolean;
     private readonly _client: IClient;
 
+    /**
+     * Create a deck object from a deck details payload
+     * @param payload deck details payload
+     * @param client 
+     * @param user 
+     * @returns IDeck the deck object
+     */
     public static fromDeckDetailsPayload(payload: DeckDetailsPayload, client: IClient, user:IUser): Deck {
         return new Deck(payload.deckid, 
                         payload.name, 

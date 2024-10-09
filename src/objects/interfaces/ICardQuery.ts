@@ -1,7 +1,14 @@
 export interface ICardQuery {
+    /**
+     * Get the query string that use in the request
+     * @returns string the query string
+     */
     getQueryString(): string;
 }
 
+/**
+ * Card order string
+ */
 export enum CardOrder {
     NONE = "",
     ID = "ID",

@@ -1,3 +1,6 @@
+/**
+ * Payloads for the decks
+ */
 export type DeckDetails = {
     deckid: number,
     name: string

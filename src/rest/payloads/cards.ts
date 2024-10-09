@@ -1,3 +1,6 @@
+/**
+ * Card related payloads
+ */
 export type Card = {
     cardid:number,
     name:string,

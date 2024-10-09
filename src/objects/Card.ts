@@ -15,6 +15,11 @@ export abstract class Card implements ICard {
     private readonly _image: string;
     private readonly _description: string;
 
+    /**
+     * Create a card object from a card payload
+     * @param payload the card payload
+     * @returns ICardCritter | ICardItem the card object
+     */
     public static fromCardPayload(payload: CardPayload): ICardCritter | ICardItem {
         if (payload.type === "critter") {
             return CardCritter.fromCardPayload(payload);
