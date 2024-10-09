@@ -12,11 +12,6 @@ export interface IFriendsManager {
      */
     addFriend(user: IUser): Promise<void>;
     /**
-     * Add a user as a friend
-     * @param username the username of the user to add as a friend
-     */
-    addFriend(user: string): Promise<void>;
-    /**
      * Get the friend requests
      * @returns a list of users who have sent friend requests
      */

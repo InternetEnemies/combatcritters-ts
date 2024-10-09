@@ -17,15 +17,8 @@ export class FriendsManager implements IFriendsManager {
         return this.fromUserPayloadsToUsers(response);
     }
 
-    public async addFriend(user: IUser): Promise<void>;
-    public async addFriend(user: string): Promise<void>;
-    public async addFriend(user: IUser | string): Promise<void> {
-        let friend:Payloads.FriendPayload
-        if (typeof user === "string") {
-            friend = {username:user};
-        } else {
-            friend = {username:user.username};
-        }
+    public async addFriend(user: IUser): Promise<void> {
+        let friend:Payloads.FriendPayload = {username:user.username};
         await this._client.rest.post(Routes.Friends.User.friends(this._user.id), friend);
     }
 
