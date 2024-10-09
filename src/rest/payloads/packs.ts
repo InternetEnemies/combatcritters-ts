@@ -1,3 +1,6 @@
+/**
+ * Payloads for the packs
+ */
 export type Pack = {
     packid:number,
     name:string,

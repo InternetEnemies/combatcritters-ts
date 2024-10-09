@@ -1,5 +1,4 @@
 export * from "./IDeckManager"
 export * from "./IUserCardsManager"
 export * from "./ICardsManager"
-export * from "./IUserManager"
 export * from "./IFriendsManager"

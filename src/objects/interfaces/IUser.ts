@@ -2,6 +2,7 @@ import {IDeckManager, IUserCardsManager, IFriendsManager} from "../../managers/i
 import {IProfile} from "./index";
 
 export interface IUser {
+    //properties
     decks:IDeckManager;
     cards:IUserCardsManager;
     friends:IFriendsManager;
