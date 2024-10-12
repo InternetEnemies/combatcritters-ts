@@ -1,4 +1,5 @@
 export interface IDeckValidity {
-    isValid:boolean;
-    issues:string[]
+    // properties
+    isValid:boolean
+    issues?:string[]
 }
