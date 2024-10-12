@@ -9,7 +9,7 @@ export class DeckValidity implements IDeckValidity {
         return new DeckValidity(payload.isvalid, payload.issues);
     }
 
-    constructor(isValid, issues) {
+    constructor(isValid:boolean, issues:string[]) {
         this._isValid = isValid;
         this._issues = issues;
     }
