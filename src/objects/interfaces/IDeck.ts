@@ -1,4 +1,4 @@
-import {ICard} from "./ICard";
+import {ICard, IDeckValidity} from "./index";
 
 export interface IDeck {
     deckid:number;
@@ -21,7 +21,7 @@ export interface IDeck {
      * set the local copy of the cards to the api
      * @returns the validity of the deck
      */
-    commit():Promise<DeckValidity>;
+    commit():Promise<IDeckValidity>;
 
     /**
      * reset the local copy of the cards to the api
@@ -31,10 +31,5 @@ export interface IDeck {
     /**
      * get the validity of this deck
      */
-    getValidity():Promise<DeckValidity>;
-}
-
-export type DeckValidity = {
-    isValid:boolean,
-    issues?:string[]
+    getValidity():Promise<IDeckValidity>;
 }

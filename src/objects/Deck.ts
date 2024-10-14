@@ -1,10 +1,8 @@
 import { Routes } from "../rest/routes/decks";
-import { ICard, IUser } from "./interfaces";
-import { DeckValidity, IDeck } from "./interfaces/IDeck";
-import { Deck as DeckPayload, DeckDetails as DeckDetailsPayload, DeckValidity as DeckValidityPayload, UpdateDeck as UpdateDeckPayload } from "../rest/payloads/decks";
-import { Card as CardPayload } from "../rest/payloads/cards";
-import { Card } from "./Card";
-import { IClient } from "../IClient";
+import { ICard, IUser, IDeckValidity, DeckValidity, IDeck  } from "./index";
+import { Deck as DeckPayload, DeckDetails as DeckDetailsPayload, DeckValidity as DeckValidityPayload, UpdateDeck as UpdateDeckPayload, Card as CardPayload } from "../rest/payloads/index";
+import { Card } from "./index";
+import { IClient } from "../index";
 
 export class Deck implements IDeck {
     private readonly _deckid: number;
@@ -50,25 +48,19 @@ export class Deck implements IDeck {
         return this.localcards;
     }
 
-    public async commit(): Promise<DeckValidity> {
+    public async commit(): Promise<IDeckValidity> {
         let deck:DeckPayload ={cards:this.localcards.map(card => card.cardid)};
         const response:UpdateDeckPayload = await this._client.rest.put(Routes.User.deckCards(this._user.id, this._deckid), deck);
-        return {
-            isValid: response.deck_validity.isvalid,
-            issues: response.deck_validity.issues
-        };
+        return DeckValidity.fromDeckValidityPayload(response.deck_validity);
     }
 
     public async reset(): Promise<void> {
         await this.fetch();
     }
 
-    public async getValidity(): Promise<DeckValidity> {
+    public async getValidity(): Promise<IDeckValidity> {
         const response:DeckValidityPayload = await this._client.rest.get(Routes.User.deckValidity(this._user.id ,this._deckid));
-        return {
-            isValid: response.isvalid,
-            issues: response.issues
-        };
+        return DeckValidity.fromDeckValidityPayload(response);
     }
 
     private async fetch(): Promise<void>{
