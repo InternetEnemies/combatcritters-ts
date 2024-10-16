@@ -1,4 +1,4 @@
-import {DeckManager, FriendsManager, ICardsManager, IDeckManager, IFriendsManager, IUserCardsManager, UserCardsManager} from "../managers/index";
+import {DeckManager, FriendsManager, ICardsManager, IDeckManager, IFriendsManager, IUserCardsManager, UserCardsManager, IPacksManager, PacksManager} from "../managers/index";
 import {IUser, IProfile} from "./interfaces";
 import {UserPayload} from "../rest/payloads";
 import {IClient} from "../IClient";
@@ -9,6 +9,7 @@ export class User implements IUser {
     private readonly _decks: IDeckManager;
     private readonly _cards: IUserCardsManager;
     private readonly _friends: IFriendsManager;
+    private readonly _packs: IPacksManager;
     private readonly _profile: IProfile;
     private readonly _username: string;
     private readonly _id: number;
@@ -27,6 +28,7 @@ export class User implements IUser {
         this._decks = new DeckManager(client, this);
         this._cards = new UserCardsManager(client, this);
         this._friends = new FriendsManager(client, this);
+        this._packs = new PacksManager(client, this);
         this._profile = new Profile(client, this);
         this._username = username;
         this._id = id;
@@ -41,6 +43,9 @@ export class User implements IUser {
     }
     public get friends():IFriendsManager {
         return this._friends;
+    }
+    public get packs():IPacksManager {
+        return this._packs;
     }
     public get profile():IProfile {
         return this._profile;
