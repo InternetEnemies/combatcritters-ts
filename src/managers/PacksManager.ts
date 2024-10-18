@@ -1,6 +1,7 @@
 import { IPack } from "../objects/index";
 import { IClient, IUser } from "../index";
 import { IPacksManager } from "./index";
+import { Pack } from "../objects/index";
 
 export class PacksManager implements IPacksManager {
     private readonly _client: IClient;
@@ -12,6 +13,10 @@ export class PacksManager implements IPacksManager {
     }
 
     public async getPacks(): Promise<IPack[]> {
-        throw new Error("Method not implemented.");
+        const packs: IPack[] = [];
+        for(let i = 0; i < 20; i++) {
+            packs[i] = new Pack("/assets/images/pack.png", "Into the Robverse", 0);
+        }
+    return packs;
     }
 }

@@ -1,4 +1,8 @@
 import { ICard, IPack } from './index';
+import { ICardCritter } from './index';
+import { ICardItem } from './index';
+import { CardCritter } from './index';
+import { CardItem } from './index';
 
 export class Pack implements IPack{
 
@@ -14,12 +18,48 @@ export class Pack implements IPack{
         this._packid = packid
     }
 
+    //TODO: Remove this function
+    private getCards(): ICard[] {
+    const cards: (ICardCritter | ICardItem)[] = [];
+
+    for (let i = 0; i < 20; i++) {
+        if (i < 10) {
+            const critterCard = new CardCritter(
+                i,                            
+                "UglyMan, the Hideous Hero",         
+                i, 
+                2, 
+                "???",             
+                `Super ugly dude`,       
+                i, 
+                i, 
+                [0,1,2]
+            );
+            cards.push(critterCard);
+        } else {
+            const itemCard = new CardItem(
+                i + 1,                            
+                "The item",                  
+                i,
+                i, 
+                "???",               
+                "Item description",     
+                i
+            );
+            cards.push(itemCard);
+        }
+    }
+
+    return cards;
+}
+
+
     public async getSetList(): Promise<ICard[]> {
-        throw new Error("Method not implemented.");
+        return this.getCards();
     }
 
     public async open(): Promise<ICard[]> {
-        throw new Error("Method not implemented.");
+        return this.getCards().splice(0, 5);
     }
 
     public get image(): string {
