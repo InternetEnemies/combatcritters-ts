@@ -18,7 +18,7 @@ export class Pack implements IPack{
         this._packid = packid
     }
 
-    //TODO: Remove this function
+    //TODO: Remove this function once #67 is resolved
     private getCards(): ICard[] {
     const cards: (ICardCritter | ICardItem)[] = [];
 
