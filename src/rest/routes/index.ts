@@ -5,6 +5,7 @@ import {Routes as Friends} from './friends'
 import {Routes as Profiles} from './profiles'
 import {Routes as Packs} from './packs'
 import {Routes as Wallet} from './wallet'
+import {Routes as Market} from './market'
 
 export const Routes = {
     Auth,
@@ -13,5 +14,6 @@ export const Routes = {
     Friends,
     Profiles,
     Packs,
-    Wallet
+    Wallet,
+    Market
 }
