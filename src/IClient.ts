@@ -1,5 +1,5 @@
-import {IUser} from "./objects";
-import {ICardsManager, IVendorManager} from "./index";
+import {IOffer, IUser} from "./objects";
+import {ICardsManager, IOffersManager, IVendorManager} from "./index";
 import {IRest} from "./rest/IRest";
 
 export interface IClient {
@@ -9,6 +9,7 @@ export interface IClient {
     user:IUser;
     cards:ICardsManager;
     vendors:IVendorManager;
+    offers: IOffersManager;
     rest:IRest;
 
     /**

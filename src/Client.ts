@@ -1,5 +1,5 @@
 import {IClient} from "./IClient";
-import {CardsManager, ICardsManager, IVendorManager, VendorManager} from "./index";
+import {CardsManager, ICardsManager, IOffersManager, IVendorManager, OffersManager, VendorManager} from "./index";
 import {Rest, IRest, Routes} from "./rest";
 import {IUser} from "./objects";
 import {UserPayload} from "./rest/payloads";
@@ -9,6 +9,7 @@ export class Client implements IClient{
     
     private readonly _cards:ICardsManager;
     private readonly _vendors:IVendorManager;
+    private readonly _offers:IOffersManager;
     private readonly _rest: IRest;
     private _user!:IUser; //user is initialized late
 
@@ -21,15 +22,17 @@ export class Client implements IClient{
         return new Client(
             passingRest,
             new CardsManager(passingRest),
-            new VendorManager(passingRest)
+            new VendorManager(passingRest),
+            new OffersManager(passingRest)
         )
     }
     
     
-    constructor(rest:IRest, cards:ICardsManager, vendors:IVendorManager){
+    constructor(rest:IRest, cards:ICardsManager, vendors:IVendorManager, offers:IOffersManager){
         this._cards = cards;
         this._rest = rest;
         this._vendors = vendors;
+        this._offers = offers;
     }
     
     public async login(username:string, password:string):Promise<void> {
@@ -55,6 +58,9 @@ export class Client implements IClient{
     }
     public get vendors(): IVendorManager{
         return this._vendors;
+    }
+    public get offers(): IOffersManager{
+        return this._offers;
     }
     public get rest(): IRest{
         return this._rest;
