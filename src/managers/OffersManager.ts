@@ -1,4 +1,4 @@
-import { IOffer, IDiscountOffer, IRest } from "../index";
+import { IOffer, IDiscountOffer, IRest, Offer, DiscountOffer } from "../index";
 import { IOffersManager } from "./index";
 
 export class OffersManager implements IOffersManager {
@@ -8,20 +8,32 @@ export class OffersManager implements IOffersManager {
         this._rest = rest;
     }
 
-    getOffers(): Promise<IOffer[]> {
+    public async getOffers(): Promise<IOffer[]> {
         //TODO: Implement this method
         //https://github.com/InternetEnemies/combatcritters-ts/issues/60
-        throw new Error("Method not implemented.");
+        const offers: IOffer[] = [];
+        for(let i = 0; i < 20; i++) {
+            offers[i] = new Offer(i, [], []);
+        }
+        return offers;
     }
-    getSpecials(): Promise<IOffer[]> {
+    public async getSpecials(): Promise<IOffer[]> {
         //TODO: Implement this method
         //https://github.com/InternetEnemies/combatcritters-ts/issues/60
-        throw new Error("Method not implemented.");
+        const specials: IOffer[] = [];
+        for(let i = 0; i < 20; i++) {
+            specials[i] = new Offer(i, [], []);
+        }
+        return specials;
     }
-    getDiscounts(): Promise<IDiscountOffer[]> {
+    public async getDiscounts(): Promise<IDiscountOffer[]> {
         //TODO: Implement this method
         //https://github.com/InternetEnemies/combatcritters-ts/issues/60
-        throw new Error("Method not implemented.");
+        const discounts: IDiscountOffer[] = [];
+        for(let i = 0; i < 20; i++) {
+            discounts[i] = new DiscountOffer([], i, i, "", new Offer(i, [], []));
+        }
+        return discounts;
     }
     
 }

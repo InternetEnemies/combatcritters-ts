@@ -1,4 +1,4 @@
-import { IClient, IRest } from "../index";
+import { IClient, IRest, Vendor, VendorReputation } from "../index";
 import { IVendor } from "../index";
 import { IVendorManager } from "./index";
 
@@ -9,15 +9,21 @@ export class VendorManager implements IVendorManager {
         this._rest = rest;
     }
 
-    getVendor(id: number): Promise<IVendor> {
+    public async getVendor(id: number): Promise<IVendor> {
         //TODO: Implement this method
         // https://github.com/InternetEnemies/combatcritters-ts/issues/65
-        throw new Error("Method not implemented.");
+        const vendor = new Vendor(id, "Vendor", new VendorReputation(0, 0, 0, 0));
+        return vendor;
     }
-    getVendors(): Promise<IVendor[]> {
+
+    public async getVendors(): Promise<IVendor[]> {
         //TODO: Implement this method
         // https://github.com/InternetEnemies/combatcritters-ts/issues/65
-        throw new Error("Method not implemented.");
+        const vendors: IVendor[] = [];
+        for(let i = 0; i < 20; i++) {
+            vendors[i] = new Vendor(i, "Vendor", new VendorReputation(0, 0, 0, 0));
+        }
+        return vendors;
     }
     
 }

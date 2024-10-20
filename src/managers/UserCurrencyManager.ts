@@ -12,6 +12,6 @@ export class UserCurrencyManager implements IUserCurrencyManager {
     public async getCoins(): Promise<number> {
         //TODO: Implement
         // https://github.com/InternetEnemies/combatcritters-ts/issues/66
-        throw new Error("Method not implemented.");
+        return 0;
     }
 }

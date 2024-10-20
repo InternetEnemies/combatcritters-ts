@@ -19,6 +19,6 @@ export class PacksManager implements IPacksManager {
         for(let i = 0; i < 20; i++) {
             packs[i] = new Pack("/assets/images/pack.png", "Into the Robverse", 0);
         }
-    return packs;
+        return packs;
     }
 }

@@ -13,11 +13,4 @@ export type PackResult = {
     cards:Card[]
 }
 
-export type PackCardSlot = {
-    rarityWeight: {
-        rarity: number,
-        weight: number
-    }[]
-}
-
 export type PackContents = Card[]
