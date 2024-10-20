@@ -4,7 +4,7 @@
 export type Offer = {
     give: OfferItem[],
     id: number,
-    receive: OfferItem[]
+    receive: OfferItem
 }
 
 export type Vendor = {
@@ -16,8 +16,9 @@ export type Vendor = {
 }
 
 export type OfferItem = {
-    item: number,
-    type: string
+    type: ItemType,
+    count: number,
+    item_id: number
 }
 
 export type RepChange = {
@@ -38,4 +39,10 @@ export type VendorReputation = {
     level: number,
     next_level_xp: number,
     prev_level_xp: number
+}
+
+export enum ItemType {
+    CARD = "card",
+    CURRENCY = "currency",
+    PACK = "pack"
 }

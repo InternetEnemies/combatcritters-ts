@@ -3,7 +3,7 @@ import { IDiscountOffer, IItemStack, IOffer } from "./index";
 
 export class DiscountOffer implements IDiscountOffer {
     private readonly _offerID: number;
-    private readonly _receiveItems: IItemStack<any>[];
+    private readonly _receiveItem: IItemStack<any>;
     private readonly _giveItem: IItemStack<any>[];
     private readonly _discountedGive: IItemStack<any>[];
     private readonly _discount: number;
@@ -22,6 +22,9 @@ export class DiscountOffer implements IDiscountOffer {
         this._discountID = discountID;
         this._expires = expires;
         this._originalOffer = originalOffer;
+        {
+            //TODO: initialize _offerID, _receiveItem, _giveItem
+        }
     }
 
     public compareUserItems(): IItemStack<any>[] {
@@ -31,8 +34,8 @@ export class DiscountOffer implements IDiscountOffer {
     public get offerID(): number {
         return this._offerID;
     }
-    public get receiveItems(): IItemStack<any>[] {
-        return this._receiveItems;
+    public get receiveItem(): IItemStack<any> {
+        return this._receiveItem;
     }
     public get giveItem(): IItemStack<any>[] {
         return this._giveItem;
