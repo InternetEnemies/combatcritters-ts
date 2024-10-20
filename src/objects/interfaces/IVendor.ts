@@ -19,4 +19,9 @@ export interface IVendor {
      * @returns list of special offers from the vendor
      */
     getSpecialOffers(): Promise<IOffer[]>;
+    /**
+     * Purchase an offer from the vendor
+     * @param offer the offer to purchase
+     */
+    purchaseOffer(offer: IOffer): Promise<void>;
 }
