@@ -3,16 +3,20 @@ import { IDiscountOffer, IOffer, IVendorReputation } from "./index";
 export interface IVendor {
     id: number;
     name: string;
-    Offers: IOffer[];
     reputation: IVendorReputation;
+    /**
+     * Get offers from the vendor
+     * @returns list of offers from the vendor
+     */
+    getOffers(): Promise<IOffer[]>;
     /**
      * Get discount offers from the vendor
      * @returns list of discount offers from the vendor
      */
-    discountOffers(): IDiscountOffer[];
+    discountOffers(): Promise<IDiscountOffer[]>;
     /**
      * Get special offers from the vendor
      * @returns list of special offers from the vendor
      */
-    getSpecialOffers(): IOffer[];
+    getSpecialOffers(): Promise<IOffer[]>;
 }
