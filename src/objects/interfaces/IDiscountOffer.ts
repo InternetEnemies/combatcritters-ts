@@ -7,4 +7,10 @@ export interface IDiscountOffer extends IOffer {
     // Date when the discount offer expires
     expires: string;
     originalOffer: IOffer;
+
+    /**
+     * Get the number of days left until the discount offer expires
+     * @returns number of days left until the discount offer expires
+     */
+    getDaysLeft(): number;
 }
