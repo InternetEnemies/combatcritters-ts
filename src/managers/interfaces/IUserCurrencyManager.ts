@@ -1,6 +1,8 @@
+import { ICurrency } from "../../index";
+
 export interface IUserCurrencyManager {
     /**
-     * Get the amount of coins the user has
+     * Get the currency the user has
      */
-    getCoins(): Promise<number>;
+    getCurrency(): Promise<ICurrency>;
 }

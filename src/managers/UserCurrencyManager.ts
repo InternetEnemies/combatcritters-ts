@@ -1,4 +1,4 @@
-import { IClient,IUserCurrencyManager, IUser } from "../index";
+import { IClient,IUserCurrencyManager, IUser, ICurrency, Currency } from "../index";
 
 export class UserCurrencyManager implements IUserCurrencyManager {
     private readonly _client: IClient;
@@ -9,9 +9,9 @@ export class UserCurrencyManager implements IUserCurrencyManager {
         this._user = user;
     }
 
-    public async getCoins(): Promise<number> {
+    public async getCurrency(): Promise<ICurrency> {
         //TODO: Implement
         // https://github.com/InternetEnemies/combatcritters-ts/issues/66
-        return 0;
+        return new Currency(10);
     }
 }
