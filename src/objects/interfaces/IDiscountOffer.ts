@@ -1,7 +1,7 @@
 import { IItemStack, IOffer } from "./index";
 
-export interface IDiscountOffer {
-    discountedGiveItem: IItemStack<any>[];
+export interface IDiscountOffer extends IOffer {
+    discountedGive: IItemStack<any>[];
     // Discount percentage
     discount: number;
     discountID: number;
