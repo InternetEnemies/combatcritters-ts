@@ -10,9 +10,13 @@ export class VendorManager implements IVendorManager {
     }
 
     getVendor(id: number): Promise<IVendor> {
+        //TODO: Implement this method
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/65
         throw new Error("Method not implemented.");
     }
     getVendors(): Promise<IVendor[]> {
+        //TODO: Implement this method
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/65
         throw new Error("Method not implemented.");
     }
     
