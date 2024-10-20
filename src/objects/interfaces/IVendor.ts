@@ -4,6 +4,8 @@ export interface IVendor {
     id: number;
     name: string;
     reputation: IVendorReputation;
+    image: string;
+    refrest_time: string;
     /**
      * Get offers from the vendor
      * @returns list of offers from the vendor

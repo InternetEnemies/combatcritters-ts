@@ -12,7 +12,7 @@ export class VendorManager implements IVendorManager {
     public async getVendor(id: number): Promise<IVendor> {
         //TODO: Implement this method
         // https://github.com/InternetEnemies/combatcritters-ts/issues/65
-        const vendor = new Vendor(id, "Vendor", new VendorReputation(0, 0, 0, 0));
+        const vendor = new Vendor(id, "Vendor", new VendorReputation(0, 0, 0, 0),"","");
         return vendor;
     }
 
@@ -21,7 +21,7 @@ export class VendorManager implements IVendorManager {
         // https://github.com/InternetEnemies/combatcritters-ts/issues/65
         const vendors: IVendor[] = [];
         for(let i = 0; i < 20; i++) {
-            vendors[i] = new Vendor(i, "Vendor", new VendorReputation(0, 0, 0, 0));
+            vendors[i] = new Vendor(i, "Vendor", new VendorReputation(0, 0, 0, 0),"","");
         }
         return vendors;
     }

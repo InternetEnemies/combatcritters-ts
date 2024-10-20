@@ -10,7 +10,9 @@ export type Offer = {
 export type Vendor = {
     id: number,
     name: string,
-    reputation: VendorReputation
+    image: string,
+    reputation: VendorReputation,
+    refrest_time: string
 }
 
 export type OfferItem = {
