@@ -1,45 +1,29 @@
 import { OfferDiscount } from "../rest/payloads";
-import { IDiscountOffer, IItemStack, IOffer } from "./index";
+import { IDiscountOffer, IItemStack, IOffer, Offer } from "./index";
 
-export class DiscountOffer implements IDiscountOffer {
-    private readonly _offerID: number;
-    private readonly _receiveItem: IItemStack<any>;
-    private readonly _giveItem: IItemStack<any>[];
+export class DiscountOffer extends Offer implements IDiscountOffer {
     private readonly _discountedGive: IItemStack<any>[];
     private readonly _discount: number;
     private readonly _discountID: number;
     private readonly _expires: string;
-    private readonly _originalOffer: IOffer;
 
     public static fromDiscountOfferPayload(payload: OfferDiscount): DiscountOffer {
         //TODO: Implement this method
         throw new Error("Method not implemented.");
     }
 
-    constructor(discountedGive: IItemStack<any>[], discount: number, discountID: number, expires: string, originalOffer: IOffer) {
+    constructor(discountedGive: IItemStack<any>[], discount: number, discountID: number, expires: string, offerID: number, receiveItem: IItemStack<any>, originalGive: IItemStack<any>[]) {
+        super(offerID, receiveItem, originalGive);
         this._discountedGive = discountedGive;
         this._discount = discount;
         this._discountID = discountID;
         this._expires = expires;
-        this._originalOffer = originalOffer;
-        {
-            //TODO: initialize _offerID, _receiveItem, _giveItem
-        }
     }
 
     public compareUserItems(): IItemStack<any>[] {
         throw new Error("Method not implemented.");
     }
 
-    public get offerID(): number {
-        return this._offerID;
-    }
-    public get receiveItem(): IItemStack<any> {
-        return this._receiveItem;
-    }
-    public get giveItem(): IItemStack<any>[] {
-        return this._giveItem;
-    }
     public get discountedGive(): IItemStack<any>[] {
         return this._discountedGive;
     }
@@ -51,8 +35,5 @@ export class DiscountOffer implements IDiscountOffer {
     }
     public get expires(): string {
         return this._expires;
-    }
-    public get originalOffer(): IOffer {
-        return this._originalOffer;
     }
 }

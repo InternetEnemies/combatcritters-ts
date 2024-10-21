@@ -7,5 +7,4 @@ export interface IDiscountOffer extends IOffer {
     discountID: number;
     // Date when the discount offer expires
     expires: string;
-    originalOffer: IOffer;
 }
