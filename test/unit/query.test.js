@@ -1,5 +1,5 @@
 import assert from 'assert'
-import * as critter from "../src"
+import * as critter from "../../src/index.js"
 
 describe('test query', () => {
     it('should give correct simple query', () => {

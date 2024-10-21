@@ -4,6 +4,7 @@
   "description": "combatcritters ts wrapper",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
+  "type": "module",
   "scripts": {
     "test": "echo TODO",
     "build": "tsc"
