@@ -26,4 +26,9 @@ export interface IClient {
      * register a new user
      */
     register(username: string, password: string): Promise<void>;
+
+    /**
+     * logout the user
+     */
+    logout(): Promise<void>;
 }
