@@ -30,7 +30,6 @@ export type OfferDiscount = {
     discounted_give: OfferItem[],
     discount: number,
     discountid: number,
-    expires: string,
     parent_offer: Offer
 }
 

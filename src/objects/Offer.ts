@@ -1,33 +1,33 @@
-import { IItemStack, IOffer } from "../index";
+import { ICard, ICurrency, IItemStack, IOffer, IPack } from "../index";
 import { Offer as OfferPayload } from "../rest/payloads";
 
 export class Offer implements IOffer{
     private readonly _offerID: number;
-    private readonly _receiveItem: IItemStack<any>;
-    private readonly _giveItem: IItemStack<any>[];
+    private readonly _receiveItem: IItemStack<ICurrency | ICard | IPack>;
+    private readonly _giveItem: IItemStack<ICurrency | ICard | IPack>[];
     
     public static fromOfferPayload(payload: OfferPayload): Offer {
         //TODO: Implement this method
         throw new Error("Method not implemented.");
     }
 
-    constructor(offerID: number, receiveItems: IItemStack<any>, giveItem: IItemStack<any>[]) {
+    constructor(offerID: number, receiveItems: IItemStack<ICurrency | ICard | IPack>, giveItem: IItemStack<ICurrency | ICard | IPack>[]) {
         this._offerID = offerID;
         this._receiveItem = receiveItems;
         this._giveItem = giveItem;
     }
 
-    compareUserItems(): IItemStack<any>[] {
+    public compareUserItems(): IItemStack<ICurrency | ICard | IPack>[] {
         throw new Error("Method not implemented.");
     }
 
     public get offerID(): number {
         return this._offerID;
     }
-    public get receiveItem(): IItemStack<any> {
+    public get receiveItem(): IItemStack<ICurrency | ICard | IPack> {
         return this._receiveItem;
     }
-    public get giveItem(): IItemStack<any>[] {
+    public get giveItem(): IItemStack<ICurrency | ICard | IPack>[] {
         return this._giveItem;
     }
 }

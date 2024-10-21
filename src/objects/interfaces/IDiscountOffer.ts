@@ -1,10 +1,8 @@
-import { IItemStack, IOffer } from "./index";
+import { ICard, ICurrency, IItemStack, IOffer, IPack } from "./index";
 
 export interface IDiscountOffer extends IOffer {
-    discountedGive: IItemStack<any>[];
+    discountedGive: IItemStack<ICurrency | ICard | IPack>[];
     // Discount percentage
     discount: number;
     discountID: number;
-    // Date when the discount offer expires
-    expires: string;
 }

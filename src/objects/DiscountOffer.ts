@@ -1,30 +1,28 @@
 import { OfferDiscount } from "../rest/payloads";
-import { IDiscountOffer, IItemStack, IOffer, Offer } from "./index";
+import { ICard, ICurrency, IDiscountOffer, IItemStack, IOffer, IPack, Offer } from "./index";
 
 export class DiscountOffer extends Offer implements IDiscountOffer {
-    private readonly _discountedGive: IItemStack<any>[];
+    private readonly _discountedGive: IItemStack<ICurrency | ICard | IPack>[];
     private readonly _discount: number;
     private readonly _discountID: number;
-    private readonly _expires: string;
 
     public static fromDiscountOfferPayload(payload: OfferDiscount): DiscountOffer {
         //TODO: Implement this method
         throw new Error("Method not implemented.");
     }
 
-    constructor(discountedGive: IItemStack<any>[], discount: number, discountID: number, expires: string, offerID: number, receiveItem: IItemStack<any>, originalGive: IItemStack<any>[]) {
+    constructor(discountedGive: IItemStack<ICurrency | ICard | IPack>[], discount: number, discountID: number, offerID: number, receiveItem: IItemStack<ICurrency | ICard | IPack>, originalGive: IItemStack<ICurrency | ICard | IPack>[]) {
         super(offerID, receiveItem, originalGive);
         this._discountedGive = discountedGive;
         this._discount = discount;
         this._discountID = discountID;
-        this._expires = expires;
     }
 
-    public compareUserItems(): IItemStack<any>[] {
+    public override compareUserItems(): IItemStack<ICurrency | ICard | IPack>[] {
         throw new Error("Method not implemented.");
     }
 
-    public get discountedGive(): IItemStack<any>[] {
+    public get discountedGive(): IItemStack<ICurrency | ICard | IPack>[] {
         return this._discountedGive;
     }
     public get discount(): number {
@@ -32,8 +30,5 @@ export class DiscountOffer extends Offer implements IDiscountOffer {
     }
     public get discountID(): number {
         return this._discountID;
-    }
-    public get expires(): string {
-        return this._expires;
     }
 }
