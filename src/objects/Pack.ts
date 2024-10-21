@@ -1,10 +1,10 @@
-import { ICard, IPack } from './index';
+import { ICard, IItem, IItemVisitor, IPack } from './index';
 import { ICardCritter } from './index';
 import { ICardItem } from './index';
 import { CardCritter } from './index';
 import { CardItem } from './index';
 
-export class Pack implements IPack{
+export class Pack implements IPack, IItem{
 
     private readonly _image: string;
     private readonly _name: string;
@@ -18,40 +18,44 @@ export class Pack implements IPack{
         this._packid = packid
     }
 
-    //TODO: Remove this function once #67 is resolved
-    private getCards(): ICard[] {
-    const cards: (ICardCritter | ICardItem)[] = [];
-
-    for (let i = 0; i < 20; i++) {
-        if (i < 10) {
-            const critterCard = new CardCritter(
-                i,                            
-                "UglyMan, the Hideous Hero",         
-                i, 
-                2, 
-                "???",             
-                `Super ugly dude`,       
-                i, 
-                i, 
-                [0,1,2]
-            );
-            cards.push(critterCard);
-        } else {
-            const itemCard = new CardItem(
-                i + 1,                            
-                "The item",                  
-                i,
-                i, 
-                "???",               
-                "Item description",     
-                i
-            );
-            cards.push(itemCard);
-        }
+    public accept(visitor: IItemVisitor): void{
+        visitor.visitPack(this);
     }
 
-    return cards;
-}
+    //TODO: Remove this function once #67 is resolved
+    private getCards(): ICard[] {
+        const cards: (ICardCritter | ICardItem)[] = [];
+
+        for (let i = 0; i < 20; i++) {
+            if (i < 10) {
+                const critterCard = new CardCritter(
+                    i,                            
+                    "UglyMan, the Hideous Hero",         
+                    i, 
+                    2, 
+                    "???",             
+                    `Super ugly dude`,       
+                    i, 
+                    i, 
+                    [0,1,2]
+                );
+                cards.push(critterCard);
+            } else {
+                const itemCard = new CardItem(
+                    i + 1,                            
+                    "The item",                  
+                    i,
+                    i, 
+                    "???",               
+                    "Item description",     
+                    i
+                );
+                cards.push(itemCard);
+            }
+        }
+
+        return cards;
+    }
 
 
     public async getSetList(): Promise<ICard[]> {

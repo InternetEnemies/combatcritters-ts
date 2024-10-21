@@ -1,6 +1,10 @@
+import { UserPayload } from "./auth";
+
 /**
- * payload for the friend request
+ * Friend related payloads
  */
 export type FriendPayload = {
     username: string;
 }
+
+export type Friends = UserPayload[]

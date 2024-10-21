@@ -1,4 +1,4 @@
-import {IDeckManager, IUserCardsManager, IFriendsManager, IPacksManager} from "../../managers/index";
+import {IDeckManager, IUserCardsManager, IFriendsManager, IPacksManager, IUserCurrencyManager} from "../../managers/index";
 import {IProfile} from "./index";
 
 export interface IUser {
@@ -7,6 +7,7 @@ export interface IUser {
     cards:IUserCardsManager;
     friends:IFriendsManager;
     packs:IPacksManager;
+    currency:IUserCurrencyManager;
     profile: IProfile;
     username:string;
     id:number;
