@@ -8,7 +8,6 @@
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
-    "outDir": "./dist"
   },
   "tsc-alias": {
     "resolveFullPaths": true,
