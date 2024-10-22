@@ -1,5 +1,5 @@
 import {IClient} from "./IClient";
-import {ICardsManager, IOffersManager, IVendorManager, OffersManager, VendorManager} from "./index";
+import {ICardsManager, IOffersManager, IVendorManager} from "./index";
 import {Rest, IRest, Routes} from "./rest";
 import {IUser} from "./objects";
 import {UserPayload} from "./rest/payloads";
@@ -24,17 +24,15 @@ export class Client implements IClient{
         return new Client(
             new ClientComponentFactory(),
             new Rest(api)
-            new VendorManager(passingRest),
-            new OffersManager(passingRest)
         )
     }
     
     
-    constructor(factory:IClientComponentFactory, rest:IRest, vendors:IVendorManager, offers:IOffersManager){
+    constructor(factory:IClientComponentFactory, rest:IRest){
         this._cards = factory.getCardsManager(this);
         this._rest = rest;
-        this._vendors = vendors;
-        this._offers = offers;
+        this._vendors = factory.getVendorManager(this);
+        this._offers = factory.getOffersManager(this);
     }
     
     public async login(username:string, password:string):Promise<void> {
