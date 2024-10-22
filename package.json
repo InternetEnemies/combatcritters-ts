@@ -22,6 +22,7 @@
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
     "sinon": "^19.0.2",
+    "testcontainers": "^10.13.2",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.10",
