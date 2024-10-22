@@ -6,12 +6,13 @@ import { IRest, Routes } from "../rest";
 import { ICardsManager } from "./interfaces";
 import { Card as CardPayload } from "../rest/payloads";
 import { CardQueryBuilder } from "../objects/CardQueryBuilder";
+import {IClient} from "../IClient";
 
 export class CardsManager implements ICardsManager {
     private readonly _rest: IRest;
 
-    constructor(rest: IRest) {
-        this._rest = rest;
+    constructor(client:IClient) {
+        this._rest = client.rest;
     }
 
     public async getCard(id: number): Promise<ICard> {

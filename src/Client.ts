@@ -1,9 +1,11 @@
 import {IClient} from "./IClient";
-import {CardsManager, ICardsManager, IOffersManager, IVendorManager, OffersManager, VendorManager} from "./index";
+import {ICardsManager, IOffersManager, IVendorManager} from "./index";
 import {Rest, IRest, Routes} from "./rest";
 import {IUser} from "./objects";
 import {UserPayload} from "./rest/payloads";
 import {User} from "./objects/User";
+import {IClientComponentFactory} from "./IClientComponentFactory";
+import {ClientComponentFactory} from "./ClientComponentFactory";
 
 export class Client implements IClient{
     
@@ -18,21 +20,19 @@ export class Client implements IClient{
      * @param api URI of the api
      */
     static fromApi(api:string):IClient{
-        var passingRest = new Rest(api)
+        
         return new Client(
-            passingRest,
-            new CardsManager(passingRest),
-            new VendorManager(passingRest),
-            new OffersManager(passingRest)
+            new ClientComponentFactory(),
+            new Rest(api)
         )
     }
     
     
-    constructor(rest:IRest, cards:ICardsManager, vendors:IVendorManager, offers:IOffersManager){
-        this._cards = cards;
+    constructor(factory:IClientComponentFactory, rest:IRest){
+        this._cards = factory.getCardsManager(this);
         this._rest = rest;
-        this._vendors = vendors;
-        this._offers = offers;
+        this._vendors = factory.getVendorManager(this);
+        this._offers = factory.getOffersManager(this);
     }
     
     public async login(username:string, password:string):Promise<void> {
@@ -51,11 +51,7 @@ export class Client implements IClient{
     }
 
     public isLoggedIn(): boolean {
-        if(this._user) {
-            return true;
-        } else {
-            return false;
-        }
+        return !!this._user;
     }
     
     // properties

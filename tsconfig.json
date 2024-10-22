@@ -6,7 +6,12 @@
     "target": "es5",
     "allowJs": true,
     "moduleResolution": "node",
-    "declaration": true
+    "declaration": true,
+    "sourceMap": true,
+  },
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "verbose": false
   },
   "files": ["src/index.ts"]
 }
