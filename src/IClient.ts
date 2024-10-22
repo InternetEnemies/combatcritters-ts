@@ -1,5 +1,5 @@
-import {IUser} from "./objects";
-import {ICardsManager} from "./managers";
+import {IOffer, IUser} from "./objects";
+import {ICardsManager, IOffersManager, IVendorManager} from "./index";
 import {IRest} from "./rest/IRest";
 
 export interface IClient {
@@ -8,6 +8,8 @@ export interface IClient {
      */
     user:IUser;
     cards:ICardsManager;
+    vendors:IVendorManager;
+    offers: IOffersManager;
     rest:IRest;
 
     /**
@@ -24,4 +26,9 @@ export interface IClient {
      * register a new user
      */
     register(username: string, password: string): Promise<void>;
+
+    /**
+     * logout the user
+     */
+    logout(): Promise<void>;
 }

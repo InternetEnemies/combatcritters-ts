@@ -12,5 +12,12 @@ export const Routes = {
      */
     login(){
         return "users/auth/login" as const;
+    },
+    /**
+     * - POST
+     * Logout the signed in user
+     */
+    logout(){
+        return "users/auth/logout" as const;
     }
 }
