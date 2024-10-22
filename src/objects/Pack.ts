@@ -23,6 +23,7 @@ export class Pack implements IPack, IItem{
     }
 
     //TODO: Remove this function once #67 is resolved
+    // https://github.com/InternetEnemies/combatcritters-ts/issues/67
     private getCards(): ICard[] {
         const cards: (ICardCritter | ICardItem)[] = [];
 
@@ -63,6 +64,8 @@ export class Pack implements IPack, IItem{
     }
 
     public async open(): Promise<ICard[]> {
+        //TODO: Correct this function once #67 is resolved
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/67
         return this.getCards().splice(0, 5);
     }
 

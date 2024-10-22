@@ -8,6 +8,7 @@ export class DiscountOffer extends Offer implements IDiscountOffer {
 
     public static fromDiscountOfferPayload(payload: OfferDiscount): DiscountOffer {
         //TODO: Implement this method
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/62
         throw new Error("Method not implemented.");
     }
 
@@ -19,6 +20,8 @@ export class DiscountOffer extends Offer implements IDiscountOffer {
     }
 
     public override compareUserItems(): IItemStack<ICurrency | ICard | IPack>[] {
+         //TODO: Implement this method
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/62
         throw new Error("Method not implemented.");
     }
 

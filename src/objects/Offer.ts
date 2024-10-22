@@ -8,6 +8,7 @@ export class Offer implements IOffer{
     
     public static fromOfferPayload(payload: OfferPayload): Offer {
         //TODO: Implement this method
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/61
         throw new Error("Method not implemented.");
     }
 
@@ -18,6 +19,8 @@ export class Offer implements IOffer{
     }
 
     public compareUserItems(): IItemStack<ICurrency | ICard | IPack>[] {
+        //TODO: Implement this method
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/61
         throw new Error("Method not implemented.");
     }
 

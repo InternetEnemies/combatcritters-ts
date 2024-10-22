@@ -9,6 +9,7 @@ export class VendorReputation implements IVendorReputation {
     
     public static fromVendorReputationPayload(payload: VendorReputationPayload): VendorReputation {
         //TODO: Implement this method
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/64
         throw new Error("Method not implemented.");
     }
 

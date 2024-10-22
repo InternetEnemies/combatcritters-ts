@@ -10,6 +10,7 @@ export class Vendor implements IVendor {
 
     public static fromVendorPayload(payload: VendorPayload): Vendor {
         //TODO: Implement this method
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/63
         throw new Error("Method not implemented.");
     }
 
@@ -22,15 +23,23 @@ export class Vendor implements IVendor {
     }
 
     public async getOffers(): Promise<IOffer[]> {
+        //TODO: Implement this method
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/63
         throw new Error("Method not implemented.");
     }
     public async discountOffers(): Promise<IDiscountOffer[]> {
+        //TODO: Implement this method
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/63
         throw new Error("Method not implemented.");
     }
     public async getSpecialOffers(): Promise<IOffer[]> {
+        //TODO: Implement this method
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/63
         throw new Error("Method not implemented.");
     }
     public async purchaseOffer(offer: IOffer): Promise<void> {
+        //TODO: Implement this method
+        // https://github.com/InternetEnemies/combatcritters-ts/issues/63
         throw new Error("Method not implemented.");
     }
     
