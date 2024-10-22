@@ -1,8 +1,6 @@
-import { ICardCritter, ICardItem, ICurrency, IPack } from "../index";
+import { ICardVisitor, ICurrency, IPack} from "../index";
 
-export interface IItemVisitor {
-    visitCardCritter: (card: ICardCritter) => void;
-    visitCardItem: (card: ICardItem) => void;
+export interface IItemVisitor extends ICardVisitor {
     visitPack: (pack: IPack) => void;
     visitCurrency: (currency: ICurrency) => void
 }

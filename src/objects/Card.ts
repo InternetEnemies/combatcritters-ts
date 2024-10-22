@@ -1,4 +1,4 @@
-import { ICardVisitor, IItemVisitor } from "./visitor";
+import { ICardVisitor } from "./visitor";
 import { ICard, ICardCritter, ICardItem, IItem } from "./interfaces";
 import { Card as CardPayload, CardCritter as CritterPayload, CardItem as ItemPayload } from "../rest/payloads/cards";
 
@@ -62,12 +62,9 @@ export abstract class Card implements ICard, IItem {
     public get description(): string {
         return this._description;
     }
+    
+    public abstract accept(visitor: ICardVisitor): void;
 
-    public accept(visitor: ICardVisitor): void;
-    public accept(visitor: IItemVisitor): void;
-    public accept(visitor: ICardVisitor | IItemVisitor): void {
-        throw new Error("Method not implemented: this card should either be a critter or an item.");
-    }
 }
 
 export class CardCritter extends Card implements ICardCritter {
@@ -109,16 +106,8 @@ export class CardCritter extends Card implements ICardCritter {
         return this._abilities;
     }
 
-    public override accept(visitor: ICardVisitor): void;
-    public override accept(visitor: IItemVisitor): void;
-    public override accept(visitor: ICardVisitor | IItemVisitor): void {
-        if ('visitCritter' in visitor) {
-            visitor.visitCritter(this);
-        } else if ('visitCardCritter' in visitor) {
-            visitor.visitCardCritter(this);
-        } else {
-            throw new Error("Method not implemented: Cannot accept visitor.: CardCritter.");
-        }
+    public override accept(visitor: ICardVisitor): void {
+        visitor.visitCritter(this)
     }
 }
 
@@ -145,16 +134,8 @@ export class CardItem extends Card implements ICardItem {
     public get abilityid(): number {
         return this._abilityid;
     }
-
-    public override accept(visitor: ICardVisitor): void;
-    public override accept(visitor: IItemVisitor): void;
-    public override accept(visitor: ICardVisitor | IItemVisitor): void {
-        if ('visitItem' in visitor) {
-            visitor.visitItem(this);
-        } else if ('visitCardItem' in visitor) {
-            visitor.visitCardItem(this);
-        } else {
-            throw new Error("Method not implemented: Cannot accept visitor: CardItem.");
-        }
+    
+    public override accept(visitor: ICardVisitor): void {
+      visitor.visitItem(this)
     }
 }
