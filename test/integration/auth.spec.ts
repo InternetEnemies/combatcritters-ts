@@ -12,7 +12,6 @@ beforeEach(async () => {
 })
 describe("Auth test", () => {
     
-    // ! this test will fail the second time
     it("should register, login, and access privileged route", async () => {
         await client.register("username","password")
         await client.login("username","password")

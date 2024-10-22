@@ -1,5 +1,8 @@
 import { DockerComposeEnvironment, StartedDockerComposeEnvironment} from "testcontainers";
-import {Client, IClient} from "../../src";
+import axios, {AxiosInstance} from "axios"
+import {wrapper} from "axios-cookiejar-support";
+import {CookieJar} from "tough-cookie";
+import {Client, ClientComponentFactory, IClient, Rest} from "../../src";
 
 const API_PORT = 4000;
 const API_URL = `http://localhost:${API_PORT}`;
@@ -14,7 +17,20 @@ export class BackendInstance {
         
         this._apiContainer = await new DockerComposeEnvironment(COMPOSE_PATH, COMPOSE_FILE).up();
         
-        return Client.fromApi(API_URL);
+        
+        
+        return this.getClient();
+    }
+    
+    getClient() :IClient {
+        const jar = new CookieJar();
+        let axiosInstance:AxiosInstance = wrapper(axios
+            .create({
+                jar:jar,
+                baseURL:API_URL,
+                withCredentials: true
+            }))
+        return new Client(new ClientComponentFactory(), new Rest(API_URL,axiosInstance))
     }
     
     async teardown() {
