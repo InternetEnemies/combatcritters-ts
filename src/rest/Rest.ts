@@ -4,11 +4,15 @@ import axios, {AxiosInstance, AxiosRequestConfig} from "axios"
 export class Rest  implements IRest {
     private Axios:AxiosInstance;
     
-    constructor(private readonly api: string) {
-        this.Axios = axios.create({
-            baseURL:api,
-            withCredentials: true
-        })
+    constructor(private readonly api: string, axiosInstance: AxiosInstance = null) {
+        if (!axiosInstance){
+            this.Axios = axios.create({
+                baseURL:api,
+                withCredentials: true
+            })
+        } else {
+            this.Axios = axiosInstance
+        }
     }
     private async request(config:AxiosRequestConfig) {
         return (await this.Axios.request(config)).data
