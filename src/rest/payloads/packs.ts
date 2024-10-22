@@ -1,13 +1,16 @@
+import { Card } from "./index";
+
 /**
  * Payloads for the packs
  */
 export type Pack = {
     packid:number,
     name:string,
-    image:string,
-    contents:number[]
+    image:string
 }
 
 export type PackResult = {
-    cards:number[]
+    cards:Card[]
 }
+
+export type PackContents = Card[]

@@ -1,5 +1,5 @@
 import { ICardVisitor } from "./visitor";
-import { ICard, ICardCritter, ICardItem } from "./interfaces";
+import { ICard, ICardCritter, ICardItem, IItem } from "./interfaces";
 import { Card as CardPayload, CardCritter as CritterPayload, CardItem as ItemPayload } from "../rest/payloads/cards";
 
 /**
@@ -7,7 +7,7 @@ import { Card as CardPayload, CardCritter as CritterPayload, CardItem as ItemPay
  * @Brief this file contains objects for both critter and item cards.
  */
 
-export abstract class Card implements ICard {
+export abstract class Card implements ICard, IItem {
     private readonly _cardid: number;
     private readonly _name: string;
     private readonly _playcost: number;
@@ -62,10 +62,9 @@ export abstract class Card implements ICard {
     public get description(): string {
         return this._description;
     }
+    
+    public abstract accept(visitor: ICardVisitor): void;
 
-    accept(visitor: ICardVisitor): void {
-        throw new Error("Method not implemented: this card should either be a critter or an item.");
-    }
 }
 
 export class CardCritter extends Card implements ICardCritter {
@@ -108,7 +107,7 @@ export class CardCritter extends Card implements ICardCritter {
     }
 
     public override accept(visitor: ICardVisitor): void {
-        visitor.visitCritter(this);
+        visitor.visitCritter(this)
     }
 }
 
@@ -135,8 +134,8 @@ export class CardItem extends Card implements ICardItem {
     public get abilityid(): number {
         return this._abilityid;
     }
-
+    
     public override accept(visitor: ICardVisitor): void {
-        visitor.visitItem(this);
+      visitor.visitItem(this)
     }
 }
