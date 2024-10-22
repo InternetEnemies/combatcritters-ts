@@ -15,6 +15,8 @@
   "devDependencies": {
     "@babel/core": "^7.25.7",
     "@babel/preset-env": "^7.25.7",
+    "@testcontainers/postgresql": "^10.13.2",
+    "@types/mocha": "^10.0.9",
     "@webpack-cli/generators": "^3.0.7",
     "babel-loader": "^9.2.1",
     "html-webpack-plugin": "^5.6.0",
@@ -33,5 +35,8 @@
     "axios-cookiejar-support": "^5.0.3",
     "node-polyfill-webpack-plugin": "^4.0.0",
     "tough-cookie": "^5.0.0"
+  },
+  "mocha": {
+    "timeout": 50000
   }
 }
