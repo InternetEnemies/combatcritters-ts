@@ -58,7 +58,7 @@ export class Vendor implements IVendor {
   // https://github.com/InternetEnemies/combatcritters-ts/issues/63
   private getPack(): ItemStack<Pack> {
     return new ItemStack(
-      new Pack("Into the Robverse", "Into the Robverse", 2),
+      new Pack("/assets/images/pack.png", "Into the Robverse", 2),
       1
     );
   }
