@@ -19,7 +19,7 @@ export class DiscountOffer extends Offer implements IDiscountOffer {
         this._discountID = discountID;
     }
 
-    public override compareUserItems(): ITradeItem<ICurrency | ICard | IPack>[] {
+    public override compareUserItems(): Promise<ITradeItem<ICurrency | ICard | IPack>[]> {
          //TODO: Implement this method
         // https://github.com/InternetEnemies/combatcritters-ts/issues/62
         throw new Error("Method not implemented.");
