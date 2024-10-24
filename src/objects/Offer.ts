@@ -1,4 +1,4 @@
-import { ICard, ICurrency, IItemStack, IOffer, IPack } from "../index";
+import { ICard, ICurrency, IItemStack, IOffer, IPack, ITradeItem } from "../index";
 import { Offer as OfferPayload } from "../rest/payloads";
 
 export class Offer implements IOffer{
@@ -18,7 +18,7 @@ export class Offer implements IOffer{
         this._giveItem = giveItem;
     }
 
-    public compareUserItems(): IItemStack<ICurrency | ICard | IPack>[] {
+    public compareUserItems(): ITradeItem<ICard | IPack | ICurrency>[] {
         //TODO: Implement this method
         // https://github.com/InternetEnemies/combatcritters-ts/issues/61
         throw new Error("Method not implemented.");
