@@ -18,7 +18,7 @@ export class Offer implements IOffer{
         this._giveItem = giveItem;
     }
 
-    public compareUserItems(): ITradeItem<ICard | IPack | ICurrency>[] {
+    public async compareUserItems(): Promise<ITradeItem<ICard | IPack | ICurrency>[]> {
         //TODO: Implement this method
         // https://github.com/InternetEnemies/combatcritters-ts/issues/61
         throw new Error("Method not implemented.");
