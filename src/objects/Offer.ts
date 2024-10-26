@@ -55,6 +55,12 @@ export class Offer implements IOffer {
     return tradeItems;
   }
 
+  //TODO: Implement this method
+  // https://github.com/InternetEnemies/combatcritters-ts/issues/61
+  public async accept(): Promise<boolean> {
+    return Math.random() < .5;
+  }
+
   public get offerID(): number {
     return this._offerID;
   }

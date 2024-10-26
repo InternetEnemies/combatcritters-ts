@@ -10,4 +10,10 @@ export interface IOffer {
    * @returns list of items the user misses to get the offer
    */
   compareUserItems(): Promise<ITradeItem<ICard | IPack | ICurrency>[]>;
+
+  /**
+   * Accepts the offer.
+   * @returns whether or not the transaction was successful.
+   */
+  accept(): Promise<boolean>;
 }
