@@ -15,5 +15,5 @@ export interface IOffer {
    * Accepts the offer.
    * @returns whether or not the transaction was successful.
    */
-  accept(): Promise<boolean>;
+  accept(): Promise<void>;
 }

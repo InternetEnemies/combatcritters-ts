@@ -58,8 +58,8 @@ export class Offer implements IOffer {
 
   //TODO: Implement this method
   // https://github.com/InternetEnemies/combatcritters-ts/issues/61
-  public async accept(): Promise<boolean> {
-    return Math.random() < 0.5;
+  public async accept(): Promise<void> {
+    
   }
 
   public get offerID(): number {
