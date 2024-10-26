@@ -5,7 +5,7 @@
 
 import { IItemStack } from "./index";
 
-export interface ITradeItem<T> {
+export interface IUserOfferItem<T> {
   giveItem: IItemStack<T>; //The give item in an offer.
   userItem: IItemStack<T>; //The amount of that item in a user's inventory.
 }
