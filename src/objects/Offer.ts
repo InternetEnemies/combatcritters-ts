@@ -5,7 +5,8 @@ import {
   IOffer,
   IPack,
   ItemStack,
-  ITradeItem,
+  IUserOfferItem,
+  IUserOfferState,
 } from "../index";
 import { Offer as OfferPayload } from "../rest/payloads";
 
@@ -31,11 +32,11 @@ export class Offer implements IOffer {
   }
 
   public async compareUserItems(): Promise<
-    ITradeItem<ICard | IPack | ICurrency>[]
+    IUserOfferState<IPack | ICard | ICurrency>
   > {
     //TODO: Implement this method
     // https://github.com/InternetEnemies/combatcritters-ts/issues/61
-    const tradeItems: ITradeItem<IPack | ICard | ICurrency>[] = [];
+    const tradeItems: IUserOfferItem<IPack | ICard | ICurrency>[] = [];
     for (let i = 0; i < this.giveItem.length; i++) {
       if (i % 2 === 0) {
         tradeItems.push({
@@ -52,7 +53,13 @@ export class Offer implements IOffer {
         });
       }
     }
-    return tradeItems;
+    return {userOfferItems:tradeItems, canPurchase:(Math.random()<.5)};
+  }
+
+  //TODO: Implement this method
+  // https://github.com/InternetEnemies/combatcritters-ts/issues/61
+  public async accept(): Promise<void> {
+    
   }
 
   public get offerID(): number {
