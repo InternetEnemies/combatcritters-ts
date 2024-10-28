@@ -5,10 +5,10 @@ import { Routes } from '../rest';
 
 export class Pack implements IPack, IItem{
 
-    private readonly _image: string;
-    private readonly _name: string;
-    private readonly _packid: number;
-    private readonly _client: IClient;
+    protected readonly _image: string;
+    protected readonly _name: string;
+    protected readonly _packid: number;
+    protected readonly _client: IClient;
 
     public static fromPackDetailsPayload(payload: PackPayload, client: IClient): Pack {
         return new Pack(payload.image,
