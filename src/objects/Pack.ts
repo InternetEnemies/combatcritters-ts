@@ -1,6 +1,7 @@
-import { ICard, IItem, IItemVisitor, IPack, ICardCritter, ICardItem, CardCritter, CardItem } from './index';
+import { ICard, IItem, IItemVisitor, IPack, ICardCritter, ICardItem, CardCritter, CardItem, Card } from './index';
 import { Pack as PackPayload, Card as CardPayload } from '../rest/payloads/index';
 import { IClient } from "../IClient";
+import { Routes } from '../rest';
 
 export class Pack implements IPack, IItem{
 
@@ -29,12 +30,8 @@ export class Pack implements IPack, IItem{
 
     public async getSetList(): Promise<ICard[]> {
         const response:CardPayload[] = await this._client.rest.get(Routes.Packs.packContents(this.packid));
-    }
-
-    public async open(): Promise<ICard[]> {
-        //TODO: Correct this function once #67 is resolved
-        // https://github.com/InternetEnemies/combatcritters-ts/issues/67
-        return this.getCards().splice(0, 5);
+        const cards:ICard[] = response.map(Card.fromCardPayload);
+        return cards;
     }
 
     public get image(): string {
