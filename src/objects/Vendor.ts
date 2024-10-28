@@ -1,4 +1,5 @@
-import { PacksManager } from "../managers";
+import { IClient } from "../IClient";
+import { IRest } from "../rest";
 import { Vendor as VendorPayload } from "../rest/payloads";
 import { Card, CardCritter } from "./Card";
 import { Currency } from "./Currency";
@@ -14,6 +15,7 @@ export class Vendor implements IVendor {
   private readonly _reputation: IVendorReputation;
   private readonly _image: string;
   private readonly _refrest_time: string;
+  private readonly _rest: IRest;
 
   public static fromVendorPayload(payload: VendorPayload): Vendor {
     //TODO: Implement this method
@@ -26,13 +28,15 @@ export class Vendor implements IVendor {
     name: string,
     reputation: IVendorReputation,
     image: string,
-    refrest_time: string
+    refrest_time: string,
+    rest: IRest
   ) {
     this._id = id;
     this._name = name;
     this._reputation = reputation;
     this._image = image;
     this._refrest_time = refrest_time;
+    this._rest = rest;
   }
 
   //TODO: Delete this
@@ -58,7 +62,7 @@ export class Vendor implements IVendor {
   // https://github.com/InternetEnemies/combatcritters-ts/issues/63
   private getPack(): ItemStack<Pack> {
     return new ItemStack(
-      new Pack("/assets/images/pack.png", "Into the Robverse", 2),
+      new Pack("/assets/images/pack.png", "Into the Robverse", 2, this._rest),
       1
     );
   }

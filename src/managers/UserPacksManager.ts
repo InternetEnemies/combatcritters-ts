@@ -16,7 +16,7 @@ export class UserPacksManager implements IUserPacksManager {
 
     public async getPacks(): Promise<IUserPack[]> {
         const response:PackPayload[] = await this._client.rest.get(Routes.User.packs(this._user.id));
-        const packs:IUserPack[] = response.map((pack) => UserPack.fromPackPayload(pack, this._client, this._user));
+        const packs:IUserPack[] = response.map((pack) => UserPack.fromPackPayload(pack, this._client.rest, this._user));
         return packs;
     }
 }
