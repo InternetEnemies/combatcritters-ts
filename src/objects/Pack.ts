@@ -1,66 +1,34 @@
-import { ICard, IItem, IItemVisitor, IPack } from './index';
-import { ICardCritter } from './index';
-import { ICardItem } from './index';
-import { CardCritter } from './index';
-import { CardItem } from './index';
+import { ICard, IItem, IItemVisitor, IPack, ICardCritter, ICardItem, CardCritter, CardItem } from './index';
+import { Pack as PackPayload, Card as CardPayload } from '../rest/payloads/index';
+import { IClient } from "../IClient";
 
 export class Pack implements IPack, IItem{
 
     private readonly _image: string;
     private readonly _name: string;
     private readonly _packid: number;
+    private readonly _client: IClient;
 
-    // should have a from payload static method
+    public static fromPackDetailsPayload(payload: PackPayload, client: IClient): Pack {
+        return new Pack(payload.image,
+                        payload.name,
+                        payload.packid,
+                        client);
+    }
 
-    constructor(image: string, name: string, packid: number) {
+    constructor(image: string, name: string, packid: number, client: IClient) {
         this._image = image;
         this._name = name;
-        this._packid = packid
+        this._packid = packid;
+        this._client = client;
     }
 
     public accept(visitor: IItemVisitor): void{
         visitor.visitPack(this);
     }
 
-    //TODO: Remove this function once #67 is resolved
-    // https://github.com/InternetEnemies/combatcritters-ts/issues/67
-    private getCards(): ICard[] {
-        const cards: (ICardCritter | ICardItem)[] = [];
-
-        for (let i = 0; i < 20; i++) {
-            if (i < 10) {
-                const critterCard = new CardCritter(
-                    i,                            
-                    "UglyMan, the Hideous Hero",         
-                    i, 
-                    2, 
-                    "???",             
-                    `Super ugly dude`,       
-                    i, 
-                    i, 
-                    [0,1,2]
-                );
-                cards.push(critterCard);
-            } else {
-                const itemCard = new CardItem(
-                    i + 1,                            
-                    "The item",                  
-                    i,
-                    i, 
-                    "???",               
-                    "Item description",     
-                    i
-                );
-                cards.push(itemCard);
-            }
-        }
-
-        return cards;
-    }
-
-
     public async getSetList(): Promise<ICard[]> {
-        return this.getCards();
+        const response:CardPayload[] = await this._client.rest.get(Routes.Packs.packContents(this.packid));
     }
 
     public async open(): Promise<ICard[]> {
