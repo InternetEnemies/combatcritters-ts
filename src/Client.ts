@@ -47,12 +47,6 @@ export class Client implements IClient{
         await this.rest.post(Routes.Auth.register(),{ username, password });
     }
 
-    public async logout(): Promise<void> {
-        await this.rest.post(Routes.Auth.logout(),{});
-        console.debug(`${this._user.username} logged out`);
-        this._user = undefined;
-    }
-
     public isLoggedIn(): boolean {
         return !!this._user;
     }
