@@ -105,13 +105,26 @@ export class DeckValidator implements IDeckValidator {
     */
     private checkOwnership(cards: ICard[]): void {
         let cardsStack: ItemStack<ICard>[] = DeckValidator.countCards(cards);
-        for (let card of cardsStack) {
-            let owned = this._ownedCards.filter(ownedCard => (ownedCard.getItem() as ICard).cardid === (card.getItem() as ICard).cardid);
-            if (owned.length === 0) {
-                this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", (card.getItem() as ICard).name));
-            } else if (owned[0].getAmount() < card.getAmount()) {
-                this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", (card.getItem() as ICard).name));
+        let not_owned = cardsStack.filter(this.filterCards.bind(this));
+        for (let card of not_owned) {
+            this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", card.getItem().name));
+        }
+    }
+
+    /**
+     * filter out cards that the user does not own
+     * @param card card to check
+     */
+    private filterCards(card: IItemStack<ICard>): boolean {
+        for (let ownedCard of this._ownedCards) {
+            if (ownedCard.getItem().cardid === card.getItem().cardid) {
+                if (ownedCard.getAmount() < card.getAmount()) {
+                    return true;
+                }else{
+                    return false;
+                }
             }
         }
+        return true;
     }
 }
