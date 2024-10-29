@@ -1,5 +1,5 @@
-import { CardItem, CardRarity, DeckValidity, ICard, ICardsManager, IDeck, IDeckValidator, IDeckValidity, } from "../index";
-import { DeckRules, DeckIssue } from "../rest/payloads";
+import { CardItem, CardQuery, CardRarity, DeckValidity, ICard, ICardsManager, IDeck, IDeckValidator, IDeckValidity, IItemStack, ItemStack, UserCardsManager, } from "../index";
+import { DeckRules, DeckIssue, CardQuery as CardQueryPayload } from "../rest/payloads";
 
 export class DeckValidator implements IDeckValidator {
     private readonly _min_cards: number;
@@ -8,25 +8,36 @@ export class DeckValidator implements IDeckValidator {
     private readonly _limit_epic: number;
     private readonly _limit_rare: number;
     private readonly _limit_item: number;
+    private readonly _ownedCards: IItemStack<ICard>[];
     private issues: Array<string>;
 
-    public static fromDeckRules(rules: DeckRules): DeckValidator {
+    public static from_DeckRules_UserCards(rules: DeckRules, CardsPayload:CardQueryPayload[]): DeckValidator {
         return new DeckValidator(rules.min_cards, 
                                  rules.max_cards, 
                                  rules.limit_legend, 
                                  rules.limit_epic, 
                                  rules.limit_rare,
-                                 rules.limit_item
+                                 rules.limit_item,
+                                 CardQuery.fromCardQueryPayloads(CardsPayload)
         );
     }
 
-    constructor(min_cards: number, max_cards: number, limit_legend: number, limit_epic: number, limit_rare: number, limit_item: number) {
+    public static countCards(cards: ICard[]): ItemStack<ICard>[] {
+        let cardStacks: ItemStack<ICard>[] = [];
+        for (let card of cards) {
+            cardStacks.push(new ItemStack(card, 1));
+        }
+        return cardStacks;
+    }
+
+    constructor(min_cards: number, max_cards: number, limit_legend: number, limit_epic: number, limit_rare: number, limit_item: number, ownedCards: IItemStack<ICard>[]) {
         this._min_cards = min_cards;
         this._max_cards = max_cards;
         this._limit_legend = limit_legend;
         this._limit_epic = limit_epic;
         this._limit_rare = limit_rare;
         this._limit_item = limit_item;
+        this._ownedCards = ownedCards;
         this.issues = [];
     }
 
@@ -35,6 +46,7 @@ export class DeckValidator implements IDeckValidator {
         this.checkTotalCards(cards);
         this.checkItemCount(cards);
         this.checkRarity(cards);
+        this.checkOwnership(cards);
         return new DeckValidity(this.issues.length === 0, this.issues);
     }
 
@@ -87,4 +99,19 @@ export class DeckValidator implements IDeckValidator {
         }
     }
     
+    /** 
+     * check that the user owns the cards in the deck
+     * @param cards deck to validate
+    */
+    private checkOwnership(cards: ICard[]): void {
+        let cardsStack: ItemStack<ICard>[] = DeckValidator.countCards(cards);
+        for (let card of cardsStack) {
+            let owned = this._ownedCards.filter(ownedCard => (ownedCard.getItem() as ICard).cardid === (card.getItem() as ICard).cardid);
+            if (owned.length === 0) {
+                this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", (card.getItem() as ICard).name));
+            } else if (owned[0].getAmount() < card.getAmount()) {
+                this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", (card.getItem() as ICard).name));
+            }
+        }
+    }
 }
