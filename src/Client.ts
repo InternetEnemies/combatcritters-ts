@@ -40,7 +40,8 @@ export class Client implements IClient{
         const userRes:UserPayload = await this.rest.post(Routes.Auth.login(),{ username, password });
         const rules:DeckRules = await this.rest.get(Routes.Decks.validity());
         this._user = User.fromUserPayload(this, userRes);
-        this._deckValidator = DeckValidator.fromDeckRules(rules);
+        const userCards = await this.rest.get(Routes.Cards.User.cards(this._user.id, ""));
+        this._deckValidator = DeckValidator.from_DeckRules_UserCards(rules, userCards);
         console.debug(`logged in as ${userRes.username}`);
     }
     public async register(username: string, password: string): Promise<void> {
