@@ -14,6 +14,11 @@ export class UserCardsManager implements IUserCardsManager {
     private readonly _client: IClient;
     private readonly _user: IUser;
 
+    public static fromCardQueryPayloads(cards: CardQueryPayload[]): IItemStack<ICard>[] {
+        const cardStacks: IItemStack<ICard>[] = cards.map(card => new ItemStack(Card.fromCardPayload(card.item), card.count));
+        return cardStacks;
+    }
+
     constructor(client: IClient, user: IUser) {
         this._client = client;
         this._user = user;
@@ -21,11 +26,7 @@ export class UserCardsManager implements IUserCardsManager {
 
     public async getCards(query: ICardQuery): Promise<IItemStack<ICard>[]> {
         const userRes: CardQueryPayload[] = await this._client.rest.get(Routes.Cards.User.cards(this._user.id, query.getQueryString()));
-        const cardStacks: IItemStack<ICard>[] = [];
-        for (let i = 0; i < userRes.length; i++) {
-            cardStacks.push(new ItemStack(Card.fromCardPayload(userRes[i].item), userRes[i].count));
-        }
-        return cardStacks;
+        return UserCardsManager.fromCardQueryPayloads(userRes);
     }
 
     public getBuilder(): ICardQueryBuilder {
