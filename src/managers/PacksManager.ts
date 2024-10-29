@@ -1,4 +1,4 @@
-import { IUserPack } from "../objects/index";
+import { IItemStack, IUserPack } from "../objects/index";
 import { IClient, IUser } from "../index";
 import { IPacksManager } from "./index";
 import { Routes } from '../rest/routes/packs';
@@ -14,9 +14,9 @@ export class PacksManager implements IPacksManager {
         this._user = user;
     }
 
-    public async getPacks(): Promise<IUserPack[]> {
+    public async getPacks(): Promise<IItemStack<IUserPack>[]> {
         const response:UserPackPayload[] = await this._client.rest.get(Routes.User.packs(this._user.id));
-        const packs:IUserPack[] = response.map((pack) => UserPack.fromUserPackPayload(pack, this._client.rest, this._user));
+        const packs:IItemStack<IUserPack>[] = response.map((pack) => UserPack.fromUserPackPayload(pack, this._client.rest, this._user));
         return packs;
     }
 }
