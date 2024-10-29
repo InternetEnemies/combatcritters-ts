@@ -1,8 +1,8 @@
 import {IClient} from "./IClient";
 import {ICardsManager, IOffersManager, IVendorManager} from "./index";
 import {Rest, IRest, Routes} from "./rest";
-import {IUser} from "./objects";
-import {UserPayload} from "./rest/payloads";
+import {DeckValidator, IDeckValidator, IUser} from "./objects";
+import {DeckRules, UserPayload} from "./rest/payloads";
 import {User} from "./objects/User";
 import {IClientComponentFactory} from "./IClientComponentFactory";
 import {ClientComponentFactory} from "./ClientComponentFactory";
@@ -12,6 +12,7 @@ export class Client implements IClient{
     private readonly _cards:ICardsManager;
     private readonly _vendors:IVendorManager;
     private readonly _offers:IOffersManager;
+    private _deckValidator!:IDeckValidator;
     private readonly _rest: IRest;
     private _user!:IUser; //user is initialized late
 
@@ -37,7 +38,9 @@ export class Client implements IClient{
     
     public async login(username:string, password:string):Promise<void> {
         const userRes:UserPayload = await this.rest.post(Routes.Auth.login(),{ username, password });
+        const rules:DeckRules = await this.rest.get(Routes.Decks.validity());
         this._user = User.fromUserPayload(this, userRes);
+        this._deckValidator = DeckValidator.fromDeckRules(rules);
         console.debug(`logged in as ${userRes.username}`);
     }
     public async register(username: string, password: string): Promise<void> {
@@ -69,5 +72,8 @@ export class Client implements IClient{
     }
     public get user(): IUser{
         return this._user;
+    }
+    public get deckValidator(): IDeckValidator{
+        return this._deckValidator;
     }
 }
