@@ -1,4 +1,4 @@
-import { IDeck, IDeckValidity } from "./index";
+import { ICard, IDeck, IDeckValidity } from "./index";
 
 /**
  * Interface for a local deck validator.
@@ -6,8 +6,8 @@ import { IDeck, IDeckValidity } from "./index";
 export interface IDeckValidator {
     /**
      * Validate a deck locally.
-     * @param deck the deck to validate
+     * @param cards the deck to validate
      * @returns IDeckValidity the validity of the deck
      */
-    validate(deck: IDeck): IDeckValidity;
+    validate(cards: ICard[]): IDeckValidity;
 }

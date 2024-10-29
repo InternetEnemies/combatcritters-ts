@@ -1,4 +1,4 @@
-import { IDeck, IDeckValidator, IDeckValidity, } from "../index";
+import { ICard, ICardsManager, IDeck, IDeckValidator, IDeckValidity, } from "../index";
 import { DeckRules, DeckIssue } from "../rest/payloads";
 
 export class DeckValidator implements IDeckValidator {
@@ -28,7 +28,7 @@ export class DeckValidator implements IDeckValidator {
         this.limit_item = limit_item;
     }
 
-    validate(deck: IDeck): IDeckValidity {
+    public validate(cards: ICard[]): IDeckValidity {
         throw new Error("Method not implemented.");
     }
     
