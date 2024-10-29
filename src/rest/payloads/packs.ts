@@ -14,3 +14,8 @@ export type PackResult = {
 }
 
 export type PackContents = Card[]
+
+export type UserPack = {
+    item: Pack,
+    count: number
+}

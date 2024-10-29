@@ -1,22 +1,26 @@
 import { IClient, IRest } from "../index";
 import { Routes } from '../rest/routes/packs';
 import { Pack, IUserPack, IUser, ICard, Card } from "./index";
-import { Pack as PackPayload, Card as CardPayload } from '../rest/payloads/index';
+import { UserPack as UserPackPayload, Card as CardPayload } from '../rest/payloads/index';
 
 export class UserPack extends Pack implements IUserPack{
     private readonly _user: IUser;
+    private readonly _quantity: number;
 
-    public static fromPackPayload(payload: PackPayload, rest: IRest, user:IUser): UserPack {
-        return new UserPack(payload.packid,
-                            payload.name,
-                            payload.image,
+    public static fromUserPackPayload(payload: UserPackPayload, rest: IRest, user:IUser): UserPack {
+        return new UserPack(payload.item.packid,
+                            payload.item.name,
+                            payload.item.image,
                             rest,
-                            user);
+                            user,
+                            payload.count
+        );
     }
 
-    constructor(packid: number, name: string, image: string, rest:IRest, user:IUser) {
+    constructor(packid: number, name: string, image: string, rest:IRest, user:IUser, quantity:number) {
         super(image, name, packid, rest);
         this._user = user;
+        this._quantity = quantity;
     }
 
     public async open(): Promise<ICard[]> {
@@ -27,5 +31,8 @@ export class UserPack extends Pack implements IUserPack{
 
     public get user(): IUser {
         return this._user;
+    }
+    public get quantity(): number {
+        return this._quantity;
     }
 }
