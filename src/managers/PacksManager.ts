@@ -1,11 +1,11 @@
 import { IUserPack } from "../objects/index";
 import { IClient, IUser } from "../index";
-import { IUserPacksManager } from "./index";
+import { IPacksManager } from "./index";
 import { Routes } from '../rest/routes/packs';
-import { Pack as PackPayload } from '../rest/payloads/index';
+import { UserPack as UserPackPayload } from '../rest/payloads/index';
 import { UserPack } from "../objects/index";
 
-export class UserPacksManager implements IUserPacksManager {
+export class PacksManager implements IPacksManager {
     private readonly _client: IClient;
     private readonly _user: IUser;
 
@@ -15,8 +15,8 @@ export class UserPacksManager implements IUserPacksManager {
     }
 
     public async getPacks(): Promise<IUserPack[]> {
-        const response:PackPayload[] = await this._client.rest.get(Routes.User.packs(this._user.id));
-        const packs:IUserPack[] = response.map((pack) => UserPack.fromPackPayload(pack, this._client.rest, this._user));
+        const response:UserPackPayload[] = await this._client.rest.get(Routes.User.packs(this._user.id));
+        const packs:IUserPack[] = response.map((pack) => UserPack.fromUserPackPayload(pack, this._client.rest, this._user));
         return packs;
     }
 }
