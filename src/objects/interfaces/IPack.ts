@@ -13,12 +13,6 @@ export interface IPack {
   getSetList(): Promise<ICard[]>;
 
   /**
-   * Open the pack and get the cards
-   * @returns list of cards in the pack
-   */
-  open(): Promise<ICard[]>;
-
-  /**
    * Accept a visitor
    * @param visitor the visitor to accept
    */

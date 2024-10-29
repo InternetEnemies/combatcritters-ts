@@ -1,7 +1,9 @@
-import { IPack } from "../objects/index";
+import { IItemStack, IUserPack } from "../objects/index";
 import { IClient, IUser } from "../index";
 import { IPacksManager } from "./index";
-import { Pack } from "../objects/index";
+import { Routes } from '../rest/routes/packs';
+import { UserPack as UserPackPayload } from '../rest/payloads/index';
+import { UserPack } from "../objects/index";
 
 export class PacksManager implements IPacksManager {
     private readonly _client: IClient;
@@ -12,13 +14,9 @@ export class PacksManager implements IPacksManager {
         this._user = user;
     }
 
-    public async getPacks(): Promise<IPack[]> {
-        //TODO: implement this
-        // https://github.com/InternetEnemies/combatcritters-ts/issues/68
-        const packs: IPack[] = [];
-        for(let i = 0; i < 20; i++) {
-            packs[i] = new Pack("/assets/images/pack.png", "Into the Robverse", 0);
-        }
+    public async getPacks(): Promise<IItemStack<IUserPack>[]> {
+        const response:UserPackPayload[] = await this._client.rest.get(Routes.User.packs(this._user.id));
+        const packs:IItemStack<IUserPack>[] = response.map((pack) => UserPack.fromUserPackPayload(pack, this._client.rest, this._user));
         return packs;
     }
 }

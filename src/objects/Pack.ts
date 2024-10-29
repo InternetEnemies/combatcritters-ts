@@ -1,72 +1,37 @@
-import { ICard, IItem, IItemVisitor, IPack } from './index';
-import { ICardCritter } from './index';
-import { ICardItem } from './index';
-import { CardCritter } from './index';
-import { CardItem } from './index';
+import { ICard, IItem, IItemVisitor, IPack, ICardCritter, ICardItem, CardCritter, CardItem, Card } from './index';
+import { Pack as PackPayload, Card as CardPayload } from '../rest/payloads/index';
+import { IClient } from "../IClient";
+import { IRest, Routes } from '../rest';
 
 export class Pack implements IPack, IItem{
 
-    private readonly _image: string;
-    private readonly _name: string;
-    private readonly _packid: number;
+    protected readonly _image: string;
+    protected readonly _name: string;
+    protected readonly _packid: number;
+    protected readonly _rest: IRest;
 
-    // should have a from payload static method
+    public static fromPackDetailsPayload(payload: PackPayload, rest: IRest): Pack {
+        return new Pack(payload.image,
+                        payload.name,
+                        payload.packid,
+                        rest);
+    }
 
-    constructor(image: string, name: string, packid: number) {
+    constructor(image: string, name: string, packid: number, rest: IRest) {
         this._image = image;
         this._name = name;
-        this._packid = packid
+        this._packid = packid;
+        this._rest = rest;
     }
 
     public accept(visitor: IItemVisitor): void{
         visitor.visitPack(this);
     }
 
-    //TODO: Remove this function once #67 is resolved
-    // https://github.com/InternetEnemies/combatcritters-ts/issues/67
-    private getCards(): ICard[] {
-        const cards: (ICardCritter | ICardItem)[] = [];
-
-        for (let i = 0; i < 20; i++) {
-            if (i < 10) {
-                const critterCard = new CardCritter(
-                    i,                            
-                    "UglyMan, the Hideous Hero",         
-                    i, 
-                    2, 
-                    "???",             
-                    `Super ugly dude`,       
-                    i, 
-                    i, 
-                    [0,1,2]
-                );
-                cards.push(critterCard);
-            } else {
-                const itemCard = new CardItem(
-                    i + 1,                            
-                    "The item",                  
-                    i,
-                    i, 
-                    "???",               
-                    "Item description",     
-                    i
-                );
-                cards.push(itemCard);
-            }
-        }
-
-        return cards;
-    }
-
-
     public async getSetList(): Promise<ICard[]> {
-        return this.getCards();
-    }
-
-    public async open(): Promise<ICard[]> {
-        //TODO: Correct this function once #67 is resolved
-        // https://github.com/InternetEnemies/combatcritters-ts/issues/67
-        return this.getCards().splice(0, 5);
+        const response:CardPayload[] = await this._rest.get(Routes.Packs.packContents(this.packid));
+        const cards:ICard[] = response.map(Card.fromCardPayload);
+        return cards;
     }
 
     public get image(): string {
