@@ -89,15 +89,15 @@ export class Vendor implements IVendor {
   // https://github.com/InternetEnemies/combatcritters-ts/issues/63
   private generateOffers(): Offer[] {
     const offers: Offer[] = [];
-    offers.push(new Offer(0, this.getCard(), this.getRequired()));
-    offers.push(new Offer(1, this.getCard(), this.getRequired()));
-    offers.push(new Offer(3, this.getCard(), this.getRequired()));
-    offers.push(new Offer(4, this.getCard(), this.getRequired()));
-    offers.push(new Offer(5, this.getCard(), this.getRequired()));
-    offers.push(new Offer(6, this.getPack(), this.getRequired()));
-    offers.push(new Offer(7, this.getPack(), this.getRequired()));
-    offers.push(new Offer(8, this.getPack(), this.getRequired()));
-    offers.push(new Offer(0, this.getPack(), this.getRequired()));
+    offers.push(new Offer(0, this.getCard(), this.getRequired(), this._rest));
+    offers.push(new Offer(1, this.getCard(), this.getRequired(), this._rest));
+    offers.push(new Offer(3, this.getCard(), this.getRequired(), this._rest));
+    offers.push(new Offer(4, this.getCard(), this.getRequired(), this._rest));
+    offers.push(new Offer(5, this.getCard(), this.getRequired(), this._rest));
+    offers.push(new Offer(6, this.getPack(), this.getRequired(), this._rest));
+    offers.push(new Offer(7, this.getPack(), this.getRequired(), this._rest));
+    offers.push(new Offer(8, this.getPack(), this.getRequired(), this._rest));
+    offers.push(new Offer(0, this.getPack(), this.getRequired(), this._rest));
     return offers;
   }
 
@@ -118,7 +118,8 @@ export class Vendor implements IVendor {
           0,
           0,
           this.getCard(),
-          this.getRequired()
+          this.getRequired(),
+          this._rest
         )
       );
     }
@@ -130,7 +131,8 @@ export class Vendor implements IVendor {
           0,
           0,
           this.getPack(),
-          this.getRequired()
+          this.getRequired(),
+          this._rest
         )
       );
     }

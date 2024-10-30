@@ -1,34 +1,66 @@
 import {
+  Card,
+  Currency,
   ICard,
+  IClient,
   ICurrency,
   IItemStack,
   IOffer,
   IPack,
+  IRest,
   ItemStack,
   IUserOfferItem,
   IUserOfferState,
+  Pack,
 } from "../index";
-import { Offer as OfferPayload } from "../rest/payloads";
+import { 
+  Offer as OfferPayload, 
+  OfferItem as OfferItemPayload, 
+  ItemType,
+  Card as CardPayload ,
+  Pack as PackPayload
+} from "../rest/payloads";
 
 export class Offer implements IOffer {
-  private readonly _offerID: number;
-  private readonly _receiveItem: IItemStack<ICurrency | ICard | IPack>;
-  private readonly _giveItem: IItemStack<ICurrency | ICard | IPack>[];
+  protected readonly _rest: IRest;
+  protected readonly _offerID: number;
+  protected readonly _receiveItem: IItemStack<ICurrency | ICard | IPack>;
+  protected readonly _giveItem: IItemStack<ICurrency | ICard | IPack>[];
 
-  public static fromOfferPayload(payload: OfferPayload): Offer {
-    //TODO: Implement this method
-    // https://github.com/InternetEnemies/combatcritters-ts/issues/61
-    throw new Error("Method not implemented.");
+  public static fromOfferItemPayload(payload: OfferItemPayload): Card | Pack | Currency {
+    let itemObj: ICard | IPack | ICurrency;
+    switch (payload.type) {
+      case ItemType.CARD:
+        itemObj = Card.fromCardPayload(payload.item as CardPayload);
+        break;
+      case ItemType.PACK:
+        itemObj = Pack.fromPackDetailsPayload(payload.item as PackPayload, );
+        break;
+      case ItemType.CURRENCY:
+        
+        break;
+      default:
+        throw new Error("Invalid item type");
+    }
+    return itemObj;
+  }
+
+  public static fromOfferPayload(payload: OfferPayload, rest: IRest): Offer {
+    let give: IItemStack<ICurrency | ICard | IPack>[] = [];
+    let receive: ItemStack<ICurrency | ICard | IPack>;
+    return new Offer(payload.id, receive, give, rest);
   }
 
   constructor(
     offerID: number,
     receiveItems: IItemStack<ICurrency | ICard | IPack>,
-    giveItem: IItemStack<ICurrency | ICard | IPack>[]
+    giveItem: IItemStack<ICurrency | ICard | IPack>[].
+    rest: IRest
   ) {
     this._offerID = offerID;
     this._receiveItem = receiveItems;
     this._giveItem = giveItem;
+    this._rest = rest;
   }
 
   public async compareUserItems(): Promise<

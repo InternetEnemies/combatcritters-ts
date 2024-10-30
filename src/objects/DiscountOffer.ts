@@ -1,3 +1,4 @@
+import { IRest } from "..";
 import { OfferDiscount } from "../rest/payloads";
 import { ICard, ICurrency, IDiscountOffer, IItemStack, IPack, IUserOfferState, Offer } from "./index";
 
@@ -12,8 +13,14 @@ export class DiscountOffer extends Offer implements IDiscountOffer {
         throw new Error("Method not implemented.");
     }
 
-    constructor(discountedGive: IItemStack<ICurrency | ICard | IPack>[], discount: number, discountID: number, offerID: number, receiveItem: IItemStack<ICurrency | ICard | IPack>, originalGive: IItemStack<ICurrency | ICard | IPack>[]) {
-        super(offerID, receiveItem, originalGive);
+    constructor(discountedGive: IItemStack<ICurrency | ICard | IPack>[], 
+                discount: number, 
+                discountID: number, 
+                offerID: number, 
+                receiveItem: IItemStack<ICurrency | ICard | IPack>, 
+                originalGive: IItemStack<ICurrency | ICard | IPack>[], 
+                rest: IRest) {
+        super(offerID, receiveItem, originalGive, rest);
         this._discountedGive = discountedGive;
         this._discount = discount;
         this._discountID = discountID;

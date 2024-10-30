@@ -13,7 +13,7 @@ export class OffersManager implements IOffersManager {
         //https://github.com/InternetEnemies/combatcritters-ts/issues/60
         const offers: IOffer[] = [];
         for(let i = 0; i < 20; i++) {
-            offers[i] = new Offer(i, new ItemStack(new CardCritter(i, "", 0, 0, "", "", 0, 0, []), 1), []);
+            offers[i] = new Offer(i, new ItemStack(new CardCritter(i, "", 0, 0, "", "", 0, 0, []), 1), [], this._rest);
         }
         return offers;
     }
@@ -22,7 +22,7 @@ export class OffersManager implements IOffersManager {
         //https://github.com/InternetEnemies/combatcritters-ts/issues/60
         const specials: IOffer[] = [];
         for(let i = 0; i < 20; i++) {
-            specials[i] = new Offer(i, new ItemStack(new CardCritter(i, "", 0, 0, "", "", 0, 0, []), 1), []);
+            specials[i] = new Offer(i, new ItemStack(new CardCritter(i, "", 0, 0, "", "", 0, 0, []), 1), [], this._rest);
         }
         return specials;
     }
@@ -31,7 +31,7 @@ export class OffersManager implements IOffersManager {
         //https://github.com/InternetEnemies/combatcritters-ts/issues/60
         const discounts: IDiscountOffer[] = [];
         for(let i = 0; i < 20; i++) {
-            discounts[i] = new DiscountOffer([], i, i, i, new ItemStack(new CardCritter(i, "", 0, 0, "", "", 0, 0, []), 1), []);
+            discounts[i] = new DiscountOffer([], i, i, i, new ItemStack(new CardCritter(i, "", 0, 0, "", "", 0, 0, []), 1), [], this._rest);
         }
         return discounts;
     }
