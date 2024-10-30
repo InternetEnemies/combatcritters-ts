@@ -27,17 +27,17 @@ export class Offer implements IOffer {
   protected readonly _receiveItem: IItemStack<ICurrency | ICard | IPack>;
   protected readonly _giveItem: IItemStack<ICurrency | ICard | IPack>[];
 
-  public static fromOfferItemPayload(payload: OfferItemPayload): Card | Pack | Currency {
+  public static fromOfferItemPayload(payload: OfferItemPayload, rest:IRest): Card | Pack | Currency {
     let itemObj: ICard | IPack | ICurrency;
     switch (payload.type) {
       case ItemType.CARD:
         itemObj = Card.fromCardPayload(payload.item as CardPayload);
         break;
       case ItemType.PACK:
-        itemObj = Pack.fromPackDetailsPayload(payload.item as PackPayload, );
+        itemObj = Pack.fromPackDetailsPayload(payload.item as PackPayload, this._rest);
         break;
       case ItemType.CURRENCY:
-        
+        itemObj = new Currency(payload.count);
         break;
       default:
         throw new Error("Invalid item type");
