@@ -1,7 +1,7 @@
-import { IClient, IRest } from "../index";
-import { Routes } from '../rest/routes/packs';
-import { Pack, IUserPack, IUser, ICard, Card, IItemStack, ItemStack } from "./index";
-import { UserPack as UserPackPayload, Card as CardPayload } from '../rest/payloads/index';
+import {IRest} from "../index";
+import {Routes} from '../rest/routes/packs';
+import {Card, ICard, IItemStack, ItemStack, IUser, IUserPack, Pack} from "./index";
+import {PackResult, UserPack as UserPackPayload} from '../rest/payloads/index';
 
 export class UserPack extends Pack implements IUserPack{
     private readonly _user: IUser;
@@ -25,9 +25,8 @@ export class UserPack extends Pack implements IUserPack{
     }
 
     public async open(): Promise<ICard[]> {
-        const response:CardPayload[] = await this._rest.post(Routes.User.openPack(this._user.id, this.packid),{});
-        const cards:ICard[] = response.map(Card.fromCardPayload);
-        return cards;
+        const response:PackResult = await this._rest.post(Routes.User.openPack(this._user.id, this.packid),{});
+        return response.cards.map(Card.fromCardPayload);
     }
 
     public get user(): IUser {
