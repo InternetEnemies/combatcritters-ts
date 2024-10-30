@@ -1,4 +1,6 @@
 import { IClient,IUserCurrencyManager, IUser, ICurrency, Currency } from "../index";
+import { Wallet } from "../rest/payloads";
+import { Routes } from "../rest/routes/wallet";
 
 export class UserCurrencyManager implements IUserCurrencyManager {
     private readonly _client: IClient;
@@ -10,8 +12,7 @@ export class UserCurrencyManager implements IUserCurrencyManager {
     }
 
     public async getCurrency(): Promise<ICurrency> {
-        //TODO: Implement
-        // https://github.com/InternetEnemies/combatcritters-ts/issues/66
-        return new Currency(10);
+        let response:Wallet = await this._client.rest.get(Routes.User.wallet(this._user.id));
+        return Currency.fromWalletPayload(response);
     }
 }
