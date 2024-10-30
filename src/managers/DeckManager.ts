@@ -1,16 +1,18 @@
 import { IClient } from "../IClient";
-import { Deck, IDeck, IUser } from "../objects";
-import { Routes } from "../rest";
+import { Deck, IDeck, IDeckValidator, IUser } from "../objects";
+import { IRest, Routes } from "../rest";
 import { DeckRules, DeckDetails} from "../rest/payloads";
 import { IDeckManager } from "./interfaces";
 
 export class DeckManager implements IDeckManager {
     private readonly _client: IClient;
     private readonly _user: IUser;
+    private readonly _validator: IDeckValidator;
 
-    constructor(client: IClient, user: IUser) {
+    constructor(client: IClient, user: IUser, validator: IDeckValidator) {
         this._client = client;
         this._user = user;
+        this._validator = validator
     }
 
     public async getDecks(): Promise<IDeck[]> {
@@ -34,5 +36,9 @@ export class DeckManager implements IDeckManager {
     public async getDeckRules(): Promise<DeckRules> {
         const userRes: DeckRules = await this._client.rest.get(Routes.Decks.validity());
         return userRes;
+    }
+
+    public get validator(): IDeckValidator {
+        return this._validator;
     }
 }
