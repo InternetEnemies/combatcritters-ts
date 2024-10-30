@@ -13,9 +13,9 @@ export interface IDeck {
     /**
      * set the cards in the deck
      * @param cards list of cards to set
-     * @returns the validity of the deck, validate locally
+     * @returns the local deck
      */
-    setCards(cards:ICard[]):IDeckValidity;
+    setCards(cards:ICard[]):ICard[];
 
     /**
      * set the local copy of the cards to the api

@@ -43,9 +43,9 @@ export class Deck implements IDeck {
         return this.localcards;
     }
 
-    public setCards(cards: ICard[]): IDeckValidity {
+    public setCards(cards: ICard[]): ICard[] {
         this.localcards = cards;
-        return this._client.deckValidator.validate(this.localcards);
+        return this.localcards;
     }
 
     public async commit(): Promise<IDeckValidity> {
