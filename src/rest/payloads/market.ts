@@ -1,3 +1,6 @@
+import { Currency, Pack } from "../../objects"
+import { Card } from "./cards"
+
 /**
  * Market related payload
  */
@@ -12,13 +15,13 @@ export type Vendor = {
     name: string,
     image: string,
     reputation: VendorReputation,
-    refrest_time: string
+    refresh_time: string
 }
 
 export type OfferItem = {
     type: ItemType,
     count: number,
-    item_id: number
+    item: Card | Pack | null
 }
 
 export type RepChange = {
