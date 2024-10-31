@@ -17,10 +17,11 @@ export class DiscountOffer extends Offer implements IDiscountOffer {
                 discount: number, 
                 discountID: number, 
                 offerID: number, 
+                vendorID: number,
                 receiveItem: IItemStack<ICurrency | ICard | IPack>, 
                 originalGive: IItemStack<ICurrency | ICard | IPack>[], 
                 client: IClient) {
-        super(offerID, receiveItem, originalGive, client);
+        super(offerID, vendorID, receiveItem, originalGive, client);
         this._discountedGive = discountedGive;
         this._discount = discount;
         this._discountID = discountID;

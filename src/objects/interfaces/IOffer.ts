@@ -2,6 +2,7 @@ import { ICard, ICurrency, IItemStack, IPack, IUserOfferState } from "../index";
 
 export interface IOffer {
   offerID: number;
+  vendorID: number;
   receiveItem: IItemStack<ICurrency | ICard | IPack>;
   giveItem: IItemStack<ICurrency | ICard | IPack>[];
 

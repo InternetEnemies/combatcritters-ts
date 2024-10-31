@@ -24,6 +24,7 @@ import {
 export class Offer implements IOffer {
   protected readonly _client: IClient;
   protected readonly _offerID: number;
+  protected readonly _vendorID: number;
   protected readonly _receiveItem: IItemStack<ICurrency | ICard | IPack>;
   protected readonly _giveItem: IItemStack<ICurrency | ICard | IPack>[];
 
@@ -45,7 +46,7 @@ export class Offer implements IOffer {
     return itemObj;
   }
 
-  public static fromOfferPayload(payload: OfferPayload, client: IClient): Offer {
+  public static fromOfferPayload(payload: OfferPayload, vendorID: number, client: IClient): Offer {
     let give: IItemStack<ICurrency | ICard | IPack>[] = payload.give.map((item) => {
       return new ItemStack<ICurrency | ICard | IPack>(
         this.fromOfferItemPayload(item, client.rest),
@@ -56,11 +57,12 @@ export class Offer implements IOffer {
       this.fromOfferItemPayload(payload.receive, client.rest),
       payload.receive.count
     );
-    return new Offer(payload.id, receive, give, client);
+    return new Offer(payload.id, vendorID, receive, give, client);
   }
 
   constructor(
     offerID: number,
+    vendorID: number,
     receiveItems: IItemStack<ICurrency | ICard | IPack>,
     giveItem: IItemStack<ICurrency | ICard | IPack>[],
     client: IClient
@@ -96,14 +98,15 @@ export class Offer implements IOffer {
     return {userOfferItems:tradeItems, canPurchase:(Math.random()<.5)};
   }
 
-  //TODO: Implement this method
-  // https://github.com/InternetEnemies/combatcritters-ts/issues/61
   public async accept(): Promise<void> {
     
   }
 
   public get offerID(): number {
     return this._offerID;
+  }
+  public get vendorID(): number {
+    return this._vendorID;
   }
   public get receiveItem(): IItemStack<ICurrency | ICard | IPack> {
     return this._receiveItem;

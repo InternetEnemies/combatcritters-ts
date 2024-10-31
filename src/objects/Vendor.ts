@@ -89,15 +89,15 @@ export class Vendor implements IVendor {
   // https://github.com/InternetEnemies/combatcritters-ts/issues/63
   private generateOffers(): Offer[] {
     const offers: Offer[] = [];
-    offers.push(new Offer(0, this.getCard(), this.getRequired(), this._client));
-    offers.push(new Offer(1, this.getCard(), this.getRequired(), this._client));
-    offers.push(new Offer(3, this.getCard(), this.getRequired(), this._client));
-    offers.push(new Offer(4, this.getCard(), this.getRequired(), this._client));
-    offers.push(new Offer(5, this.getCard(), this.getRequired(), this._client));
-    offers.push(new Offer(6, this.getPack(), this.getRequired(), this._client));
-    offers.push(new Offer(7, this.getPack(), this.getRequired(), this._client));
-    offers.push(new Offer(8, this.getPack(), this.getRequired(), this._client));
-    offers.push(new Offer(0, this.getPack(), this.getRequired(), this._client));
+    offers.push(new Offer(0, this._id, this.getCard(), this.getRequired(), this._client));
+    offers.push(new Offer(1, this._id, this.getCard(), this.getRequired(), this._client));
+    offers.push(new Offer(3, this._id, this.getCard(), this.getRequired(), this._client));
+    offers.push(new Offer(4, this._id, this.getCard(), this.getRequired(), this._client));
+    offers.push(new Offer(5, this._id, this.getCard(), this.getRequired(), this._client));
+    offers.push(new Offer(6, this._id, this.getPack(), this.getRequired(), this._client));
+    offers.push(new Offer(7, this._id, this.getPack(), this.getRequired(), this._client));
+    offers.push(new Offer(8, this._id, this.getPack(), this.getRequired(), this._client));
+    offers.push(new Offer(0, this._id, this.getPack(), this.getRequired(), this._client));
     return offers;
   }
 
@@ -115,6 +115,7 @@ export class Vendor implements IVendor {
         new DiscountOffer(
           this.getRequired(),
           75,
+          1,
           0,
           0,
           this.getCard(),
@@ -128,6 +129,7 @@ export class Vendor implements IVendor {
         new DiscountOffer(
           this.getRequired(),
           75,
+          1,
           0,
           0,
           this.getPack(),
