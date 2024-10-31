@@ -7,13 +7,15 @@ import { IDeckManager } from "./interfaces";
 export class DeckManager implements IDeckManager {
     private readonly _client: IClient;
     private readonly _user: IUser;
-    private _validator: IDeckValidator;
+    private _validator!: IDeckValidator;
 
     constructor(client: IClient, user: IUser, validator?: IDeckValidator) {
         this._client = client;
         this._user = user;
         if (validator) {
             this._validator = validator;
+        }else{
+            this._validator = new DeckValidator(this._client);
         }
     }
 
@@ -41,15 +43,6 @@ export class DeckManager implements IDeckManager {
     }
 
     public get validator(): IDeckValidator {
-        if (!this._validator) {
-            this.validatorInit();
-        }
         return this._validator;
-    }
-
-    private async validatorInit(): Promise<void> {
-        const rules:DeckRules = await this._client.rest.get(Routes.Decks.validity());
-        const userCards:CardQueryPayload[] = await this._client.rest.get(Routes.Cards.User.cards(this._user.id, ""));
-        this._validator = DeckValidator.from_DeckRules_UserCards(rules, userCards);
     }
 }

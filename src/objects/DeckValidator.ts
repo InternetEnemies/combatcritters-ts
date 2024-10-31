@@ -1,18 +1,20 @@
-import { CardItem, CardQuery, CardRarity, DeckValidity, ICard, ICardsManager, IDeck, IDeckValidator, IDeckValidity, IItemStack, ItemStack, UserCardsManager, } from "../index";
+import { CardItem, CardQuery, CardRarity, DeckValidity, ICard, ICardsManager, IClient, IDeck, IDeckValidator, IDeckValidity, IItemStack, IRest, ItemStack, Routes, UserCardsManager, } from "../index";
 import { DeckRules, DeckIssue, CardQuery as CardQueryPayload } from "../rest/payloads";
 
 export class DeckValidator implements IDeckValidator {
-    private readonly _min_cards: number;
-    private readonly _max_cards: number;
-    private readonly _limit_legend: number;
-    private readonly _limit_epic: number;
-    private readonly _limit_rare: number;
-    private readonly _limit_item: number;
-    private readonly _ownedCards: IItemStack<ICard>[];
+    private _min_cards!: number;
+    private _max_cards!: number;
+    private _limit_legend!: number;
+    private _limit_epic!: number;
+    private _limit_rare!: number;
+    private _limit_item!: number;
+    private _ownedCards!: IItemStack<ICard>[];
+    private _client!: IClient;
     private issues: Array<string>;
 
-    public static from_DeckRules_UserCards(rules: DeckRules, CardsPayload:CardQueryPayload[]): DeckValidator {
-        return new DeckValidator(rules.min_cards, 
+    public static from_DeckRules_UserCards(rules: DeckRules, CardsPayload:CardQueryPayload[], client: IClient): DeckValidator {
+        return new DeckValidator(client,
+                                 rules.min_cards, 
                                  rules.max_cards, 
                                  rules.limit_legend, 
                                  rules.limit_epic, 
@@ -30,18 +32,44 @@ export class DeckValidator implements IDeckValidator {
         return cardStacks;
     }
 
-    constructor(min_cards: number, max_cards: number, limit_legend: number, limit_epic: number, limit_rare: number, limit_item: number, ownedCards: IItemStack<ICard>[]) {
-        this._min_cards = min_cards;
-        this._max_cards = max_cards;
-        this._limit_legend = limit_legend;
-        this._limit_epic = limit_epic;
-        this._limit_rare = limit_rare;
-        this._limit_item = limit_item;
-        this._ownedCards = ownedCards;
+    constructor(client: IClient, min_cards?: number, max_cards?: number, limit_legend?: number, limit_epic?: number, limit_rare?: number, limit_item?: number, ownedCards?: IItemStack<ICard>[]) {
+        if(min_cards){
+            this._min_cards = min_cards;
+        }
+        if(max_cards){
+            this._max_cards = max_cards;
+        }
+        if(limit_legend){
+            this._limit_legend = limit_legend;
+        }
+        if(limit_epic){
+            this._limit_epic = limit_epic;
+        }
+        if(limit_rare){
+            this._limit_rare = limit_rare;
+        }
+        if(limit_item){
+            this._limit_item = limit_item;
+        }
+        if(ownedCards){
+            this._ownedCards = ownedCards;
+        }
+        this._client = client;
         this.issues = [];
     }
 
-    public validate(cards: ICard[]): IDeckValidity {
+    public async validate(cards: ICard[]): Promise<IDeckValidity> {
+        if(this._ownedCards === undefined){
+            const rules:DeckRules = await this._client.rest.get(Routes.Decks.validity());
+            const userCards:CardQueryPayload[] = await this._client.rest.get(Routes.Cards.User.cards(this._client.user.id, ""));
+            this._ownedCards = CardQuery.fromCardQueryPayloads(userCards);
+            this._min_cards = rules.min_cards;
+            this._max_cards = rules.max_cards;
+            this._limit_legend = rules.limit_legend;
+            this._limit_epic = rules.limit_epic;
+            this._limit_rare = rules.limit_rare;
+            this._limit_item = rules.limit_item;
+        }
         this.issues = [];
         this.checkTotalCards(cards);
         this.checkItemCount(cards);
