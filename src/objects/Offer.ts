@@ -7,19 +7,23 @@ import {
   IItemStack,
   IOffer,
   IPack,
+  IPurchaseStatus,
   IRest,
   ItemStack,
   IUserOfferItem,
   IUserOfferState,
   Pack,
+  PurchaseStatus,
 } from "../index";
 import { 
   Offer as OfferPayload, 
   OfferItem as OfferItemPayload, 
   ItemType,
   Card as CardPayload ,
-  Pack as PackPayload
+  Pack as PackPayload,
+  RepChange
 } from "../rest/payloads";
+import { Routes } from "../rest/routes/market";
 
 export class Offer implements IOffer {
   protected readonly _client: IClient;
@@ -98,8 +102,9 @@ export class Offer implements IOffer {
     return {userOfferItems:tradeItems, canPurchase:(Math.random()<.5)};
   }
 
-  public async accept(): Promise<void> {
-    
+  public async accept(): Promise<IPurchaseStatus> {
+    const response: RepChange = await this._client.rest.post(Routes.purchaseOffer(this._vendorID, this._offerID),{});
+    return PurchaseStatus.fromRepChangePayload(response);
   }
 
   public get offerID(): number {

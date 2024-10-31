@@ -26,7 +26,7 @@ export type OfferItem = {
 
 export type RepChange = {
     amount: number,
-    vendor: string
+    vendor: number
 }
 
 export type OfferDiscount = {
