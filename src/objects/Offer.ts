@@ -15,6 +15,7 @@ import {
   Pack,
   PurchaseStatus,
   User,
+  UserOfferItem,
   UserOfferState,
 } from "../index";
 import { 
@@ -101,11 +102,37 @@ export class Offer implements IOffer {
     let missingItems: IUserOfferItem<IPack | ICard | ICurrency>[] = [];
 
     // check if the user have enough cards to give
-    
-    // check if the user have enough packs to give
-
-    // check if the user have enough currency to give
-
+    for(let item of this._giveItem){
+      if(this.isICard(item.getItem())){
+        // find the first item that match with the cardid
+        let userCard = userCardStack.find(userItem => userItem.getItem().cardid === (item.getItem() as ICard).cardid);
+        // if the user doesn't have the card, add it to the missing items
+        if(userCard === undefined){
+          missingItems.push(new UserOfferItem(item, new ItemStack(item.getItem(), 0)));
+        }else if(!this.compareItemStacks(item, userCard)){
+          // if the user have the card but not enough amount, add it to the missing items
+          missingItems.push(new UserOfferItem(item, userCard));
+        }
+      }else if(this.isIPack(item.getItem())){
+        // find the first item that match with the packid
+        let userPack = userPackStack.find(userItem => userItem.getItem().packid === (item.getItem() as IPack).packid);
+        if(userPack === undefined){
+          // if the user doesn't have the pack, add it to the missing items
+          missingItems.push(new UserOfferItem(item, new ItemStack(item.getItem(), 0)));
+        }else if(!this.compareItemStacks(item, userPack)){
+          // if the user have the pack but not enough amount, add it to the missing items
+          missingItems.push(new UserOfferItem(item, userPack));
+        }
+      }else if(this.isICurrency(item.getItem())){
+        if(!this.compareItemStacks(item, userCurrencyStack)){
+          missingItems.push(new UserOfferItem(item, userCurrencyStack));
+        }
+      }else{
+        // probably will never reach here
+        // throw error if the item is not a card, pack or currency
+        throw new Error("Invalid item type");
+      }
+    }
 
     return new UserOfferState(missingItems, missingItems.length === 0);
   }
@@ -137,7 +164,22 @@ export class Offer implements IOffer {
     return this._giveItem;
   }
 
-  private compareItemStacks(giveItem: IItemStack<IPack | ICard | ICurrency>, userItem: IItemStack<IPack | ICard | ICurrency>): IUserOfferItem<IPack | ICard | ICurrency> | null {
-    return null;
+  private compareItemStacks(giveItem: IItemStack<IPack | ICard | ICurrency>, userItem: IItemStack<IPack | ICard | ICurrency>): boolean {
+    // check if the user have enough amount of the item
+    // true if the user have enough amount of the item
+    // false if the user doesn't have enough amount of the item
+    return giveItem.getAmount() <= userItem.getAmount();
+  }
+
+  private isICard(item: ICard | IPack | ICurrency): item is ICard {
+    return (item as ICard).cardid !== undefined;
+  }
+
+  private isIPack(item: ICard | IPack | ICurrency): item is IPack {
+    return (item as IPack).packid !== undefined;
+  }
+
+  private isICurrency(item: ICard | IPack | ICurrency): item is ICurrency {
+    return (item as ICurrency).coins !== undefined;
   }
 }
