@@ -22,7 +22,8 @@ import {
   Card as CardPayload ,
   Pack as PackPayload,
   RepChange,
-  CardQuery as CardQueryPayload
+  CardQuery as CardQueryPayload,
+  Wallet as WalletPayload
 } from "../rest/payloads";
 import { Routes } from "../rest/routes/index";
 
@@ -84,14 +85,23 @@ export class Offer implements IOffer {
     // get user owned cards, packs and currency
     const userOwnedCards: CardQueryPayload = await this._client.rest.get(Routes.Cards.User.cards(this._client.user.id, ""));
     const userOwnedPacks: PackPayload[] = await this._client.rest.get(Routes.Packs.User.packs(this._client.user.id));
-    const userOwnedCurrency: ICurrency[] = await this._client.rest.get(Routes.Wallet.User.wallet(this._client.user.id));
+    const userOwnedCurrency: WalletPayload = await this._client.rest.get(Routes.Wallet.User.wallet(this._client.user.id));
 
     
     // compare user owned items with offer items and return missing items
   }
 
   public async accept(): Promise<IPurchaseStatus> {
-    const response: RepChange = await this._client.rest.post(Routes.Market.purchaseOffer(this._vendorID, this._offerID),{});
+    let response: RepChange;
+    try{
+      response = await this._client.rest.post(Routes.Market.purchaseOffer(this._vendorID, this._offerID),{});
+    }catch(error){
+      if(error.response.status === 400){
+        return new PurchaseStatus(false, this._vendorID, 0);
+      }else{
+        throw error;
+      }
+    }
     return PurchaseStatus.fromRepChangePayload(response);
   }
 
