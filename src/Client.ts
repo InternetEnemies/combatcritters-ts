@@ -68,7 +68,4 @@ export class Client implements IClient{
     public get user(): IUser{
         return this._user;
     }
-    public get deckValidator(): IDeckValidator{
-        return this._deckValidator;
-    }
 }

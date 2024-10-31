@@ -11,7 +11,6 @@ export interface IClient {
     vendors:IVendorManager;
     offers: IOffersManager;
     rest:IRest;
-    deckValidator: IDeckValidator;
 
     /**
      * Is the user logged in?

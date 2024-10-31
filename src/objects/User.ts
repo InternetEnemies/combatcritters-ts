@@ -26,7 +26,7 @@ export class User implements IUser {
     
     constructor(client:IClient, username: string, id: number) {
         this.client = client;
-        this._decks = new DeckManager(client, this, client.deckValidator);
+        this._decks = new DeckManager(client, this);
         this._cards = new UserCardsManager(client, this);
         this._friends = new FriendsManager(client, this);
         this._packs = new PacksManager(client, this);
