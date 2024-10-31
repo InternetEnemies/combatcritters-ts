@@ -9,5 +9,5 @@ export interface IDeckValidator {
      * @param cards the deck to validate
      * @returns IDeckValidity the validity of the deck
      */
-    validate(cards: ICard[]): IDeckValidity;
+    validate(cards: ICard[]): Promise<IDeckValidity>;
 }
