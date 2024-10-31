@@ -1,4 +1,7 @@
-import { ICardQuery, CardOrder } from "./interfaces";
+import { ICardQuery, CardOrder, IItemStack, ICard } from "./interfaces";
+import { Card as CardPayload, CardQuery as CardQueryPayload } from "../rest/payloads";
+import { ItemStack } from "./ItemStack";
+import { Card } from "./Card";
 
 export class CardQuery implements ICardQuery {
     private readonly cost!: number;
@@ -8,6 +11,11 @@ export class CardQuery implements ICardQuery {
     private readonly owned!: boolean;
     private readonly rarities!: number[];
     private readonly raritiesInclude!: boolean;
+
+    public static fromCardQueryPayloads(cards: CardQueryPayload[]): IItemStack<ICard>[] {
+        const cardStacks: IItemStack<ICard>[] = cards.map(card => new ItemStack(Card.fromCardPayload(card.item), card.count));
+        return cardStacks;
+    }
 
     constructor(cost: number, costLess: boolean, ids: number[], order: CardOrder, owned: boolean, rarities: number[], rarityInclude: boolean) {
         this.cost = cost;

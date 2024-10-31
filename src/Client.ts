@@ -1,8 +1,8 @@
 import {IClient} from "./IClient";
 import {ICardsManager, IOffersManager, IVendorManager} from "./index";
 import {Rest, IRest, Routes} from "./rest";
-import {IUser} from "./objects";
-import {UserPayload} from "./rest/payloads";
+import {DeckValidator, IDeckValidator, IUser} from "./objects";
+import {DeckRules, UserPayload, CardQuery as CardQueryPayload } from "./rest/payloads";
 import {User} from "./objects/User";
 import {IClientComponentFactory} from "./IClientComponentFactory";
 import {ClientComponentFactory} from "./ClientComponentFactory";
