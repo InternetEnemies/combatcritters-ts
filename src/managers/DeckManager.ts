@@ -14,8 +14,6 @@ export class DeckManager implements IDeckManager {
         this._user = user;
         if (validator) {
             this._validator = validator;
-        } else {
-            this.validatorInit();
         }
     }
 
@@ -43,6 +41,9 @@ export class DeckManager implements IDeckManager {
     }
 
     public get validator(): IDeckValidator {
+        if (!this._validator) {
+            this.validatorInit();
+        }
         return this._validator;
     }
 
