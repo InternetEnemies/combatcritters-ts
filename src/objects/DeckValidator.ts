@@ -17,16 +17,12 @@ export class DeckValidator implements IDeckValidator {
 
     constructor(client: IClient) {
         this._client = client;
-        this._rules = null;
-        this._ownedCards = null;
+        this._rules = DeckValidator.getRules(this._client);
+        this._ownedCards = UserCardsManager.getUserCard(this._client);
         this.issues = [];
     }
 
     public async validate(cards: ICard[]): Promise<IDeckValidity> {
-        if(this._ownedCards === null || this._rules === null){
-            this._ownedCards = UserCardsManager.getUserCard(this._client);
-            this._rules = DeckValidator.getRules(this._client);
-        }
         this.issues = [];
         this.checkTotalCards(cards);
         this.checkItemCount(cards);
