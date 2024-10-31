@@ -1,4 +1,4 @@
-import {IOffer, IUser} from "./objects";
+import {IDeck, IDeckValidator, IOffer, IUser} from "./objects";
 import {ICardsManager, IOffersManager, IVendorManager} from "./index";
 import {IRest} from "./rest/IRest";
 

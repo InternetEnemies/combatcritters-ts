@@ -1,7 +1,8 @@
-import { IDeck } from "../../objects/interfaces";
+import { IDeck, IDeckValidator } from "../../objects/interfaces";
 import { DeckRules } from "../../rest/payloads";
 
 export interface IDeckManager {
+    validator: IDeckValidator;
     /**
      * Get the decks of the user
      * @returns Promise<IDeck[]> the decks of the user

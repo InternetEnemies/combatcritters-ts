@@ -1,16 +1,20 @@
 import { IClient } from "../IClient";
-import { Deck, IDeck, IUser } from "../objects";
-import { Routes } from "../rest";
-import { DeckRules, DeckDetails} from "../rest/payloads";
+import { Deck, DeckValidator, IDeck, IDeckValidator, IUser } from "../objects";
+import { IRest, Routes } from "../rest";
+import { DeckRules, DeckDetails, CardQuery as CardQueryPayload } from "../rest/payloads";
 import { IDeckManager } from "./interfaces";
 
 export class DeckManager implements IDeckManager {
     private readonly _client: IClient;
     private readonly _user: IUser;
+    private _validator: IDeckValidator;
 
-    constructor(client: IClient, user: IUser) {
+    constructor(client: IClient, user: IUser, validator?: IDeckValidator) {
         this._client = client;
         this._user = user;
+        if (validator) {
+            this._validator = validator;
+        }
     }
 
     public async getDecks(): Promise<IDeck[]> {
@@ -34,5 +38,18 @@ export class DeckManager implements IDeckManager {
     public async getDeckRules(): Promise<DeckRules> {
         const userRes: DeckRules = await this._client.rest.get(Routes.Decks.validity());
         return userRes;
+    }
+
+    public get validator(): IDeckValidator {
+        if (!this._validator) {
+            this.validatorInit();
+        }
+        return this._validator;
+    }
+
+    private async validatorInit(): Promise<void> {
+        const rules:DeckRules = await this._client.rest.get(Routes.Decks.validity());
+        const userCards:CardQueryPayload[] = await this._client.rest.get(Routes.Cards.User.cards(this._user.id, ""));
+        this._validator = DeckValidator.from_DeckRules_UserCards(rules, userCards);
     }
 }

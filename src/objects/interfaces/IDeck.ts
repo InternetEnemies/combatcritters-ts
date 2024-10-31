@@ -13,7 +13,7 @@ export interface IDeck {
     /**
      * set the cards in the deck
      * @param cards list of cards to set
-     * @returns the list of local cards in the deck after setting
+     * @returns the local deck
      */
     setCards(cards:ICard[]):ICard[];
 
