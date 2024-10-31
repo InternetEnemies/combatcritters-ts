@@ -14,6 +14,8 @@ import {
   IUserOfferState,
   Pack,
   PurchaseStatus,
+  User,
+  UserOfferState,
 } from "../index";
 import { 
   Offer as OfferPayload, 
@@ -23,7 +25,8 @@ import {
   Pack as PackPayload,
   RepChange,
   CardQuery as CardQueryPayload,
-  Wallet as WalletPayload
+  Wallet as WalletPayload,
+  UserPack as UserPackPayload
 } from "../rest/payloads";
 import { Routes } from "../rest/routes/index";
 
@@ -83,12 +86,28 @@ export class Offer implements IOffer {
     IUserOfferState<IPack | ICard | ICurrency>
   > {
     // get user owned cards, packs and currency
-    const userOwnedCards: CardQueryPayload = await this._client.rest.get(Routes.Cards.User.cards(this._client.user.id, ""));
-    const userOwnedPacks: PackPayload[] = await this._client.rest.get(Routes.Packs.User.packs(this._client.user.id));
+    const userOwnedCards: CardQueryPayload[] = await this._client.rest.get(Routes.Cards.User.cards(this._client.user.id, ""));
+    const userOwnedPacks: UserPackPayload[] = await this._client.rest.get(Routes.Packs.User.packs(this._client.user.id));
     const userOwnedCurrency: WalletPayload = await this._client.rest.get(Routes.Wallet.User.wallet(this._client.user.id));
 
+    // convert CardQueryPayload to IItemStack<ICard>
+    const userCardStack: IItemStack<ICard>[] = userOwnedCards.map(ItemStack.fromCardQueryPayloadToItemStack);
+    // convert PackPayload to IItemStack<IPack>
+    const userPackStack: IItemStack<IPack>[] = userOwnedPacks.map(pack => ItemStack.fromUserPackPayloadToItemStack(pack,this._client.rest));
+    // convert WalletPayload to IItemStack<ICurrency>
+    const userCurrencyStack: IItemStack<ICurrency> = ItemStack.fromWalletPayloadToItemStack(userOwnedCurrency);
     
     // compare user owned items with offer items and return missing items
+    let missingItems: IUserOfferItem<IPack | ICard | ICurrency>[] = [];
+
+    // check if the user have enough cards to give
+    
+    // check if the user have enough packs to give
+
+    // check if the user have enough currency to give
+
+
+    return new UserOfferState(missingItems, missingItems.length === 0);
   }
 
   public async accept(): Promise<IPurchaseStatus> {
@@ -116,5 +135,9 @@ export class Offer implements IOffer {
   }
   public get giveItem(): IItemStack<ICurrency | ICard | IPack>[] {
     return this._giveItem;
+  }
+
+  private compareItemStacks(giveItem: IItemStack<IPack | ICard | ICurrency>, userItem: IItemStack<IPack | ICard | ICurrency>): IUserOfferItem<IPack | ICard | ICurrency> | null {
+    return null;
   }
 }

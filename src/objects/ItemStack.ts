@@ -11,18 +11,18 @@ export class ItemStack<T> implements IItemStack<T> {
     private readonly _amount: number;
 
     // convert CardQueryPayload to IItemStack<ICard>
-    public static fromCardQueryPayloadToItemStack(cardQueryPayload: CardQueryPayload): ItemStack<ICard> {
+    public static fromCardQueryPayloadToItemStack(cardQueryPayload: CardQueryPayload): IItemStack<ICard> {
         return new ItemStack<ICard>(Card.fromCardPayload(cardQueryPayload.item), cardQueryPayload.count);
     }
 
     // convert UserPackPayload to IItemStack<IPack>
-    public static fromUserPackPayloadToItemStack(packPayload: UserPackPayload, rest: IRest): ItemStack<IPack> {
+    public static fromUserPackPayloadToItemStack(packPayload: UserPackPayload, rest: IRest): IItemStack<IPack> {
         return new ItemStack<IPack>(Pack.fromPackDetailsPayload(packPayload.item, rest), packPayload.count);
     }
 
     // convert WalletPayload to IItemStack<ICurrency>
-    public static fromWalletPayloadToItemStack(walletPayload: WalletPayload): ItemStack<ICurrency> {
-        return new ItemStack<ICurrency>(new Currency(walletPayload.coins), 1);
+    public static fromWalletPayloadToItemStack(walletPayload: WalletPayload): IItemStack<ICurrency> {
+        return new ItemStack<ICurrency>(new Currency(1), walletPayload.coins);
     }
 
     constructor(item: T, amount: number) {
