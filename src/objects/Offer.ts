@@ -46,8 +46,15 @@ export class Offer implements IOffer {
   }
 
   public static fromOfferPayload(payload: OfferPayload, rest: IRest): Offer {
-    let give: IItemStack<ICurrency | ICard | IPack>[] = [];
-    let receive: ItemStack<ICurrency | ICard | IPack>;
+    let give: IItemStack<ICurrency | ICard | IPack>[] = payload.give.map((item) => {
+      return new ItemStack<ICurrency | ICard | IPack>(
+        this.fromOfferItemPayload(item, rest),
+        item.count
+      )});
+    let receive: ItemStack<ICurrency | ICard | IPack> = new ItemStack<ICurrency | ICard | IPack>(
+      this.fromOfferItemPayload(payload.receive, rest),
+      payload.receive.count
+    );
     return new Offer(payload.id, receive, give, rest);
   }
 
