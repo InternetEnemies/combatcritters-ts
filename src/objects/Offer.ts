@@ -21,9 +21,10 @@ import {
   ItemType,
   Card as CardPayload ,
   Pack as PackPayload,
-  RepChange
+  RepChange,
+  CardQuery as CardQueryPayload
 } from "../rest/payloads";
-import { Routes } from "../rest/routes/market";
+import { Routes } from "../rest/routes/index";
 
 export class Offer implements IOffer {
   protected readonly _client: IClient;
@@ -80,11 +81,17 @@ export class Offer implements IOffer {
   public async compareUserItems(): Promise<
     IUserOfferState<IPack | ICard | ICurrency>
   > {
+    // get user owned cards, packs and currency
+    const userOwnedCards: CardQueryPayload = await this._client.rest.get(Routes.Cards.User.cards(this._client.user.id, ""));
+    const userOwnedPacks: PackPayload[] = await this._client.rest.get(Routes.Packs.User.packs(this._client.user.id));
+    const userOwnedCurrency: ICurrency[] = await this._client.rest.get(Routes.Wallet.User.wallet(this._client.user.id));
+
     
+    // compare user owned items with offer items and return missing items
   }
 
   public async accept(): Promise<IPurchaseStatus> {
-    const response: RepChange = await this._client.rest.post(Routes.purchaseOffer(this._vendorID, this._offerID),{});
+    const response: RepChange = await this._client.rest.post(Routes.Market.purchaseOffer(this._vendorID, this._offerID),{});
     return PurchaseStatus.fromRepChangePayload(response);
   }
 
