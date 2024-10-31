@@ -7,7 +7,7 @@ import {IClientComponentFactory} from "./IClientComponentFactory";
  */
 export class ClientComponentFactory implements IClientComponentFactory {
     getVendorManager(client: IClient): IVendorManager {
-        return new VendorManager(client.rest);
+        return new VendorManager(client);
     }
     getOffersManager(client: IClient): IOffersManager {
         return new OffersManager(client.rest);

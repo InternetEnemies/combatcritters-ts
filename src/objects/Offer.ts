@@ -22,7 +22,7 @@ import {
 } from "../rest/payloads";
 
 export class Offer implements IOffer {
-  protected readonly _rest: IRest;
+  protected readonly _client: IClient;
   protected readonly _offerID: number;
   protected readonly _receiveItem: IItemStack<ICurrency | ICard | IPack>;
   protected readonly _giveItem: IItemStack<ICurrency | ICard | IPack>[];
@@ -45,29 +45,30 @@ export class Offer implements IOffer {
     return itemObj;
   }
 
-  public static fromOfferPayload(payload: OfferPayload, rest: IRest): Offer {
+  public static fromOfferPayload(payload: OfferPayload, client: IClient): Offer {
     let give: IItemStack<ICurrency | ICard | IPack>[] = payload.give.map((item) => {
       return new ItemStack<ICurrency | ICard | IPack>(
-        this.fromOfferItemPayload(item, rest),
+        this.fromOfferItemPayload(item, client.rest),
         item.count
-      )});
+      )
+    });
     let receive: ItemStack<ICurrency | ICard | IPack> = new ItemStack<ICurrency | ICard | IPack>(
-      this.fromOfferItemPayload(payload.receive, rest),
+      this.fromOfferItemPayload(payload.receive, client.rest),
       payload.receive.count
     );
-    return new Offer(payload.id, receive, give, rest);
+    return new Offer(payload.id, receive, give, client);
   }
 
   constructor(
     offerID: number,
     receiveItems: IItemStack<ICurrency | ICard | IPack>,
     giveItem: IItemStack<ICurrency | ICard | IPack>[],
-    rest: IRest
+    client: IClient
   ) {
     this._offerID = offerID;
     this._receiveItem = receiveItems;
     this._giveItem = giveItem;
-    this._rest = rest;
+    this._client = client;
   }
 
   public async compareUserItems(): Promise<

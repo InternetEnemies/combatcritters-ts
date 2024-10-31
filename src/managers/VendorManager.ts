@@ -3,16 +3,16 @@ import { IVendor } from "../index";
 import { IVendorManager } from "./index";
 
 export class VendorManager implements IVendorManager {
-    private readonly _rest: IRest;
+    private readonly _client: IClient;
 
-    constructor(rest: IRest) {
-        this._rest = rest;
+    constructor(client: IClient) {
+        this._client = client;
     }
 
     public async getVendor(id: number): Promise<IVendor> {
         //TODO: Implement this method
         // https://github.com/InternetEnemies/combatcritters-ts/issues/65
-        const vendor = new Vendor(id, "Vendor", new VendorReputation(0, 0, 0, 0),"","",this._rest);
+        const vendor = new Vendor(id, "Vendor", new VendorReputation(0, 0, 0, 0),"","",this._client);
         return vendor;
     }
 
@@ -21,7 +21,7 @@ export class VendorManager implements IVendorManager {
         // https://github.com/InternetEnemies/combatcritters-ts/issues/65
         const vendors: IVendor[] = [];
         for(let i = 0; i < 20; i++) {
-            vendors[i] = new Vendor(i, "Vendor", new VendorReputation(0, 0, 0, 0),"","",this._rest);
+            vendors[i] = new Vendor(i, "Vendor", new VendorReputation(0, 0, 0, 0),"","",this._client);
         }
         return vendors;
     }

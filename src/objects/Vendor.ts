@@ -15,7 +15,7 @@ export class Vendor implements IVendor {
   private readonly _reputation: IVendorReputation;
   private readonly _image: string;
   private readonly _refrest_time: string;
-  private readonly _rest: IRest;
+  private readonly _client: IClient;
 
   public static fromVendorPayload(payload: VendorPayload): Vendor {
     //TODO: Implement this method
@@ -29,14 +29,14 @@ export class Vendor implements IVendor {
     reputation: IVendorReputation,
     image: string,
     refrest_time: string,
-    rest: IRest
+    client: IClient
   ) {
     this._id = id;
     this._name = name;
     this._reputation = reputation;
     this._image = image;
     this._refrest_time = refrest_time;
-    this._rest = rest;
+    this._client = client;
   }
 
   //TODO: Delete this
@@ -62,7 +62,7 @@ export class Vendor implements IVendor {
   // https://github.com/InternetEnemies/combatcritters-ts/issues/63
   private getPack(): ItemStack<Pack> {
     return new ItemStack(
-      new Pack("/assets/images/pack.png", "Into the Robverse", 2, this._rest),
+      new Pack("/assets/images/pack.png", "Into the Robverse", 2, this._client.rest),
       1
     );
   }
@@ -89,15 +89,15 @@ export class Vendor implements IVendor {
   // https://github.com/InternetEnemies/combatcritters-ts/issues/63
   private generateOffers(): Offer[] {
     const offers: Offer[] = [];
-    offers.push(new Offer(0, this.getCard(), this.getRequired(), this._rest));
-    offers.push(new Offer(1, this.getCard(), this.getRequired(), this._rest));
-    offers.push(new Offer(3, this.getCard(), this.getRequired(), this._rest));
-    offers.push(new Offer(4, this.getCard(), this.getRequired(), this._rest));
-    offers.push(new Offer(5, this.getCard(), this.getRequired(), this._rest));
-    offers.push(new Offer(6, this.getPack(), this.getRequired(), this._rest));
-    offers.push(new Offer(7, this.getPack(), this.getRequired(), this._rest));
-    offers.push(new Offer(8, this.getPack(), this.getRequired(), this._rest));
-    offers.push(new Offer(0, this.getPack(), this.getRequired(), this._rest));
+    offers.push(new Offer(0, this.getCard(), this.getRequired(), this._client));
+    offers.push(new Offer(1, this.getCard(), this.getRequired(), this._client));
+    offers.push(new Offer(3, this.getCard(), this.getRequired(), this._client));
+    offers.push(new Offer(4, this.getCard(), this.getRequired(), this._client));
+    offers.push(new Offer(5, this.getCard(), this.getRequired(), this._client));
+    offers.push(new Offer(6, this.getPack(), this.getRequired(), this._client));
+    offers.push(new Offer(7, this.getPack(), this.getRequired(), this._client));
+    offers.push(new Offer(8, this.getPack(), this.getRequired(), this._client));
+    offers.push(new Offer(0, this.getPack(), this.getRequired(), this._client));
     return offers;
   }
 
@@ -119,7 +119,7 @@ export class Vendor implements IVendor {
           0,
           this.getCard(),
           this.getRequired(),
-          this._rest
+          this._client
         )
       );
     }
@@ -132,7 +132,7 @@ export class Vendor implements IVendor {
           0,
           this.getPack(),
           this.getRequired(),
-          this._rest
+          this._client
         )
       );
     }

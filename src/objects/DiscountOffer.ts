@@ -1,4 +1,4 @@
-import { IRest } from "..";
+import { IClient, IRest } from "..";
 import { OfferDiscount } from "../rest/payloads";
 import { ICard, ICurrency, IDiscountOffer, IItemStack, IPack, IUserOfferState, Offer } from "./index";
 
@@ -19,8 +19,8 @@ export class DiscountOffer extends Offer implements IDiscountOffer {
                 offerID: number, 
                 receiveItem: IItemStack<ICurrency | ICard | IPack>, 
                 originalGive: IItemStack<ICurrency | ICard | IPack>[], 
-                rest: IRest) {
-        super(offerID, receiveItem, originalGive, rest);
+                client: IClient) {
+        super(offerID, receiveItem, originalGive, client);
         this._discountedGive = discountedGive;
         this._discount = discount;
         this._discountID = discountID;
