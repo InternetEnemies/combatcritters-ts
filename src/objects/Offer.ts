@@ -27,14 +27,14 @@ export class Offer implements IOffer {
   protected readonly _receiveItem: IItemStack<ICurrency | ICard | IPack>;
   protected readonly _giveItem: IItemStack<ICurrency | ICard | IPack>[];
 
-  public static fromOfferItemPayload(payload: OfferItemPayload, rest:IRest): Card | Pack | Currency {
+  public static fromOfferItemPayload(payload: OfferItemPayload, rest: IRest): ICard | IPack | ICurrency {
     let itemObj: ICard | IPack | ICurrency;
     switch (payload.type) {
       case ItemType.CARD:
         itemObj = Card.fromCardPayload(payload.item as CardPayload);
         break;
       case ItemType.PACK:
-        itemObj = Pack.fromPackDetailsPayload(payload.item as PackPayload, this._rest);
+        itemObj = Pack.fromPackDetailsPayload(payload.item as PackPayload, rest);
         break;
       case ItemType.CURRENCY:
         itemObj = new Currency(payload.count);
@@ -54,7 +54,7 @@ export class Offer implements IOffer {
   constructor(
     offerID: number,
     receiveItems: IItemStack<ICurrency | ICard | IPack>,
-    giveItem: IItemStack<ICurrency | ICard | IPack>[].
+    giveItem: IItemStack<ICurrency | ICard | IPack>[],
     rest: IRest
   ) {
     this._offerID = offerID;
