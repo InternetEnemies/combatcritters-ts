@@ -2,7 +2,7 @@ import {IClient} from "./IClient";
 import {ICardsManager, IOffersManager, IVendorManager} from "./index";
 import {Rest, IRest, Routes} from "./rest";
 import {DeckValidator, IDeckValidator, IUser} from "./objects";
-import {DeckRules, UserPayload} from "./rest/payloads";
+import {DeckRules, UserPayload, CardQuery as CardQueryPayload } from "./rest/payloads";
 import {User} from "./objects/User";
 import {IClientComponentFactory} from "./IClientComponentFactory";
 import {ClientComponentFactory} from "./ClientComponentFactory";
@@ -40,7 +40,7 @@ export class Client implements IClient{
         const userRes:UserPayload = await this.rest.post(Routes.Auth.login(),{ username, password });
         const rules:DeckRules = await this.rest.get(Routes.Decks.validity());
         this._user = User.fromUserPayload(this, userRes);
-        const userCards = await this.rest.get(Routes.Cards.User.cards(this._user.id, ""));
+        const userCards:CardQueryPayload[] = await this.rest.get(Routes.Cards.User.cards(this._user.id, ""));
         this._deckValidator = DeckValidator.from_DeckRules_UserCards(rules, userCards);
         console.debug(`logged in as ${userRes.username}`);
     }
