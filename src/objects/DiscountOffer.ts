@@ -1,17 +1,31 @@
 import { IClient, IRest } from "..";
 import { OfferDiscount } from "../rest/payloads";
-import { ICard, ICurrency, IDiscountOffer, IItemStack, IPack, IUserOfferState, Offer } from "./index";
+import { ICard, ICurrency, IDiscountOffer, IItemStack, IPack, ItemStack, IUserOfferState, Offer } from "./index";
 
 export class DiscountOffer extends Offer implements IDiscountOffer {
     private readonly _discountedGive: IItemStack<ICurrency | ICard | IPack>[];
     private readonly _discount: number;
     private readonly _discountID: number;
 
-    public static fromDiscountOfferPayload(payload: OfferDiscount): DiscountOffer {
-        //TODO: Implement this method
-        // https://github.com/InternetEnemies/combatcritters-ts/issues/62
-        throw new Error("Method not implemented.");
-    }
+    public static fromDiscountOfferPayload(payload: OfferDiscount, vendorID: number, client: IClient): DiscountOffer {
+        let dicountGive: IItemStack<ICurrency | ICard | IPack>[] = payload.discounted_give.map((item) => {
+            return new ItemStack<ICurrency | ICard | IPack>(
+                Offer.fromOfferItemPayload(item, client.rest),
+                item.count
+            )
+        });
+        let give: IItemStack<ICurrency | ICard | IPack>[] = payload.parent_offer.give.map((item) => {
+            return new ItemStack<ICurrency | ICard | IPack>(
+              this.fromOfferItemPayload(item, client.rest),
+              item.count
+            )
+        });
+        let receive: ItemStack<ICurrency | ICard | IPack> = new ItemStack<ICurrency | ICard | IPack>(
+            this.fromOfferItemPayload(payload.parent_offer.receive, client.rest),
+            payload.parent_offer.receive.count
+        );
+        return new DiscountOffer(dicountGive, payload.discount, payload.discountid, payload.parent_offer.id, vendorID, receive, give, client);
+;    }
 
     constructor(discountedGive: IItemStack<ICurrency | ICard | IPack>[], 
                 discount: number, 
@@ -28,9 +42,7 @@ export class DiscountOffer extends Offer implements IDiscountOffer {
     }
 
     public override compareUserItems(): Promise<IUserOfferState<ICurrency | ICard | IPack>> {
-         //TODO: Implement this method
-        // https://github.com/InternetEnemies/combatcritters-ts/issues/62
-        throw new Error("Method not implemented.");
+        return this.compareItems(this._discountedGive);
     }
 
     public get discountedGive(): IItemStack<ICurrency | ICard | IPack>[] {

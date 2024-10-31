@@ -10,7 +10,7 @@ export class ClientComponentFactory implements IClientComponentFactory {
         return new VendorManager(client);
     }
     getOffersManager(client: IClient): IOffersManager {
-        return new OffersManager(client.rest);
+        return new OffersManager(client);
     }
     getCardsManager(client:IClient): ICardsManager {
         return new CardsManager(client);
