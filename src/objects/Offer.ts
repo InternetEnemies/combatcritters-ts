@@ -80,26 +80,7 @@ export class Offer implements IOffer {
   public async compareUserItems(): Promise<
     IUserOfferState<IPack | ICard | ICurrency>
   > {
-    //TODO: Implement this method
-    // https://github.com/InternetEnemies/combatcritters-ts/issues/61
-    const tradeItems: IUserOfferItem<IPack | ICard | ICurrency>[] = [];
-    for (let i = 0; i < this.giveItem.length; i++) {
-      if (i % 2 === 0) {
-        tradeItems.push({
-          giveItem: this._giveItem[i],
-          userItem: this._giveItem[i],
-        });
-      } else {
-        tradeItems.push({
-          giveItem: this._giveItem[i],
-          userItem: new ItemStack<IPack | ICurrency | ICard>(
-            this._giveItem[i].getItem(),
-            this._giveItem[i].getAmount() - 1
-          ),
-        });
-      }
-    }
-    return {userOfferItems:tradeItems, canPurchase:(Math.random()<.5)};
+    
   }
 
   public async accept(): Promise<IPurchaseStatus> {
