@@ -1,10 +1,10 @@
 import { IClient } from "../IClient";
-import { IRest } from "../rest";
-import { Vendor as VendorPayload } from "../rest/payloads";
+import { IRest, Routes } from "../rest";
+import { Vendor as VendorPayload, Offer as OfferPayload, OfferDiscount as OfferDiscountPayload } from "../rest/payloads";
 import { Card, CardCritter } from "./Card";
 import { Currency } from "./Currency";
 import { DiscountOffer } from "./DiscountOffer";
-import { IDiscountOffer, IOffer, IVendor, IVendorReputation } from "./interfaces";
+import { IDiscountOffer, IOffer, ISpecialOffer, IVendor, IVendorReputation } from "./interfaces";
 import { ItemStack } from "./ItemStack";
 import { Offer } from "./Offer";
 import { Pack } from "./Pack";
@@ -45,113 +45,27 @@ export class Vendor implements IVendor {
     this._client = client;
   }
 
-  //TODO: Delete this
-  // https://github.com/InternetEnemies/combatcritters-ts/issues/63
-  private getCard(): ItemStack<Card> {
-    return new ItemStack(
-      new CardCritter(
-        1,
-        "UglyMan, the Hideous Hero",
-        3,
-        2,
-        "",
-        "The ugliest man everrrrrrr",
-        10,
-        8,
-        [0, 1, 2]
-      ),
-      1
-    );
-  }
-
-  //TODO: Delete this
-  // https://github.com/InternetEnemies/combatcritters-ts/issues/63
-  private getPack(): ItemStack<Pack> {
-    return new ItemStack(
-      new Pack("/assets/images/pack.png", "Into the Robverse", 2, this._client.rest),
-      1
-    );
-  }
-
-  //TODO: Delete this
-  // https://github.com/InternetEnemies/combatcritters-ts/issues/63
-  private getCurrency(): ItemStack<Currency> {
-    return new ItemStack(new Currency(9), 1);
-  }
-
-  //TODO: Delete this
-  // https://github.com/InternetEnemies/combatcritters-ts/issues/63
-  private getRequired(): ItemStack<Pack | Currency | Card>[] {
-    const required: ItemStack<Pack | Currency | Card>[] = [];
-    required.push(this.getCard());
-    required.push(this.getCard());
-    required.push(this.getCurrency());
-    required.push(this.getPack());
-    required.push(this.getCard());
-    return required;
-  }
-
-  //TODO: Delete this
-  // https://github.com/InternetEnemies/combatcritters-ts/issues/63
-  private generateOffers(): Offer[] {
-    const offers: Offer[] = [];
-    offers.push(new Offer(0, this._id, this.getCard(), this.getRequired(), this._client));
-    offers.push(new Offer(1, this._id, this.getCard(), this.getRequired(), this._client));
-    offers.push(new Offer(3, this._id, this.getCard(), this.getRequired(), this._client));
-    offers.push(new Offer(4, this._id, this.getCard(), this.getRequired(), this._client));
-    offers.push(new Offer(5, this._id, this.getCard(), this.getRequired(), this._client));
-    offers.push(new Offer(6, this._id, this.getPack(), this.getRequired(), this._client));
-    offers.push(new Offer(7, this._id, this.getPack(), this.getRequired(), this._client));
-    offers.push(new Offer(8, this._id, this.getPack(), this.getRequired(), this._client));
-    offers.push(new Offer(0, this._id, this.getPack(), this.getRequired(), this._client));
-    return offers;
-  }
-
   public async getOffers(): Promise<IOffer[]> {
-    //TODO: Implement this method
-    // https://github.com/InternetEnemies/combatcritters-ts/issues/63
-    return this.generateOffers();
+    const response:OfferPayload[] = await this._client.rest.get(Routes.Market.vendorOffers(this._id));
+    return response.map((offer) => {
+      return Offer.fromOfferPayload(offer, this._id, this._client);
+    });
   }
-  public async discountOffers(): Promise<IDiscountOffer[]> {
-    //TODO: Implement this method
-    // https://github.com/InternetEnemies/combatcritters-ts/issues/63
-    const discountOffers: DiscountOffer[] = [];
-    for (let i = 0; i < 5; i++) {
-      discountOffers.push(
-        new DiscountOffer(
-          this.getRequired(),
-          75,
-          1,
-          0,
-          0,
-          this.getCard(),
-          this.getRequired(),
-          this._client
-        )
-      );
-    }
-    for (let i = 0; i < 5; i++) {
-      discountOffers.push(
-        new DiscountOffer(
-          this.getRequired(),
-          75,
-          1,
-          0,
-          0,
-          this.getPack(),
-          this.getRequired(),
-          this._client
-        )
-      );
-    }
 
-    return discountOffers;
+  public async discountOffers(): Promise<IDiscountOffer[]> {
+    const response:OfferDiscountPayload[] = await this._client.rest.get(Routes.Market.vendorDiscounts(this._id));
+    return response.map((offer) => {
+      return DiscountOffer.fromDiscountOfferPayload(offer, this._id, this._client);
+    });
   }
-  public async getSpecialOffers(): Promise<IOffer[]> {
-    //TODO: Implement this method
-    // https://github.com/InternetEnemies/combatcritters-ts/issues/63
-    return this.generateOffers();
+
+  public async getSpecialOffers(): Promise<ISpecialOffer[]> {
+    const response:OfferPayload[] = await this._client.rest.get(Routes.Market.vendorSpecialOffers(this._id));
+    return response.map((offer) => {
+      return Offer.fromOfferPayload(offer, this._id, this._client);
+    });
   }
+
   public async purchaseOffer(offer: IOffer): Promise<void> {
     //TODO: Implement this method
     // https://github.com/InternetEnemies/combatcritters-ts/issues/63

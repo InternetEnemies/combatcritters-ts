@@ -1,4 +1,4 @@
-import { IDiscountOffer, IOffer, IVendorReputation } from "./index";
+import { IDiscountOffer, IOffer, ISpecialOffer, IVendorReputation } from "./index";
 
 export interface IVendor {
     id: number;
@@ -20,7 +20,7 @@ export interface IVendor {
      * Get special offers from the vendor
      * @returns list of special offers from the vendor
      */
-    getSpecialOffers(): Promise<IOffer[]>;
+    getSpecialOffers(): Promise<ISpecialOffer[]>;
     /**
      * Purchase an offer from the vendor
      * @param offer the offer to purchase

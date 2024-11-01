@@ -56,7 +56,7 @@ export class Offer implements IOffer {
     return itemObj;
   }
 
-  public static fromOfferPayload(payload: OfferPayload, vendorID: number, client: IClient): Offer {
+  public static fromOfferPayload(payload: OfferPayload, vendorID: number, client: IClient): IOffer {
     let give: IItemStack<ICurrency | ICard | IPack>[] = payload.give.map((item) => {
       return new ItemStack<ICurrency | ICard | IPack>(
         this.fromOfferItemPayload(item, client.rest),
