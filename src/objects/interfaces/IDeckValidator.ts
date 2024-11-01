@@ -10,4 +10,9 @@ export interface IDeckValidator {
      * @returns IDeckValidity the validity of the deck
      */
     validate(cards: ICard[]): Promise<IDeckValidity>;
+
+    /**
+     * refreshes the local cards in the validator
+     */
+    refresh():void;
 }

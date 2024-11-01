@@ -1,4 +1,21 @@
-import { CardItem, CardQuery, CardRarity, DeckValidity, ICard, ICardsManager, IClient, IDeck, IDeckValidator, IDeckValidity, IItemStack, IRest, ItemStack, Routes, UserCardsManager, } from "../index";
+import {
+    CardItem,
+    CardQuery,
+    CardQueryBuilder,
+    CardRarity,
+    DeckValidity,
+    ICard,
+    ICardsManager,
+    IClient,
+    IDeck,
+    IDeckValidator,
+    IDeckValidity,
+    IItemStack,
+    IRest,
+    ItemStack,
+    Routes,
+    UserCardsManager,
+} from "../index";
 import { DeckRules, DeckIssue, CardQuery as CardQueryPayload } from "../rest/payloads";
 
 export class DeckValidator implements IDeckValidator {
@@ -18,15 +35,19 @@ export class DeckValidator implements IDeckValidator {
     constructor(client: IClient) {
         this._client = client;
         this._rules = DeckValidator.getRules(this._client);
-        this._ownedCards = UserCardsManager.getUserCard(this._client);
+        this._ownedCards = this.getCards()
         this.issues = [];
+    }
+
+    refresh(): void {
+        this._ownedCards = this.getCards();
     }
 
     public async validate(cards: ICard[]): Promise<IDeckValidity> {
         this.issues = [];
-        this.checkTotalCards(cards);
-        this.checkItemCount(cards);
-        this.checkRarity(cards);
+        await this.checkTotalCards(cards);
+        await this.checkItemCount(cards);
+        await this.checkRarity(cards);
         this.checkOwnership(cards);
         return new DeckValidity(this.issues.length === 0, this.issues);
     }
@@ -111,5 +132,11 @@ export class DeckValidator implements IDeckValidator {
 
     public static async getRules(client: IClient): Promise<DeckRules> {
         return await client.rest.get(Routes.Decks.validity());
+    }
+    
+    public async getCards():Promise<IItemStack<ICard>[]> {
+        let query:CardQueryBuilder = new CardQueryBuilder()
+        query.setOwned()
+        return this._client.user.cards.getCards(query.build());       
     }
 }
