@@ -66,11 +66,6 @@ export class Vendor implements IVendor {
     });
   }
 
-  public async purchaseOffer(offer: IOffer): Promise<void> {
-    //TODO: Implement this method
-    // https://github.com/InternetEnemies/combatcritters-ts/issues/63
-  }
-
   public get id(): number {
     return this._id;
   }
