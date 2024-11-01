@@ -8,6 +8,7 @@ import { IDiscountOffer, IOffer, IVendor, IVendorReputation } from "./interfaces
 import { ItemStack } from "./ItemStack";
 import { Offer } from "./Offer";
 import { Pack } from "./Pack";
+import { VendorReputation } from "./VendorReputation";
 
 export class Vendor implements IVendor {
   private readonly _id: number;
@@ -17,10 +18,15 @@ export class Vendor implements IVendor {
   private readonly _refrest_time: string;
   private readonly _client: IClient;
 
-  public static fromVendorPayload(payload: VendorPayload): Vendor {
-    //TODO: Implement this method
-    // https://github.com/InternetEnemies/combatcritters-ts/issues/63
-    throw new Error("Method not implemented.");
+  public static fromVendorPayload(payload: VendorPayload, client: IClient): Vendor {
+    return new Vendor(
+      payload.id,
+      payload.name,
+      VendorReputation.fromVendorReputationPayload(payload.reputation),
+      payload.image,
+      payload.refresh_time,
+      client
+    ); 
   }
 
   constructor(
