@@ -30,10 +30,10 @@ export class DeckValidator implements IDeckValidator {
 
     constructor(client: IClient, user:IUser) {
         this._client = client;
-        this._rules = DeckValidator.getRules(this._client);
-        this._ownedCards = this.getCards()
-        this.issues = [];
         this._user = user;
+        this._rules = DeckValidator.getRules(this._client);
+        this.issues = [];
+        this._ownedCards = this.getCards()
     }
 
     refresh(): void {
