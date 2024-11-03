@@ -23,7 +23,17 @@ export class DeckValidator implements IDeckValidator {
     public static countCards(cards: ICard[]): ItemStack<ICard>[] {
         let cardStacks: ItemStack<ICard>[] = [];
         for (let card of cards) {
-            cardStacks.push(new ItemStack(card, 1));
+            let found: boolean = false;
+            for (let cardStack of cardStacks) {
+                if (cardStack.getItem().cardid === card.cardid) {
+                    cardStacks.push(new ItemStack(card, cardStack.getAmount() + 1));
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                cardStacks.push(new ItemStack(card, 1));
+            }
         }
         return cardStacks;
     }
@@ -45,7 +55,7 @@ export class DeckValidator implements IDeckValidator {
         await this.checkTotalCards(cards);
         await this.checkItemCount(cards);
         await this.checkRarity(cards);
-        this.checkOwnership(cards);
+        await this.checkOwnership(cards);
         return new DeckValidity(this.issues.length === 0, this.issues);
     }
 
@@ -102,12 +112,9 @@ export class DeckValidator implements IDeckValidator {
      * check that the user owns the cards in the deck
      * @param cards deck to validate
     */
-    private checkOwnership(cards: ICard[]): void {
+    private async checkOwnership(cards: ICard[]): Promise<void> {
         let cardsStack: ItemStack<ICard>[] = DeckValidator.countCards(cards);
-        let not_owned = cardsStack.filter(this.filterCards.bind(this));
-        for (let card of not_owned) {
-            this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", card.getItem().name));
-        }
+        cardsStack.filter(await this.filterCards.bind(this));
     }
 
     /**
@@ -115,15 +122,18 @@ export class DeckValidator implements IDeckValidator {
      * @param card card to check
      */
     private async filterCards(card: IItemStack<ICard>): Promise<boolean> {
-        for (let ownedCard of await this._ownedCards) {
+        let localOwnedCards = await this._ownedCards;
+        for (let ownedCard of localOwnedCards) {
             if (ownedCard.getItem().cardid === card.getItem().cardid) {
                 if (ownedCard.getAmount() < card.getAmount()) {
+                    this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", card.getItem().name).replace("%d", ownedCard.getAmount().toString()));
                     return true;
                 }else{
                     return false;
                 }
             }
         }
+        this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", card.getItem().name).replace("%d", "0"));
         return true;
     }
 
