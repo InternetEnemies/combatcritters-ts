@@ -9,14 +9,10 @@ export class DeckManager implements IDeckManager {
     private readonly _user: IUser;
     private _validator!: IDeckValidator;
 
-    constructor(client: IClient, user: IUser, validator?: IDeckValidator) {
+    constructor(client: IClient, user: IUser, validator: IDeckValidator) {
         this._client = client;
         this._user = user;
-        if (validator) {
-            this._validator = validator;
-        }else{
-            this._validator = new DeckValidator(this._client,user);
-        }
+        this._validator = validator;
     }
 
     public async getDecks(): Promise<IDeck[]> {
