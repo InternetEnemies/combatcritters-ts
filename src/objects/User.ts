@@ -2,7 +2,7 @@ import {DeckManager, FriendsManager, ICardsManager, IDeckManager, IFriendsManage
 import {IUser, IProfile} from "./interfaces";
 import {UserPayload} from "../rest/payloads";
 import {IClient} from "../IClient";
-import {Profile} from "./index";
+import {DeckValidator, Profile} from "./index";
 
 
 export class User implements IUser {
@@ -26,14 +26,14 @@ export class User implements IUser {
     
     constructor(client:IClient, username: string, id: number) {
         this.client = client;
-        this._decks = new DeckManager(client, this);
+        this._id = id;
         this._cards = new UserCardsManager(client, this);
+        this._decks = new DeckManager(client, this, new DeckValidator(client, this._cards));
         this._friends = new FriendsManager(client, this);
         this._packs = new PacksManager(client, this);
         this._currency = new UserCurrencyManager(client, this);
         this._profile = new Profile(client, this);
         this._username = username;
-        this._id = id;
     }
     
     

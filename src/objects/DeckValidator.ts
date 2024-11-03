@@ -1,33 +1,61 @@
-import { CardItem, CardQuery, CardRarity, DeckValidity, ICard, ICardsManager, IClient, IDeck, IDeckValidator, IDeckValidity, IItemStack, IRest, ItemStack, Routes, UserCardsManager, } from "../index";
+import {
+    CardItem,
+    CardQueryBuilder,
+    CardRarity,
+    DeckValidity,
+    ICard,
+    IClient,
+    IDeckValidator,
+    IDeckValidity,
+    IItemStack,
+    ItemStack, IUser, IUserCardsManager,
+    Routes,
+} from "../index";
 import { DeckRules, DeckIssue, CardQuery as CardQueryPayload } from "../rest/payloads";
 
 export class DeckValidator implements IDeckValidator {
     private _ownedCards!: Promise<IItemStack<ICard>[]>;
     private _rules: Promise<DeckRules>;
     private _client: IClient;
+    private _userCards: IUserCardsManager;
     private issues: Array<string>;
 
     public static countCards(cards: ICard[]): ItemStack<ICard>[] {
         let cardStacks: ItemStack<ICard>[] = [];
         for (let card of cards) {
-            cardStacks.push(new ItemStack(card, 1));
+            let found: boolean = false;
+            for (let cardStack of cardStacks) {
+                if (cardStack.getItem().cardid === card.cardid) {
+                    cardStacks.push(new ItemStack(card, cardStack.getAmount() + 1));
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                cardStacks.push(new ItemStack(card, 1));
+            }
         }
         return cardStacks;
     }
 
-    constructor(client: IClient) {
+    constructor(client: IClient, userCards:IUserCardsManager) {
         this._client = client;
+        this._userCards = userCards;
         this._rules = DeckValidator.getRules(this._client);
-        this._ownedCards = UserCardsManager.getUserCard(this._client);
         this.issues = [];
+        this._ownedCards = this.getCards()
+    }
+
+    refresh(): void {
+        this._ownedCards = this.getCards();
     }
 
     public async validate(cards: ICard[]): Promise<IDeckValidity> {
         this.issues = [];
-        this.checkTotalCards(cards);
-        this.checkItemCount(cards);
-        this.checkRarity(cards);
-        this.checkOwnership(cards);
+        await this.checkTotalCards(cards);
+        await this.checkItemCount(cards);
+        await this.checkRarity(cards);
+        await this.checkOwnership(cards);
         return new DeckValidity(this.issues.length === 0, this.issues);
     }
 
@@ -84,12 +112,9 @@ export class DeckValidator implements IDeckValidator {
      * check that the user owns the cards in the deck
      * @param cards deck to validate
     */
-    private checkOwnership(cards: ICard[]): void {
+    private async checkOwnership(cards: ICard[]): Promise<void> {
         let cardsStack: ItemStack<ICard>[] = DeckValidator.countCards(cards);
-        let not_owned = cardsStack.filter(this.filterCards.bind(this));
-        for (let card of not_owned) {
-            this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", card.getItem().name));
-        }
+        cardsStack.filter(await this.filterCards.bind(this));
     }
 
     /**
@@ -97,19 +122,28 @@ export class DeckValidator implements IDeckValidator {
      * @param card card to check
      */
     private async filterCards(card: IItemStack<ICard>): Promise<boolean> {
-        for (let ownedCard of await this._ownedCards) {
+        let localOwnedCards = await this._ownedCards;
+        for (let ownedCard of localOwnedCards) {
             if (ownedCard.getItem().cardid === card.getItem().cardid) {
                 if (ownedCard.getAmount() < card.getAmount()) {
+                    this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", card.getItem().name).replace("%d", ownedCard.getAmount().toString()));
                     return true;
                 }else{
                     return false;
                 }
             }
         }
+        this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", card.getItem().name).replace("%d", "0"));
         return true;
     }
 
     public static async getRules(client: IClient): Promise<DeckRules> {
         return await client.rest.get(Routes.Decks.validity());
+    }
+    
+    public async getCards():Promise<IItemStack<ICard>[]> {
+        let query:CardQueryBuilder = new CardQueryBuilder()
+        query.setOwned()
+        return this._userCards.getCards(query.build());       
     }
 }
