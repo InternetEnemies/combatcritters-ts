@@ -8,7 +8,7 @@ import {
     IDeckValidator,
     IDeckValidity,
     IItemStack,
-    ItemStack, IUser,
+    ItemStack, IUser, IUserCardsManager,
     Routes,
 } from "../index";
 import { DeckRules, DeckIssue, CardQuery as CardQueryPayload } from "../rest/payloads";
@@ -17,7 +17,7 @@ export class DeckValidator implements IDeckValidator {
     private _ownedCards!: Promise<IItemStack<ICard>[]>;
     private _rules: Promise<DeckRules>;
     private _client: IClient;
-    private _user: IUser;
+    private _userCards: IUserCardsManager;
     private issues: Array<string>;
 
     public static countCards(cards: ICard[]): ItemStack<ICard>[] {
@@ -28,9 +28,9 @@ export class DeckValidator implements IDeckValidator {
         return cardStacks;
     }
 
-    constructor(client: IClient, user:IUser) {
+    constructor(client: IClient, userCards:IUserCardsManager) {
         this._client = client;
-        this._user = user;
+        this._userCards = userCards;
         this._rules = DeckValidator.getRules(this._client);
         this.issues = [];
         this._ownedCards = this.getCards()
@@ -134,6 +134,6 @@ export class DeckValidator implements IDeckValidator {
     public async getCards():Promise<IItemStack<ICard>[]> {
         let query:CardQueryBuilder = new CardQueryBuilder()
         query.setOwned()
-        return this._user.cards.getCards(query.build());       
+        return this._userCards.getCards(query.build());       
     }
 }
