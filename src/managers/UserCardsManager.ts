@@ -21,11 +21,7 @@ export class UserCardsManager implements IUserCardsManager {
 
     public async getCards(query: ICardQuery): Promise<IItemStack<ICard>[]> {
         const userRes: CardQueryPayload[] = await this._client.rest.get(Routes.Cards.User.cards(this._user.id, query.getQueryString()));
-        const cardStacks: IItemStack<ICard>[] = [];
-        for (let i = 0; i < userRes.length; i++) {
-            cardStacks.push(new ItemStack(Card.fromCardPayload(userRes[i].item), userRes[i].count));
-        }
-        return cardStacks;
+        return CardQuery.fromCardQueryPayloads(userRes);
     }
 
     public getBuilder(): ICardQueryBuilder {
