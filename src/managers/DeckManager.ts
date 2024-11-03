@@ -15,7 +15,7 @@ export class DeckManager implements IDeckManager {
         if (validator) {
             this._validator = validator;
         }else{
-            this._validator = new DeckValidator(this._client);
+            this._validator = new DeckValidator(this._client,user);
         }
     }
 

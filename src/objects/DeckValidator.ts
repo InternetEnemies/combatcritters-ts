@@ -1,20 +1,15 @@
 import {
     CardItem,
-    CardQuery,
     CardQueryBuilder,
     CardRarity,
     DeckValidity,
     ICard,
-    ICardsManager,
     IClient,
-    IDeck,
     IDeckValidator,
     IDeckValidity,
     IItemStack,
-    IRest,
-    ItemStack,
+    ItemStack, IUser,
     Routes,
-    UserCardsManager,
 } from "../index";
 import { DeckRules, DeckIssue, CardQuery as CardQueryPayload } from "../rest/payloads";
 
@@ -22,6 +17,7 @@ export class DeckValidator implements IDeckValidator {
     private _ownedCards!: Promise<IItemStack<ICard>[]>;
     private _rules: Promise<DeckRules>;
     private _client: IClient;
+    private _user: IUser;
     private issues: Array<string>;
 
     public static countCards(cards: ICard[]): ItemStack<ICard>[] {
@@ -32,11 +28,12 @@ export class DeckValidator implements IDeckValidator {
         return cardStacks;
     }
 
-    constructor(client: IClient) {
+    constructor(client: IClient, user:IUser) {
         this._client = client;
         this._rules = DeckValidator.getRules(this._client);
         this._ownedCards = this.getCards()
         this.issues = [];
+        this._user = user;
     }
 
     refresh(): void {
@@ -137,6 +134,6 @@ export class DeckValidator implements IDeckValidator {
     public async getCards():Promise<IItemStack<ICard>[]> {
         let query:CardQueryBuilder = new CardQueryBuilder()
         query.setOwned()
-        return this._client.user.cards.getCards(query.build());       
+        return this._user.cards.getCards(query.build());       
     }
 }
