@@ -94,10 +94,11 @@ export class Offer implements IOffer {
     let response: RepChange;
     try {
       response = await this._client.rest.post(Routes.Market.purchaseOffer(this._vendorID, this._offerID), {});
+      return PurchaseStatus.fromRepChangePayload(response);
     }catch (error){
       console.error(error);
+      return new PurchaseStatus(false, this._vendorID, 0);
     }
-    return PurchaseStatus.fromRepChangePayload(response);
   }
 
   public get offerID(): number {
