@@ -27,9 +27,4 @@ export class UserCardsManager implements IUserCardsManager {
     public getBuilder(): ICardQueryBuilder {
         return new CardQueryBuilder();
     }
-
-    public static async getUserCard(client: IClient): Promise<IItemStack<ICard>[]> {
-        const userRes: CardQueryPayload[] = await client.rest.get(Routes.Cards.User.cards(client.user.id, ""));
-        return CardQuery.fromCardQueryPayloads(userRes);
-    }
 }
