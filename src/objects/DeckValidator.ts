@@ -8,10 +8,11 @@ import {
     IDeckValidator,
     IDeckValidity,
     IItemStack,
-    ItemStack, IUser, IUserCardsManager,
+    ItemStack,
+    IUserCardsManager,
     Routes,
 } from "../index";
-import { DeckRules, DeckIssue, CardQuery as CardQueryPayload } from "../rest/payloads";
+import {DeckIssue, DeckRules} from "../rest/payloads";
 
 export class DeckValidator implements IDeckValidator {
     private _ownedCards!: Promise<IItemStack<ICard>[]>;
@@ -24,9 +25,9 @@ export class DeckValidator implements IDeckValidator {
         let cardStacks: ItemStack<ICard>[] = [];
         for (let card of cards) {
             let found: boolean = false;
-            for (let cardStack of cardStacks) {
-                if (cardStack.getItem().cardid === card.cardid) {
-                    cardStacks.push(new ItemStack(card, cardStack.getAmount() + 1));
+            for (let i = 0; i < cardStacks.length; i++) {
+                if (cardStacks[i].getItem().cardid === card.cardid) {
+                    cardStacks[i] = new ItemStack(cardStacks[i].getItem(), cardStacks[i].getAmount() + 1);
                     found = true;
                     break;
                 }
@@ -123,17 +124,17 @@ export class DeckValidator implements IDeckValidator {
      */
     private async filterCards(card: IItemStack<ICard>): Promise<boolean> {
         let localOwnedCards = await this._ownedCards;
-        for (let ownedCard of localOwnedCards) {
-            if (ownedCard.getItem().cardid === card.getItem().cardid) {
-                if (ownedCard.getAmount() < card.getAmount()) {
-                    this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", card.getItem().name).replace("%d", ownedCard.getAmount().toString()));
+        for (let i = 0; i < localOwnedCards.length; i++) {
+            if (localOwnedCards[i].getItem().cardid === card.getItem().cardid) {
+                if (localOwnedCards[i].getAmount() < card.getAmount()) {
+                    this.issues.push(DeckIssue.STR_OWNED.replace("%d", localOwnedCards[i].getAmount().toString()).replace("%s", card.getItem().name).replace("%d", card.getAmount().toString()));
                     return true;
                 }else{
                     return false;
                 }
             }
         }
-        this.issues.push(DeckIssue.STR_OWNED.replace("%d", card.getAmount().toString()).replace("%s", card.getItem().name).replace("%d", "0"));
+        this.issues.push(DeckIssue.STR_OWNED.replace("%d", "0").replace("%s", card.getItem().name).replace("%d", card.getAmount().toString()));
         return true;
     }
 

@@ -1,7 +1,8 @@
-import { ICard, ICurrency, IItemStack, IPack, IUserOfferState } from "../index";
+import { ICard, ICurrency, IItemStack, IPack, IPurchaseStatus, IUserOfferState } from "../index";
 
 export interface IOffer {
   offerID: number;
+  vendorID: number;
   receiveItem: IItemStack<ICurrency | ICard | IPack>;
   giveItem: IItemStack<ICurrency | ICard | IPack>[];
 
@@ -13,7 +14,7 @@ export interface IOffer {
 
   /**
    * Accepts the offer.
-   * @returns whether or not the transaction was successful.
+   * @returns 
    */
-  accept(): Promise<void>;
+  accept(): Promise<IPurchaseStatus>;
 }
