@@ -92,14 +92,10 @@ export class Offer implements IOffer {
 
   public async accept(): Promise<IPurchaseStatus> {
     let response: RepChange;
-    try{
-      response = await this._client.rest.post(Routes.Market.purchaseOffer(this._vendorID, this._offerID),{});
-    }catch(error){
-      if(error.response.status === 400){
-        return new PurchaseStatus(false, this._vendorID, 0);
-      }else{
-        throw error;
-      }
+    try {
+      response = await this._client.rest.post(Routes.Market.purchaseOffer(this._vendorID, this._offerID), {});
+    }catch (error){
+      console.error(error);
     }
     return PurchaseStatus.fromRepChangePayload(response);
   }
