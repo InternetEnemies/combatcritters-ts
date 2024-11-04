@@ -1,5 +1,5 @@
 import {IClient} from "./IClient";
-import {ICardsManager, IOffersManager, IVendorManager} from "./index";
+import {ICardsManager, IVendorManager} from "./index";
 import {Rest, IRest, Routes} from "./rest";
 import {DeckValidator, IDeckValidator, IUser} from "./objects";
 import {DeckRules, UserPayload, CardQuery as CardQueryPayload } from "./rest/payloads";
@@ -11,7 +11,6 @@ export class Client implements IClient{
     
     private readonly _cards:ICardsManager;
     private readonly _vendors:IVendorManager;
-    private readonly _offers:IOffersManager;
     private readonly _rest: IRest;
     private _user!:IUser; //user is initialized late
 
@@ -32,7 +31,6 @@ export class Client implements IClient{
         this._cards = factory.getCardsManager(this);
         this._rest = rest;
         this._vendors = factory.getVendorManager(this);
-        this._offers = factory.getOffersManager(this);
     }
     
     public async login(username:string, password:string):Promise<void> {
@@ -54,9 +52,6 @@ export class Client implements IClient{
     }
     public get vendors(): IVendorManager{
         return this._vendors;
-    }
-    public get offers(): IOffersManager{
-        return this._offers;
     }
     public get rest(): IRest{
         return this._rest;

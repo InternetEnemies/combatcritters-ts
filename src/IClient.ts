@@ -1,5 +1,5 @@
 import {IDeck, IDeckValidator, IOffer, IUser} from "./objects";
-import {ICardsManager, IOffersManager, IVendorManager} from "./index";
+import {ICardsManager, IVendorManager} from "./index";
 import {IRest} from "./rest/IRest";
 
 export interface IClient {
@@ -9,7 +9,6 @@ export interface IClient {
     user:IUser;
     cards:ICardsManager;
     vendors:IVendorManager;
-    offers: IOffersManager;
     rest:IRest;
 
     /**
