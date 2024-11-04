@@ -39,3 +39,24 @@ Run the following command to install the necessary npm packages:
 ```bash
 npm install
 ```
+
+---
+
+## Running Integration Tests
+
+### 1. Set Environment 
+
+1. **Docker**
+   - Download and install Docker from [here](https://www.docker.com/products/docker-desktop).
+2. **WebStorm**
+   - Download and install WebStorm from [here](https://www.jetbrains.com/webstorm/download/).
+
+### 2. Open Docker
+
+Open Docker and ensure that it is running.
+
+### 3. Run Integration Tests
+
+Run the integration tests in test/integration using WebStorm
+
+Click the green play button next to the test file you want to run.
