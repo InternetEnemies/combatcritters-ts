@@ -24,6 +24,13 @@ describe("Vendor Manager", () => {
         assert.ok(offers.length > 0)
     })
 
+    it("Test offer.compareItems", async () => {
+        let vendors = await client.vendors.getVendors();
+        let offers1 = await vendors[0].getOffers();
+        let offerstate1 = await offers1[0].compareUserItems();
+        assert.ok(!offerstate1.canPurchase)
+    })
+
     it("User can look at vendor's discount offer", async () => {
         let vendors = await client.vendors.getVendors();
         let offers = await vendors[0].discountOffers();
