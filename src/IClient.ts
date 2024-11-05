@@ -14,7 +14,7 @@ export interface IClient {
     /**
      * Is the user logged in?
      */
-    isLoggedIn(): boolean;
+    isLoggedIn(): Promise<boolean>;
 
     /**
      * login as a user
