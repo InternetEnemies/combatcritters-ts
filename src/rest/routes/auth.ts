@@ -19,5 +19,13 @@ export const Routes = {
      */
     logout(){
         return "users/auth/logout" as const;
+    },
+
+    /**
+     * - GET
+     * get current user
+     */
+    getUser(){
+        return "users/auth/user" as const;
     }
 }

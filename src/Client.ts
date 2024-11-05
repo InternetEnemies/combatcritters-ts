@@ -42,8 +42,19 @@ export class Client implements IClient{
         await this.rest.post(Routes.Auth.register(),{ username, password });
     }
 
-    public isLoggedIn(): boolean {
-        return !!this._user;
+    public async isLoggedIn(): Promise<boolean> {
+        let loggedIn = !!this._user;
+        if(!loggedIn) {
+            try{
+                const userRes:UserPayload = await this.rest.get(Routes.Auth.getUser())
+                this._user = User.fromUserPayload(this, userRes);
+                loggedIn = true;
+            } catch (e) {
+                //not logged in (we are catching a 403 here)
+            }
+        }
+        
+        return loggedIn;
     }
     
     // properties
