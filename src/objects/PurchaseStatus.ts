@@ -1,30 +1,26 @@
-import { RepChange } from '../rest/payloads';
-import { IPurchaseStatus } from './interfaces/index';
+import {VendorReputation as VendorRepPayload} from '../rest/payloads';
+import {IPurchaseStatus, IVendorReputation} from './interfaces/index';
+import {VendorReputation} from "./VendorReputation";
 
 export class PurchaseStatus implements IPurchaseStatus{
     private readonly _isCompleted: boolean;
-    private readonly _vendorID: number;
-    private readonly _xpChange: number;
+    private _vendorRep: IVendorReputation;
 
-    public static fromRepChangePayload(payload: RepChange): PurchaseStatus {
+    public static fromRepPayload(payload: VendorRepPayload): PurchaseStatus {
         return new PurchaseStatus(true, 
-            payload.vendor, 
-            payload.amount);
+            VendorReputation.fromVendorReputationPayload(payload));
     }
 
-    constructor(isCompleted: boolean, vendorID: number, xpChange: number) {
+    constructor(isCompleted: boolean, vendorRep: IVendorReputation) {
         this._isCompleted = isCompleted;
-        this._vendorID = vendorID;
-        this._xpChange = xpChange;
+        this._vendorRep = vendorRep;
     }
 
     public get isCompleted(): boolean {
         return this._isCompleted;
     }
-    public get vendorID(): number {
-        return this._vendorID;
-    }
-    public get xpChange(): number {
-        return this._xpChange;
+    
+    public get reputation():IVendorReputation{
+        return this._vendorRep;
     }
 }

@@ -11,25 +11,26 @@ import {
   IRest,
   ItemStack,
   IUserOfferItem,
-  IUserOfferState,
+  IUserOfferState, IVendorReputation,
   Pack,
   PurchaseStatus,
   User,
   UserOfferItem,
   UserOfferState,
 } from "../index";
-import { 
-  Offer as OfferPayload, 
-  OfferItem as OfferItemPayload, 
+import {
+  Offer as OfferPayload,
+  OfferItem as OfferItemPayload,
   ItemType,
-  Card as CardPayload ,
+  Card as CardPayload,
   Pack as PackPayload,
   RepChange,
   CardQuery as CardQueryPayload,
   Wallet as WalletPayload,
-  UserPack as UserPackPayload
+  UserPack as UserPackPayload, VendorReputation
 } from "../rest/payloads";
 import { Routes } from "../rest/routes/index";
+import {NullRep} from "./NullRep";
 
 export class Offer implements IOffer {
   protected readonly _client: IClient;
@@ -91,13 +92,13 @@ export class Offer implements IOffer {
   }
 
   public async accept(): Promise<IPurchaseStatus> {
-    let response: RepChange;
+    let response: VendorReputation;
     try {
       response = await this._client.rest.post(Routes.Market.purchaseOffer(this._vendorID, this._offerID), {});
-      return PurchaseStatus.fromRepChangePayload(response);
+      return PurchaseStatus.fromRepPayload(response);
     }catch (error){
       console.error(error);
-      return new PurchaseStatus(false, this._vendorID, 0);
+      return new PurchaseStatus(false, new NullRep());
     }
   }
 
