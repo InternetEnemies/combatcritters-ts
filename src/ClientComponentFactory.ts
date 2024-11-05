@@ -1,4 +1,4 @@
-import {CardsManager, ICardsManager, IClient, IOffersManager, IVendorManager, OffersManager, VendorManager} from ".";
+import {CardsManager, ICardsManager, IClient, IVendorManager, VendorManager} from ".";
 import {IClientComponentFactory} from "./IClientComponentFactory";
 
 /**
@@ -8,9 +8,6 @@ import {IClientComponentFactory} from "./IClientComponentFactory";
 export class ClientComponentFactory implements IClientComponentFactory {
     getVendorManager(client: IClient): IVendorManager {
         return new VendorManager(client);
-    }
-    getOffersManager(client: IClient): IOffersManager {
-        return new OffersManager(client);
     }
     getCardsManager(client:IClient): ICardsManager {
         return new CardsManager(client);
