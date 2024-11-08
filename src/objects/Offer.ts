@@ -132,6 +132,7 @@ export class Offer implements IOffer {
     
     // compare user owned items with offer items and return missing items
     let missingItems: IUserOfferItem<IPack | ICard | ICurrency>[] = [];
+    let flag: boolean = true;
 
     // check if the user have enough cards to give
     for(let item of compareItems){
@@ -141,9 +142,14 @@ export class Offer implements IOffer {
         // if the user doesn't have the card, add it to the missing items
         if(userCard === undefined){
           missingItems.push(new UserOfferItem(item, new ItemStack(item.getItem(), 0)));
+          flag = false;
         }else if(!this.compareItemStacks(item, userCard)){
           // if the user have the card but not enough amount, add it to the missing items
           missingItems.push(new UserOfferItem(item, userCard));
+            flag = false;
+        }else{
+            // if the user have the card and enough amount, push the userCard to the missing items
+            missingItems.push(new UserOfferItem(item, userCard));
         }
       }else if(this.isIPack(item.getItem())){
         // find the first item that match with the packid
@@ -151,14 +157,20 @@ export class Offer implements IOffer {
         if(userPack === undefined){
           // if the user doesn't have the pack, add it to the missing items
           missingItems.push(new UserOfferItem(item, new ItemStack(item.getItem(), 0)));
+            flag = false;
         }else if(!this.compareItemStacks(item, userPack)){
           // if the user have the pack but not enough amount, add it to the missing items
           missingItems.push(new UserOfferItem(item, userPack));
+            flag = false;
+        }else{
+            // if the user have the pack and enough amount, push the userPack to the missing items
+            missingItems.push(new UserOfferItem(item, userPack));
         }
       }else if(this.isICurrency(item.getItem())){
         if(!this.compareItemStacks(item, userCurrencyStack)){
-          missingItems.push(new UserOfferItem(item, userCurrencyStack));
+          flag = false;
         }
+        missingItems.push(new UserOfferItem(item, userCurrencyStack));
       }else{
         // probably will never reach here
         // throw error if the item is not a card, pack or currency
@@ -166,7 +178,7 @@ export class Offer implements IOffer {
       }
     }
 
-    return new UserOfferState(missingItems, missingItems.length === 0);
+    return new UserOfferState(missingItems, flag);
   }
 
   private compareItemStacks(giveItem: IItemStack<IPack | ICard | ICurrency>, userItem: IItemStack<IPack | ICard | ICurrency>): boolean {
