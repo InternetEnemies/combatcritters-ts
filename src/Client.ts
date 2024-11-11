@@ -6,8 +6,13 @@ import {DeckRules, UserPayload, CardQuery as CardQueryPayload } from "./rest/pay
 import {IClientComponentFactory} from "./IClientComponentFactory";
 import {ClientComponentFactory} from "./ClientComponentFactory";
 
+/**
+ * @Created 2024-09-22
+ * @Brief The client class is the main entry point for interacting with the API.
+ */
+
 export class Client implements IClient{
-    
+
     private readonly _cards:ICardsManager;
     private readonly _vendors:IVendorManager;
     private readonly _rest: IRest;
@@ -18,20 +23,20 @@ export class Client implements IClient{
      * @param api URI of the api
      */
     static fromApi(api:string):IClient{
-        
+
         return new Client(
             new ClientComponentFactory(),
             new Rest(api)
         )
     }
-    
-    
+
+
     constructor(factory:IClientComponentFactory, rest:IRest){
         this._cards = factory.getCardsManager(this);
         this._rest = rest;
         this._vendors = factory.getVendorManager(this);
     }
-    
+
     public async login(username:string, password:string):Promise<void> {
         const userRes:UserPayload = await this.rest.post(Routes.Auth.login(),{ username, password });
         this._user = User.fromUserPayload(this, userRes);
@@ -52,10 +57,10 @@ export class Client implements IClient{
                 //not logged in (we are catching a 403 here)
             }
         }
-        
+
         return loggedIn;
     }
-    
+
     // properties
     public get cards(): ICardsManager{
         return this._cards;
