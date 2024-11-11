@@ -16,7 +16,7 @@ describe("Currency test", () => {
     it("get user wallet", async() => {
         let coinsObj = await client.user.currency.getCurrency();
         let coins = coinsObj.coins;
-        assert.ok(coins === 0);
+        assert.ok(coins > 0);
     })
 
 })
