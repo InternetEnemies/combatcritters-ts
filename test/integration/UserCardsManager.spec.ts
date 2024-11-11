@@ -13,8 +13,10 @@ beforeEach(async () => {
 })
 describe("User Cards Manager test", () => {
 
-    it("User can open a pack", async () => {
-
+    it("get Cards", async () => {
+        let builder = client.user.cards.getBuilder();
+        let cards = await client.user.cards.getCards(builder.build());
+        assert.ok(cards.length > 0)
     })
 })
 
