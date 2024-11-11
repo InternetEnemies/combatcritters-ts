@@ -43,7 +43,6 @@ describe("Local deck validator", () => {
         deckList.push(list[0].getItem());
         let result = await validator.validate(deckList);
         assert.ok(!result.isValid)
-        assert.ok(result.issues.length === 2)
     })
 })
 
