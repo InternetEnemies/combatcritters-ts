@@ -1,6 +1,6 @@
-import { Deck, IDeck, IUser, IProfile } from "./index";
-import { IClient } from "../index";
-import { Payloads, Routes } from "../rest/index";
+import { Deck, IDeck, IUser, IProfile } from "../index";
+import { IClient } from "../../index";
+import { Payloads, Routes } from "../../rest";
 
 export class Profile implements IProfile {
     private readonly _client: IClient;

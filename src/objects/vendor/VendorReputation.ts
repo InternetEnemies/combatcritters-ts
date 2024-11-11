@@ -1,5 +1,5 @@
-import { VendorReputation as VendorReputationPayload } from "../rest/payloads";
-import { IVendorReputation } from "./index";
+import { VendorReputation as VendorReputationPayload } from "../../rest/payloads";
+import { IVendorReputation } from "../index";
 
 export class VendorReputation implements IVendorReputation {
     private readonly _current_xp: number;

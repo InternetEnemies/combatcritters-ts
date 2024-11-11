@@ -1,14 +1,14 @@
 import { CardQuery, ICard, IUser } from "../objects";
-import { Card } from "../objects/Card";
+import { Card } from "../objects/card/Card";
 import { ICardQuery } from "../objects/interfaces/ICardQuery";
 import { ICardQueryBuilder } from "../objects/interfaces/ICardQueryBuilder";
 import { IUserCardsManager } from "./interfaces";
 import { IClient } from "../IClient";
-import { CardQueryBuilder } from "../objects/CardQueryBuilder";
+import { CardQueryBuilder } from "../objects/card/CardQueryBuilder";
 import { Card as CardPayload, CardQuery as CardQueryPayload } from "../rest/payloads";
 import { Routes } from "../rest";
 import { IItemStack } from "../objects/interfaces/IItemStack";
-import { ItemStack } from "../objects/ItemStack";
+import { ItemStack } from "../objects/itemstack/ItemStack";
 
 export class UserCardsManager implements IUserCardsManager {
     private readonly _client: IClient;

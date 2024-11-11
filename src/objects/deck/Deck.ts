@@ -1,8 +1,8 @@
-import { Routes } from "../rest/routes/decks";
-import { ICard, IUser, IDeckValidity, DeckValidity, IDeck  } from "./index";
-import { Deck as DeckPayload, DeckDetails as DeckDetailsPayload, DeckValidity as DeckValidityPayload, UpdateDeck as UpdateDeckPayload, Card as CardPayload } from "../rest/payloads/index";
-import { Card } from "./index";
-import { IClient } from "../index";
+import { Routes } from "../../rest/routes/decks";
+import { ICard, IUser, IDeckValidity, DeckValidity, IDeck  } from "../index";
+import { Deck as DeckPayload, DeckDetails as DeckDetailsPayload, DeckValidity as DeckValidityPayload, UpdateDeck as UpdateDeckPayload, Card as CardPayload } from "../../rest/payloads";
+import { Card } from "../index";
+import { IClient } from "../../index";
 
 export class Deck implements IDeck {
     private readonly _deckid: number;

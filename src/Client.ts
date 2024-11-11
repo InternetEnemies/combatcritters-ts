@@ -3,7 +3,7 @@ import {ICardsManager, IVendorManager} from "./index";
 import {Rest, IRest, Routes} from "./rest";
 import {DeckValidator, IDeckValidator, IUser} from "./objects";
 import {DeckRules, UserPayload, CardQuery as CardQueryPayload } from "./rest/payloads";
-import {User} from "./objects/User";
+import {User} from "./objects/user/User";
 import {IClientComponentFactory} from "./IClientComponentFactory";
 import {ClientComponentFactory} from "./ClientComponentFactory";
 

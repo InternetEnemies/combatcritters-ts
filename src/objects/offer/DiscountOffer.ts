@@ -1,6 +1,6 @@
-import { IClient, IRest } from "..";
-import { OfferDiscount } from "../rest/payloads";
-import { ICard, ICurrency, IDiscountOffer, IItemStack, IPack, ItemStack, IUserOfferState, Offer } from "./index";
+import { IClient, IRest } from "../../index";
+import { OfferDiscount } from "../../rest/payloads";
+import { ICard, ICurrency, IDiscountOffer, IItemStack, IPack, ItemStack, IUserOfferState, Offer } from "../index";
 
 export class DiscountOffer extends Offer implements IDiscountOffer {
     private readonly _discountedGive: IItemStack<ICurrency | ICard | IPack>[];

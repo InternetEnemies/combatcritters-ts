@@ -1,11 +1,11 @@
 import { ICard } from "../objects";
-import { Card } from "../objects/Card";
+import { Card } from "../objects/card/Card";
 import { ICardQuery } from "../objects/interfaces/ICardQuery";
 import { ICardQueryBuilder } from "../objects/interfaces/ICardQueryBuilder";
 import { IRest, Routes } from "../rest";
 import { ICardsManager } from "./interfaces";
 import { Card as CardPayload } from "../rest/payloads";
-import { CardQueryBuilder } from "../objects/CardQueryBuilder";
+import { CardQueryBuilder } from "../objects/card/CardQueryBuilder";
 import {IClient} from "../IClient";
 
 export class CardsManager implements ICardsManager {

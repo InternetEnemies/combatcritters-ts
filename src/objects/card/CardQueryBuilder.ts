@@ -1,4 +1,4 @@
-import {CardOrder, ICardQuery, ICardQueryBuilder} from "./interfaces";
+import {CardOrder, ICardQuery, ICardQueryBuilder} from "../interfaces";
 import {CardQuery} from "./CardQuery";
 
 export class CardQueryBuilder implements ICardQueryBuilder{

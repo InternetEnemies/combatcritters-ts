@@ -11,8 +11,8 @@ import {
     ItemStack,
     IUserCardsManager,
     Routes,
-} from "../index";
-import {DeckIssue, DeckRules} from "../rest/payloads";
+} from "../../index";
+import {DeckIssue, DeckRules} from "../../rest/payloads";
 
 export class DeckValidator implements IDeckValidator {
     private _ownedCards!: Promise<IItemStack<ICard>[]>;

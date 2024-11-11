@@ -17,7 +17,7 @@ import {
   User,
   UserOfferItem,
   UserOfferState,
-} from "../index";
+} from "../../index";
 import {
   Offer as OfferPayload,
   OfferItem as OfferItemPayload,
@@ -28,9 +28,9 @@ import {
   CardQuery as CardQueryPayload,
   Wallet as WalletPayload,
   UserPack as UserPackPayload, VendorReputation
-} from "../rest/payloads";
-import { Routes } from "../rest/routes/index";
-import {NullRep} from "./NullRep";
+} from "../../rest/payloads";
+import { Routes } from "../../rest/routes";
+import {NullRep} from "../vendor/NullRep";
 
 export class Offer implements IOffer {
   protected readonly _client: IClient;

@@ -1,5 +1,5 @@
-import { Wallet } from "../rest/payloads";
-import { ICurrency, IItem, IItemVisitor } from "./index";
+import { Wallet } from "../../rest/payloads";
+import { ICurrency, IItem, IItemVisitor } from "../index";
 
 export class Currency implements ICurrency, IItem {
     private readonly _coins: number;

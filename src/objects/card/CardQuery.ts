@@ -1,6 +1,6 @@
-import { ICardQuery, CardOrder, IItemStack, ICard } from "./interfaces";
-import { Card as CardPayload, CardQuery as CardQueryPayload } from "../rest/payloads";
-import { ItemStack } from "./ItemStack";
+import { ICardQuery, CardOrder, IItemStack, ICard } from "../interfaces";
+import { Card as CardPayload, CardQuery as CardQueryPayload } from "../../rest/payloads";
+import { ItemStack } from "../itemstack/ItemStack";
 import { Card } from "./Card";
 
 export class CardQuery implements ICardQuery {
