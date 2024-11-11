@@ -1,8 +1,17 @@
-import {DeckManager, FriendsManager, ICardsManager, IDeckManager, IFriendsManager, IUserCardsManager, UserCardsManager, IPacksManager, PacksManager, IUserCurrencyManager, UserCurrencyManager} from "../../managers";
-import {IUser, IProfile} from "../interfaces";
+import {DeckManager,
+    FriendsManager,
+    ICardsManager,
+    IDeckManager,
+    IFriendsManager,
+    IUserCardsManager,
+    UserCardsManager,
+    IPacksManager,
+    PacksManager,
+    IUserCurrencyManager,
+    UserCurrencyManager} from "../../managers";
+import {IUser, IProfile, DeckValidator, Profile} from "../index";
 import {UserPayload} from "../../rest/payloads";
 import {IClient} from "../../IClient";
-import {DeckValidator, Profile} from "../index";
 
 
 export class User implements IUser {

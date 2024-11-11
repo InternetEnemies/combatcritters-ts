@@ -1,6 +1,5 @@
 import {VendorReputation as VendorRepPayload} from '../../rest/payloads';
-import {IPurchaseStatus, IVendorReputation} from '../interfaces';
-import {VendorReputation} from "../vendor/VendorReputation";
+import {IPurchaseStatus, IVendorReputation, VendorReputation} from '../index';
 
 export class PurchaseStatus implements IPurchaseStatus{
     private readonly _isCompleted: boolean;

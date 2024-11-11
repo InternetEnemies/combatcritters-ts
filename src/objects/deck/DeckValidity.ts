@@ -1,4 +1,4 @@
-import { IDeckValidity } from "../interfaces";
+import { IDeckValidity } from "../index";
 import { DeckValidity as DeckValidityPayload } from "../../rest/payloads";
 
 export class DeckValidity implements IDeckValidity {

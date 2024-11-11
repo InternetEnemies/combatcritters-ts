@@ -29,8 +29,8 @@ import {
   Wallet as WalletPayload,
   UserPack as UserPackPayload, VendorReputation
 } from "../../rest/payloads";
-import { Routes } from "../../rest/routes";
-import {NullRep} from "../vendor/NullRep";
+import { Routes } from "../../rest";
+import {NullRep} from "../vendor";
 
 export class Offer implements IOffer {
   protected readonly _client: IClient;

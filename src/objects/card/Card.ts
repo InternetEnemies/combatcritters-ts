@@ -1,5 +1,4 @@
-import { ICardVisitor } from "../visitor";
-import { ICard, ICardCritter, ICardItem, IItem } from "../interfaces";
+import { ICard, ICardCritter, ICardItem, IItem, ICardVisitor } from "../index";
 import { Card as CardPayload, CardCritter as CritterPayload, CardItem as ItemPayload } from "../../rest/payloads/cards";
 
 /**

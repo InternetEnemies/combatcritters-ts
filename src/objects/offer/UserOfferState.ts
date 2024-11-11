@@ -1,4 +1,4 @@
-import {  IUserOfferItem, IUserOfferState } from '../interfaces';
+import {  IUserOfferItem, IUserOfferState } from '../index';
 
 export class UserOfferState<T> implements IUserOfferState<T> {
     private readonly _userOfferItems: IUserOfferItem<T>[];
