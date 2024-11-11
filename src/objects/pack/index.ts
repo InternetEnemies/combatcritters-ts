@@ -1,2 +1,2 @@
-export * from "./pack"
+export * from "./Pack"
 export * from "./UserPack"
