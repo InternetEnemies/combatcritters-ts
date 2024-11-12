@@ -25,7 +25,7 @@ export class DiscountOffer extends Offer implements IDiscountOffer {
             payload.parent_offer.receive.count
         );
         return new DiscountOffer(dicountGive, payload.discount, payload.discountid, payload.parent_offer.id, vendorID, receive, give, client);
-;    }
+    }
 
     constructor(discountedGive: IItemStack<ICurrency | ICard | IPack>[], 
                 discount: number, 
