@@ -18,6 +18,13 @@ describe("Vendor Manager", () => {
         assert.ok(vendors.length > 0)
     })
 
+    it("User can look up a specific vendor by its id", async () => {
+        let vendors = await client.vendors.getVendors();
+        let id = vendors[0].id;
+        let vendor = await client.vendors.getVendor(id);
+        assert.ok(vendor.id === vendors[0].id)
+    })
+
     it("User can look at vendor's offer", async () => {
         let vendors = await client.vendors.getVendors();
         let offers = await vendors[0].getOffers();

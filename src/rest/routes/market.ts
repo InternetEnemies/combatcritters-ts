@@ -8,6 +8,14 @@ export const Routes = {
     },
     /**
      * - GET
+     * Get a vendor
+     * @param vendorid id of the vendor
+     */
+    vendor(vendorid:number){
+        return `/vendors/${vendorid}`
+    },
+    /**
+     * - GET
      * Get a vendor's offers
      * @param vendorid id of the vendor
      */

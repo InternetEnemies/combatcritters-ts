@@ -16,5 +16,10 @@ export class VendorManager implements IVendorManager {
             return Vendor.fromVendorPayload(vendor, this._client);
         });
     }
+
+    public async getVendor(id: number): Promise<IVendor> {
+        const response: VendorPayload = await this._client.rest.get(Routes.Market.vendor(id));
+        return Vendor.fromVendorPayload(response, this._client);
+    }
     
 }
