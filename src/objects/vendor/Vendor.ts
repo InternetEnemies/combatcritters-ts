@@ -1,7 +1,9 @@
-import { IClient } from "../../IClient";
-import { IRest, Routes } from "../../rest";
-import { Vendor as VendorPayload, Offer as OfferPayload, OfferDiscount as OfferDiscountPayload } from "../../rest/payloads";
-import { DiscountOffer, IDiscountOffer, IOffer, ISpecialOffer, IVendor, IVendorReputation, Offer, VendorReputation } from "../index";
+import {IDiscountOffer, IOffer, ISpecialOffer, IVendor, IVendorReputation} from "../interfaces";
+import {IClient} from "../../IClient";
+import {VendorReputation} from "./VendorReputation";
+import {DiscountOffer, Offer} from "../offer";
+import {Vendor as VendorPayload, Offer as OfferPayload, OfferDiscount as OfferDiscountPayload} from "../../rest/payloads";
+import {Routes} from "../../rest";
 
 export class Vendor implements IVendor {
   private readonly _id: number;

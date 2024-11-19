@@ -1,4 +1,4 @@
-import {IVendorReputation} from "../index";
+import {IVendorReputation} from "../interfaces";
 
 export class NullRep implements IVendorReputation{
     current_xp: number = 0;

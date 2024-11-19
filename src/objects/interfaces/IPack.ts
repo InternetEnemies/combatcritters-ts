@@ -1,5 +1,5 @@
-import { IItemVisitor } from "../visitor";
-import {ICard} from "./index";
+import {ICard} from "./ICard";
+import {IItemVisitor} from "../visitor";
 
 export interface IPack {
   image: string;

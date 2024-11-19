@@ -1,8 +1,9 @@
-import { ICard, Card, ICardQuery, ICardQueryBuilder, CardQueryBuilder } from "../objects";
-import { IRest, Routes } from "../rest";
-import { ICardsManager } from "./interfaces";
-import { Card as CardPayload } from "../rest/payloads";
+import {ICardsManager} from "./interfaces";
+import {IRest} from "../rest";
 import {IClient} from "../IClient";
+import {Card, CardQueryBuilder, ICard, ICardQuery, ICardQueryBuilder} from "../objects";
+import {Card as CardPayload} from "../rest/payloads";
+import {Routes} from "../rest";
 
 export class CardsManager implements ICardsManager {
     private readonly _rest: IRest;

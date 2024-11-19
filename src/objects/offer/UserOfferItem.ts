@@ -1,4 +1,5 @@
-import { IItemStack, IUserOfferItem } from "../index";
+import {IItemStack, IUserOfferItem} from "../interfaces";
+
 
 export class UserOfferItem<T> implements IUserOfferItem<T> {
     private readonly _giveItem: IItemStack<T>;

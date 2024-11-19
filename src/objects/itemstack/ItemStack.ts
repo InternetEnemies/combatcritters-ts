@@ -1,10 +1,10 @@
-import { IRest } from "../../rest";
-import { CardQuery as CardQueryPayload,
-        Pack as PackPayload,
-        Wallet as WalletPayload,
-        UserPack as UserPackPayload
- } from "../../rest/payloads";
-import { Card, Currency, ICard, ICurrency, IItemStack, IPack, Pack } from "../index";
+import {ICard, ICurrency, IItemStack, IPack} from "../interfaces";
+import {Card} from "../card";
+import {Pack} from "../pack";
+import {IRest} from "../../rest";
+import {Currency} from "../wallet";
+import {CardQuery as CardQueryPayload, UserPack as UserPackPayload, Wallet as WalletPayload} from "../../rest/payloads";
+
 
 export class ItemStack<T> implements IItemStack<T> {
     private readonly _item: T;

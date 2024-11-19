@@ -1,7 +1,10 @@
+import {ICard, IItemStack, IUser, IUserPack} from "../interfaces";
+import {Pack} from "./Pack";
 import {IRest} from "../../rest";
-import {Routes} from '../../rest/routes/packs';
-import {Card, ICard, IItemStack, ItemStack, IUser, IUserPack, Pack} from "../index";
-import {PackResult, UserPack as UserPackPayload} from '../../rest/payloads';
+import {Routes} from "../../rest/routes/packs";
+import {ItemStack} from "../itemstack";
+import {PackResult, UserPack as UserPackPayload} from "../../rest/payloads";
+import {Card} from "../card";
 
 export class UserPack extends Pack implements IUserPack{
     private readonly _user: IUser;

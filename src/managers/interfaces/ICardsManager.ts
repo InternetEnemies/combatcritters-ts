@@ -1,6 +1,4 @@
-import { ICard } from "../../objects";
-import { ICardQuery } from "../../objects/interfaces/ICardQuery";
-import { ICardQueryBuilder } from "../../objects/interfaces/ICardQueryBuilder";
+import {ICard, ICardQuery, ICardQueryBuilder} from "../../objects";
 
 export interface ICardsManager {
     /**

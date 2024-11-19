@@ -1,4 +1,6 @@
-import { ICard, IPack, IUser } from './index';
+import {IPack} from "./IPack";
+import {IUser} from "./IUser";
+import {ICard} from "./ICard";
 
 export interface IUserPack extends IPack {
     user: IUser;

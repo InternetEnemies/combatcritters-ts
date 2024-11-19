@@ -1,7 +1,5 @@
-import { ICard } from "../../objects";
-import { ICardQuery } from "../../objects/interfaces/ICardQuery";
-import { ICardQueryBuilder } from "../../objects/interfaces/ICardQueryBuilder";
-import { IItemStack } from "../../objects/interfaces/IItemStack";
+import {ICard, ICardQuery, ICardQueryBuilder, IItemStack} from "../../objects";
+
 
 export interface IUserCardsManager {
     /**

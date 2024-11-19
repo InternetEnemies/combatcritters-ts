@@ -1,5 +1,5 @@
-import { IDeckValidity } from "../index";
-import { DeckValidity as DeckValidityPayload } from "../../rest/payloads";
+import {IDeckValidity} from "../interfaces";
+import {DeckValidity as DeckValidityPayload} from "../../rest/payloads";
 
 export class DeckValidity implements IDeckValidity {
     _isValid: boolean;

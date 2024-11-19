@@ -1,6 +1,6 @@
 import {IDeck, IDeckValidator, IOffer, IUser} from "./objects";
 import {ICardsManager, IVendorManager} from "./index";
-import {IRest} from "./rest/IRest";
+import {IRest} from "./rest";
 
 /**
  * @Created 2024-09-22

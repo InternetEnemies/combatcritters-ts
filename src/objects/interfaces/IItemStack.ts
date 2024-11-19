@@ -5,7 +5,7 @@ export interface IItemStack<T> {
      */
     getItem(): T;
     /**
-     * Get the amount of itmes in the stack
+     * Get the amount of items in the stack
      * @returns {number} The amount of items in the stack
      */
     getAmount(): number;

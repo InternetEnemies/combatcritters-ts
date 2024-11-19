@@ -1,4 +1,4 @@
-import { IItemVisitor } from "../visitor";
+import {IItemVisitor} from "../visitor";
 
 export interface IItem {
     accept: (visitor: IItemVisitor) => void;

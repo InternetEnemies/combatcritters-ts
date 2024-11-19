@@ -1,9 +1,8 @@
-import { IItemStack, IUserPack } from "../objects/index";
-import { IClient, IUser } from "../index";
-import { IPacksManager } from "./index";
-import { Routes } from '../rest/routes/packs';
-import { UserPack as UserPackPayload } from '../rest/payloads/index';
-import { UserPack } from "../objects/index";
+import {IPacksManager} from "./interfaces";
+import {IClient} from "../IClient";
+import {IItemStack, IUser, IUserPack, UserPack} from "../objects";
+import {Routes} from "../rest/routes/packs";
+import {UserPack as UserPackPayload} from "../rest/payloads";
 
 export class PacksManager implements IPacksManager {
     private readonly _client: IClient;

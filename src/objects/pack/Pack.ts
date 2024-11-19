@@ -1,6 +1,9 @@
-import { ICard, IItem, IItemVisitor, IPack, ICardCritter, ICardItem, CardCritter, CardItem, Card } from '../index';
-import { Pack as PackPayload, Card as CardPayload } from '../../rest/payloads';
-import { IRest, Routes } from '../../rest';
+import {ICard, IItem, IPack} from "../interfaces";
+import {IRest} from "../../rest";
+import {IItemVisitor} from "../visitor";
+import {Card} from "../card";
+import {Routes} from "../../rest";
+import {Pack as PackPayload, Card as CardPayload} from "../../rest/payloads";
 
 export class Pack implements IPack, IItem{
 

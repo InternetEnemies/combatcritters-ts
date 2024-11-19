@@ -1,4 +1,5 @@
-import { ICard, IDeck, IDeckValidity } from "./index";
+import {ICard} from "./ICard";
+import {IDeckValidity} from "./IDeckValidity";
 
 /**
  * Interface for a local deck validator.
