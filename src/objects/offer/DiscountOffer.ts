@@ -1,6 +1,9 @@
-import { IClient, IRest } from "..";
-import { OfferDiscount } from "../rest/payloads";
-import { ICard, ICurrency, IDiscountOffer, IItemStack, IPack, ItemStack, IUserOfferState, Offer } from "./index";
+import {Offer} from "./Offer";
+import {ICard, ICurrency, IDiscountOffer, IItemStack, IPack, IUserOfferState} from "../interfaces";
+import {OfferDiscount} from "../../rest/payloads";
+import {ItemStack} from "../itemstack";
+import {IClient} from "../../IClient";
+
 
 export class DiscountOffer extends Offer implements IDiscountOffer {
     private readonly _discountedGive: IItemStack<ICurrency | ICard | IPack>[];
@@ -25,7 +28,7 @@ export class DiscountOffer extends Offer implements IDiscountOffer {
             payload.parent_offer.receive.count
         );
         return new DiscountOffer(dicountGive, payload.discount, payload.discountid, payload.parent_offer.id, vendorID, receive, give, client);
-;    }
+    }
 
     constructor(discountedGive: IItemStack<ICurrency | ICard | IPack>[], 
                 discount: number, 

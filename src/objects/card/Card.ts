@@ -1,11 +1,10 @@
-import { ICardVisitor } from "./visitor";
-import { ICard, ICardCritter, ICardItem, IItem } from "./interfaces";
-import { Card as CardPayload, CardCritter as CritterPayload, CardItem as ItemPayload } from "../rest/payloads/cards";
-
 /**
  * @Created 2024-09-28
  * @Brief this file contains objects for both critter and item cards.
  */
+import {ICard, ICardCritter, ICardItem, IItem} from "../interfaces";
+import {ICardVisitor} from "../visitor";
+import { Card as CardPayload, CardCritter as CritterPayload, CardItem as ItemPayload } from "../../rest/payloads";
 
 export abstract class Card implements ICard, IItem {
     private readonly _cardid: number;

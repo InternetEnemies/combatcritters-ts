@@ -1,4 +1,4 @@
-import { IDeck } from "../index";
+import {IDeck} from "./IDeck";
 
 export interface IProfile {
     /**

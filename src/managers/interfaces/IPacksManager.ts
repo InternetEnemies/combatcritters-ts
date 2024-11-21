@@ -1,4 +1,5 @@
-import { IItemStack, IUserPack } from "../../objects/index";
+import {IItemStack, IUserPack} from "../../objects";
+
 
 export interface IPacksManager {
     /**

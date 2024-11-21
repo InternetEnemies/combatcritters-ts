@@ -1,4 +1,4 @@
-import { CardOrder, ICardQuery } from "./ICardQuery";
+import {CardOrder, ICardQuery} from "./ICardQuery";
 
 /**
  * interface for building card queries
@@ -25,7 +25,7 @@ export interface ICardQueryBuilder {
     setIds(ids: number[]): void;
     /**
      * set ordering
-     * @param name the name to set the filter to
+     * @param order the order to set the filter to
      */
     setOrder(order: CardOrder): void;
     /**

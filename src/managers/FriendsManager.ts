@@ -1,7 +1,8 @@
-import { IClient } from "../index";
-import { IUser, User } from "../objects/index";
-import { Payloads, Routes } from "../rest/index";
-import { IFriendsManager } from "./index";
+import {IFriendsManager} from "./interfaces";
+import {IUser, User} from "../objects";
+import {IClient} from "../IClient";
+import {Routes, Payloads} from "../rest";
+
 
 export class FriendsManager implements IFriendsManager {
     private readonly _user: IUser;

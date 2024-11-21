@@ -1,8 +1,8 @@
-import { IClient } from "../IClient";
-import { Deck, DeckValidator, IDeck, IDeckValidator, IUser } from "../objects";
-import { IRest, Routes } from "../rest";
-import { DeckRules, DeckDetails, CardQuery as CardQueryPayload } from "../rest/payloads";
-import { IDeckManager } from "./interfaces";
+import {IDeckManager} from "./interfaces";
+import {IClient} from "../IClient";
+import {Deck, IDeck, IDeckValidator, IUser} from "../objects";
+import {DeckDetails, DeckRules} from "../rest/payloads";
+import {Routes} from "../rest";
 
 export class DeckManager implements IDeckManager {
     private readonly _client: IClient;

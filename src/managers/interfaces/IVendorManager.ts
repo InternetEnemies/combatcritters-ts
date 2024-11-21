@@ -1,4 +1,4 @@
-import { IVendor } from "../../index";
+import {IVendor} from "../../objects";
 
 export interface IVendorManager {
     /**

@@ -1,4 +1,4 @@
-import { IUser } from "../../objects/index";
+import {IUser} from "../../objects";
 
 export interface IFriendsManager {
     /**

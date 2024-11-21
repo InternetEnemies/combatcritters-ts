@@ -1,14 +1,9 @@
-import { IClient } from "../IClient";
-import { IRest, Routes } from "../rest";
-import { Vendor as VendorPayload, Offer as OfferPayload, OfferDiscount as OfferDiscountPayload } from "../rest/payloads";
-import { Card, CardCritter } from "./Card";
-import { Currency } from "./Currency";
-import { DiscountOffer } from "./DiscountOffer";
-import { IDiscountOffer, IOffer, ISpecialOffer, IVendor, IVendorReputation } from "./interfaces";
-import { ItemStack } from "./ItemStack";
-import { Offer } from "./Offer";
-import { Pack } from "./Pack";
-import { VendorReputation } from "./VendorReputation";
+import {IDiscountOffer, IOffer, ISpecialOffer, IVendor, IVendorReputation} from "../interfaces";
+import {IClient} from "../../IClient";
+import {VendorReputation} from "./VendorReputation";
+import {DiscountOffer, Offer} from "../offer";
+import {Vendor as VendorPayload, Offer as OfferPayload, OfferDiscount as OfferDiscountPayload} from "../../rest/payloads";
+import {Routes} from "../../rest";
 
 export class Vendor implements IVendor {
   private readonly _id: number;

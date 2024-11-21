@@ -1,18 +1,12 @@
-import {
-    CardItem,
-    CardQueryBuilder,
-    CardRarity,
-    DeckValidity,
-    ICard,
-    IClient,
-    IDeckValidator,
-    IDeckValidity,
-    IItemStack,
-    ItemStack,
-    IUserCardsManager,
-    Routes,
-} from "../index";
-import {DeckIssue, DeckRules} from "../rest/payloads";
+import {CardRarity, ICard, IDeckValidator, IDeckValidity, IItemStack} from "../interfaces";
+import {DeckIssue, DeckRules} from "../../rest/payloads";
+import {IClient} from "../../IClient";
+import {IUserCardsManager} from "../../managers";
+import {ItemStack} from "../itemstack";
+import {DeckValidity} from "./DeckValidity";
+import {CardItem, CardQueryBuilder} from "../card";
+import {Routes} from "../../rest";
+
 
 export class DeckValidator implements IDeckValidator {
     private _ownedCards!: Promise<IItemStack<ICard>[]>;

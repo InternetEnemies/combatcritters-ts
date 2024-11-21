@@ -1,6 +1,8 @@
-import { IClient,IUserCurrencyManager, IUser, ICurrency, Currency } from "../index";
-import { Wallet } from "../rest/payloads";
-import { Routes } from "../rest/routes/wallet";
+import {IUserCurrencyManager} from "./interfaces";
+import {IClient} from "../IClient";
+import {Currency, ICurrency, IUser} from "../objects";
+import {Wallet} from "../rest/payloads";
+import {Routes} from "../rest/routes/wallet";
 
 export class UserCurrencyManager implements IUserCurrencyManager {
     private readonly _client: IClient;

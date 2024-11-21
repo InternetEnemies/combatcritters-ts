@@ -11,14 +11,13 @@ beforeEach(async () => {
     await client.register("username","password")
     await client.login("username","password")
 })
-describe("Currency test", () => {
+describe("User Cards Manager test", () => {
 
-    it("get user wallet", async() => {
-        let coinsObj = await client.user.currency.getCurrency();
-        let coins = coinsObj.coins;
-        assert.ok(coins > 0);
+    it("get Cards", async () => {
+        let builder = client.user.cards.getBuilder();
+        let cards = await client.user.cards.getCards(builder.build());
+        assert.ok(cards.length > 0)
     })
-
 })
 
 afterEach(async () => {

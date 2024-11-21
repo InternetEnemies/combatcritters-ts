@@ -1,4 +1,9 @@
-import { ICard, ICurrency, IItemStack, IPack, IPurchaseStatus, IUserOfferState } from "../index";
+import {IItemStack} from "./IItemStack";
+import {ICurrency} from "./ICurrency";
+import {ICard} from "./ICard";
+import {IPack} from "./IPack";
+import {IUserOfferState} from "./IUserOfferState";
+import {IPurchaseStatus} from "./IPurchaseStatus";
 
 export interface IOffer {
   offerID: number;

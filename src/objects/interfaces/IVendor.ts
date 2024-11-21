@@ -1,4 +1,8 @@
-import { IDiscountOffer, IOffer, ISpecialOffer, IVendorReputation } from "./index";
+import {IVendorReputation} from "./IVendorReputation";
+import {IOffer} from "./IOffer";
+import {IDiscountOffer} from "./IDiscountOffer";
+import {ISpecialOffer} from "./ISpecialOffer";
+
 
 export interface IVendor {
     id: number;

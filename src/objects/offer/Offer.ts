@@ -1,36 +1,27 @@
 import {
-  Card,
-  Currency,
   ICard,
-  IClient,
   ICurrency,
   IItemStack,
   IOffer,
   IPack,
   IPurchaseStatus,
-  IRest,
-  ItemStack,
   IUserOfferItem,
-  IUserOfferState, IVendorReputation,
-  Pack,
-  PurchaseStatus,
-  User,
-  UserOfferItem,
-  UserOfferState,
-} from "../index";
-import {
-  Offer as OfferPayload,
-  OfferItem as OfferItemPayload,
-  ItemType,
-  Card as CardPayload,
-  Pack as PackPayload,
-  RepChange,
-  CardQuery as CardQueryPayload,
-  Wallet as WalletPayload,
-  UserPack as UserPackPayload, VendorReputation
-} from "../rest/payloads";
-import { Routes } from "../rest/routes/index";
-import {NullRep} from "./NullRep";
+  IUserOfferState
+} from "../interfaces";
+import {IClient} from "../../IClient";
+import {IRest} from "../../rest";
+import {ItemType} from "../../rest/payloads";
+import {Card} from "../card";
+import {Pack} from "../pack";
+import {Currency} from "../wallet";
+import {ItemStack} from "../itemstack";
+import {PurchaseStatus} from "./PurchaseStatus";
+import {NullRep} from "../vendor";
+import {UserOfferItem} from "./UserOfferItem";
+import {UserOfferState} from "./UserOfferState";
+import {OfferItem as OfferItemPayload, VendorReputation, Card as CardPayload, Pack as PackPayload, Offer as OfferPayload, CardQuery as CardQueryPayload, Wallet as WalletPayload, UserPack as UserPackPayload} from "../../rest/payloads";
+import {Routes} from "../../rest";
+
 
 export class Offer implements IOffer {
   protected readonly _client: IClient;

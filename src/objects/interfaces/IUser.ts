@@ -1,5 +1,5 @@
-import {IDeckManager, IUserCardsManager, IFriendsManager, IPacksManager, IUserCurrencyManager} from "../../managers/index";
-import {IProfile} from "./index";
+import {IDeckManager, IFriendsManager, IPacksManager, IUserCardsManager, IUserCurrencyManager} from "../../managers";
+import {IProfile} from "./IProfile";
 
 export interface IUser {
     //properties

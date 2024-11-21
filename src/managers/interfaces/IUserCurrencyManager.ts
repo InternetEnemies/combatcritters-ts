@@ -1,4 +1,5 @@
-import { ICurrency } from "../../index";
+import {ICurrency} from "../../objects";
+
 
 export interface IUserCurrencyManager {
     /**

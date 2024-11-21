@@ -1,4 +1,5 @@
-import {ICard, IDeckValidity} from "./index";
+import {ICard} from "./ICard";
+import {IDeckValidity} from "./IDeckValidity";
 
 export interface IDeck {
     deckid:number;

@@ -45,15 +45,18 @@ describe("Vendor Manager", () => {
         let vendors = await client.vendors.getVendors();
         let offers1 = await vendors[0].getOffers();
         let offerstate1 =  await offers1[0].accept();
+        assert.ok(offerstate1.isCompleted === true)
     })
 
     it("User can look at vendor's discount offer", async () => {
+        // ok to fail if no discount offers
         let vendors = await client.vendors.getVendors();
         let offers = await vendors[0].discountOffers();
         assert.ok(offers.length > 0)
     })
 
     it("User can look at vendor's special offer", async () => {
+        // ok to fail if no special offers
         let vendors = await client.vendors.getVendors();
         let offers = await vendors[0].getSpecialOffers();
         assert.ok(offers.length > 0)

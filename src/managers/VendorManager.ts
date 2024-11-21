@@ -1,7 +1,8 @@
-import { IClient, IRest, Routes, Vendor, VendorReputation } from "../index";
-import { IVendor } from "../index";
-import { IVendorManager } from "./index";
-import { Vendor as VendorPayload, VendorReputation as VendorReputationPayload } from "../rest/payloads";
+import {IVendorManager} from "./interfaces";
+import {IClient} from "../IClient";
+import {IVendor, Vendor} from "../objects";
+import {Routes} from "../rest";
+import {Vendor as VendorPayload} from "../rest/payloads";
 
 export class VendorManager implements IVendorManager {
     private readonly _client: IClient;

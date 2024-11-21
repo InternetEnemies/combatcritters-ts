@@ -1,5 +1,6 @@
-import { IDeck, IDeckValidator } from "../../objects/interfaces";
+
 import { DeckRules } from "../../rest/payloads";
+import {IDeck, IDeckValidator} from "../../objects";
 
 export interface IDeckManager {
     validator: IDeckValidator;
