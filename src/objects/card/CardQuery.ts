@@ -3,6 +3,12 @@ import {ItemStack} from "../itemstack";
 import {Card} from "./Card";
 import {CardQuery as CardQueryPayload} from "../../rest/payloads";
 
+/**
+ * CardQuery.ts
+ * @created 2024-09-30
+ * @brief this file contains the object for a card query
+ */
+
 export class CardQuery implements ICardQuery {
     private readonly cost!: number;
     private readonly costLess!: boolean;

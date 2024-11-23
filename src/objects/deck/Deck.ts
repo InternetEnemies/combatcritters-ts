@@ -5,6 +5,11 @@ import {Card} from "../card";
 import {Routes} from "../../rest/routes/decks";
 import {DeckDetails as DeckDetailsPayload, DeckValidity as DeckValidityPayload, Deck as DeckPayload, Card as CardPayload, UpdateDeck as UpdateDeckPayload} from "../../rest/payloads";
 
+/**
+ * Deck.ts
+ * @created 2024-10-03
+ * @brief Deck object
+ */
 
 export class Deck implements IDeck {
     private readonly _deckid: number;

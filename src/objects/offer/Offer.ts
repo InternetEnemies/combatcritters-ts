@@ -22,6 +22,11 @@ import {UserOfferState} from "./UserOfferState";
 import {OfferItem as OfferItemPayload, VendorReputation, Card as CardPayload, Pack as PackPayload, Offer as OfferPayload, CardQuery as CardQueryPayload, Wallet as WalletPayload, UserPack as UserPackPayload} from "../../rest/payloads";
 import {Routes} from "../../rest";
 
+/**
+ * Offer.ts
+ * @created 2024-10-29
+ * @brief Offer object
+ */
 
 export class Offer implements IOffer {
   protected readonly _client: IClient;

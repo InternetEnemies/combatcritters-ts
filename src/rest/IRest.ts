@@ -1,3 +1,9 @@
+/**
+ * IRest.ts
+ * @created 2024-10-29
+ * @brief Interface for the REST client
+ */
+
 export interface IRest {
     /**
      * execute a GET request for the resource

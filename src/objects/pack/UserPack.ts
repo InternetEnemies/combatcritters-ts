@@ -6,6 +6,12 @@ import {ItemStack} from "../itemstack";
 import {PackResult, UserPack as UserPackPayload} from "../../rest/payloads";
 import {Card} from "../card";
 
+/**
+ * UserPack.ts
+ * @created 2024-10-29
+ * @brief User Pack object
+ */
+
 export class UserPack extends Pack implements IUserPack{
     private readonly _user: IUser;
     private readonly _quantity: number;

@@ -1,5 +1,7 @@
 /**
- * Payloads for the decks
+ * decks.ts
+ * @created 2024-10-29
+ * @brief Payloads for the decks
  */
 export type DeckDetails = {
     deckid: number,
@@ -27,14 +29,4 @@ export type DeckRules = {
 export type UpdateDeck = {
     deck: Deck
     deck_validity: DeckValidity
-}
-
-export enum DeckIssue {
-    STR_MIN_CARDS = "Not enough cards in the deck",
-    STR_MAX_CARDS = "Too many cards in the deck",
-    STR_LIMIT_LEGEND = "Too many legendary cards in the deck",
-    STR_LIMIT_EPIC = "Too many epic cards in the deck",
-    STR_LIMIT_RARE = "Too many rare cards in the deck",
-    STR_LIMIT_ITEM = "Too many items in the deck",
-    STR_OWNED = "You own %d %s cards. (Deck uses %d)"
 }

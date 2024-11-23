@@ -1,5 +1,10 @@
 import {ICard, ICardQuery, ICardQueryBuilder, IItemStack} from "../../objects";
 
+/**
+ * IUserCardsManager.ts
+ * @created 2024-09-28
+ * @brief Interface for the user cards manager
+ */
 
 export interface IUserCardsManager {
     /**

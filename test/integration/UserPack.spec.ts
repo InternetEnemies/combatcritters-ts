@@ -2,6 +2,10 @@ import {BackendInstance} from "./ContainerUtil";
 import {IClient, IUserPack} from "../../src";
 import * as assert from "node:assert";
 
+/**
+ * User Pack integration test
+ */
+
 let client: IClient;
 let container: BackendInstance
 

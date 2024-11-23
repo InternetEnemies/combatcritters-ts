@@ -1,6 +1,12 @@
 import {IDeckValidity} from "../interfaces";
 import {DeckValidity as DeckValidityPayload} from "../../rest/payloads";
 
+/**
+ * DeckValidity.ts
+ * @created 2024-10-03
+ * @brief Deck validity object
+ */
+
 export class DeckValidity implements IDeckValidity {
     _isValid: boolean;
     _issues: string[];

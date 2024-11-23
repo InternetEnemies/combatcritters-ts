@@ -1,6 +1,8 @@
 import {CardOrder, ICardQuery} from "./ICardQuery";
 
 /**
+ * ICardQueryBuilder.ts
+ * @created 2024-10-03
  * interface for building card queries
  */
 export interface ICardQueryBuilder {

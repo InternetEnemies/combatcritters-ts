@@ -1,10 +1,12 @@
 import {IClient} from "../../src/"
 import {BackendInstance} from "./ContainerUtil";
 
+/**
+ * Auth integration test
+ */
+
 let client: IClient;
 let container: BackendInstance
-
-
 
 beforeEach(async () => {
     container = new BackendInstance()

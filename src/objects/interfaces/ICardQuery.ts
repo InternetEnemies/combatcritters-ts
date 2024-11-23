@@ -1,3 +1,12 @@
+/**
+ * ICardQuery.ts
+ * @created 2024-09-30
+ * @brief Interface for the card query & Card order string
+ */
+
+/**
+ * Interface for the card query
+ */
 export interface ICardQuery {
     /**
      * Get the query string that use in the request

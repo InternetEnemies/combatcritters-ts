@@ -3,6 +3,11 @@ import {IClient} from "../../IClient";
 import {Deck} from "../deck";
 import {Routes, Payloads} from "../../rest";
 
+/**
+ * Profile.ts
+ * @created 2021-10-29
+ * @brief Profile object
+ */
 
 export class Profile implements IProfile {
     private readonly _client: IClient;

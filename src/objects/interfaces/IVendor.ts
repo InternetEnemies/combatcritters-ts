@@ -3,6 +3,11 @@ import {IOffer} from "./IOffer";
 import {IDiscountOffer} from "./IDiscountOffer";
 import {ISpecialOffer} from "./ISpecialOffer";
 
+/**
+ * IVendor.ts
+ * @created 2024-10-29
+ * @brief Vendor interface
+ */
 
 export interface IVendor {
     id: number;

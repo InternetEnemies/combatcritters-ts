@@ -5,6 +5,12 @@ import {DiscountOffer, Offer} from "../offer";
 import {Vendor as VendorPayload, Offer as OfferPayload, OfferDiscount as OfferDiscountPayload} from "../../rest/payloads";
 import {Routes} from "../../rest";
 
+/**
+ * Vendor.ts
+ * @created 2024-10-29
+ * @brief Vendor object
+ */
+
 export class Vendor implements IVendor {
   private readonly _id: number;
   private readonly _name: string;

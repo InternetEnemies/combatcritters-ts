@@ -2,7 +2,9 @@ import { Currency, Pack } from "../../objects"
 import { Card } from "./cards"
 
 /**
- * Market related payload
+ * market.ts
+ * @created 2024-10-29
+ * @brief Market related payload
  */
 export type Offer = {
     give: OfferItem[],

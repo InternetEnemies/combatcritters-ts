@@ -1,6 +1,12 @@
 import {CardOrder, ICardQuery, ICardQueryBuilder} from "../interfaces";
 import {CardQuery} from "./CardQuery";
 
+/**
+ * CardQueryBuilder.ts
+ * @created 2024-10-03
+ * @brief this file contains the object for a card query builder
+ */
+
 export class CardQueryBuilder implements ICardQueryBuilder{
 
     private cost!: number;

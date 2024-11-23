@@ -1,3 +1,9 @@
+/**
+ * auth.ts
+ * @created 2024-10-29
+ * @brief Routes for the auth endpoints
+ */
+
 export const Routes = {
     /**
      * Route for:

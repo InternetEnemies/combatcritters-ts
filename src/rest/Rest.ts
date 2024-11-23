@@ -1,6 +1,12 @@
 import { IRest } from "./IRest";
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 
+/**
+ * Rest.ts
+ * @created 2024-10-29
+ * @brief REST client
+ */
+
 export class Rest implements IRest {
   private Axios: AxiosInstance;
 

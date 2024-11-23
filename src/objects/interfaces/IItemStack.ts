@@ -1,3 +1,9 @@
+/**
+ * IItemStack.ts
+ * @created 2024-10-29
+ * @brief Item Stack interface
+ */
+
 export interface IItemStack<T> {
     /**
      * Get the item in the stack

@@ -2,6 +2,10 @@ import {BackendInstance} from "./ContainerUtil";
 import {CardsManager, ICard, ICardQuery, ICardQueryBuilder, ICardsManager, IClient, IUserPack} from "../../src";
 import * as assert from "node:assert";
 
+/**
+ * Cards Manager integration test
+ */
+
 let client: IClient;
 let container: BackendInstance;
 let manager: ICardsManager;

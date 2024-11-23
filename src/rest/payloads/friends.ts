@@ -1,7 +1,9 @@
 import { UserPayload } from "./auth";
 
 /**
- * Friend related payloads
+ * friends.ts
+ * @created 2024-10-29
+ * @brief Friend related payloads
  */
 export type FriendPayload = {
     username: string;

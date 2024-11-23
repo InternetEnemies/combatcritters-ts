@@ -1,4 +1,5 @@
 /**
+ * ICardVisitor.ts
  * @Created 2024-10-01
  * @Brief Generic visitor class for item objects.
  */

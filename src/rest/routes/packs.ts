@@ -1,3 +1,9 @@
+/**
+ * packs.ts
+ * @created 2024-10-29
+ * @brief Routes for the packs endpoints
+ */
+
 export const Routes = {
     /**
      * - GET

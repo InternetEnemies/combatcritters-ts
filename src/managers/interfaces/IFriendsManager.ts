@@ -1,5 +1,11 @@
 import {IUser} from "../../objects";
 
+/**
+ * IFriendsManager.ts
+ * @created 2024-10-08
+ * @brief Interface for the friends manager
+ */
+
 export interface IFriendsManager {
     /**
      * Get the friends of the current user

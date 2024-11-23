@@ -1,5 +1,11 @@
 import {IDeck} from "./IDeck";
 
+/**
+ * IProfile.ts
+ * @created 2024-10-29
+ * @brief Profile interface
+ */
+
 export interface IProfile {
     /**
      * Get the profile of the user, which is the feature deck

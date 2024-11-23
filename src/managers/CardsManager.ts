@@ -5,6 +5,12 @@ import {Card, CardQueryBuilder, ICard, ICardQuery, ICardQueryBuilder} from "../o
 import {Card as CardPayload} from "../rest/payloads";
 import {Routes} from "../rest";
 
+/**
+ * CardsManager.ts
+ * @created 2024-09-29
+ * @brief Manager for cards
+ */
+
 export class CardsManager implements ICardsManager {
     private readonly _rest: IRest;
 

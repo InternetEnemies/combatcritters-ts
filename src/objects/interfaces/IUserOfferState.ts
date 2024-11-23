@@ -1,6 +1,7 @@
 import {IUserOfferItem} from "./IUserOfferItem";
 
 /**
+ * IUserOfferState.ts
  * @Created 2024-10-26
  * @Brief Compares an offer with the user's inventory
  */

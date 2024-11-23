@@ -1,6 +1,11 @@
-
 import { DeckRules } from "../../rest/payloads";
 import {IDeck, IDeckValidator} from "../../objects";
+
+/**
+ * IDeckManager.ts
+ * @created 2024-09-28
+ * @brief Interface for the deck manager
+ */
 
 export interface IDeckManager {
     validator: IDeckValidator;

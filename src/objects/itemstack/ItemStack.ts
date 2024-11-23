@@ -5,6 +5,11 @@ import {IRest} from "../../rest";
 import {Currency} from "../wallet";
 import {CardQuery as CardQueryPayload, UserPack as UserPackPayload, Wallet as WalletPayload} from "../../rest/payloads";
 
+/**
+ * ItemStack.ts
+ * @created 2024-10-24
+ * @brief Used to store an item and the amount of that item.
+ */
 
 export class ItemStack<T> implements IItemStack<T> {
     private readonly _item: T;

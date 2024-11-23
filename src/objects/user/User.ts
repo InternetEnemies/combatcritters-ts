@@ -13,6 +13,12 @@ import {UserPayload} from "../../rest/payloads";
 import {DeckValidator} from "../deck";
 import {Profile} from "../profile";
 
+/**
+ * User.ts
+ * @created 2021-10-29
+ * @brief User object
+ */
+
 export class User implements IUser {
     private readonly _decks: IDeckManager;
     private readonly _cards: IUserCardsManager;
