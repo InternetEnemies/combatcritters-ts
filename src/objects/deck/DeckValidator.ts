@@ -1,5 +1,5 @@
-import {CardRarity, ICard, IDeckValidator, IDeckValidity, IItemStack} from "../interfaces";
-import {DeckIssue, DeckRules} from "../../rest/payloads";
+import {CardRarity, ICard, IDeckValidator, IDeckValidity, IItemStack, DeckIssues} from "../interfaces";
+import {DeckRules} from "../../rest/payloads";
 import {IClient} from "../../IClient";
 import {IUserCardsManager} from "../../managers";
 import {ItemStack} from "../itemstack";
@@ -66,7 +66,7 @@ export class DeckValidator implements IDeckValidator {
             }
         }
         if (item > (await this._rules).limit_item) {
-            this.issues.push(DeckIssue.STR_LIMIT_ITEM);
+            this.issues.push(DeckIssues.STR_LIMIT_ITEM.replace("%d", (await this._rules).limit_item.toString()).replace("%d", item.toString()));
         }
     }
 
@@ -80,13 +80,13 @@ export class DeckValidator implements IDeckValidator {
             counts[card.rarity]++;
         }
         if (counts[CardRarity.LEGENDARY] > (await this._rules).limit_legend) {
-            this.issues.push(DeckIssue.STR_LIMIT_LEGEND);
+            this.issues.push(DeckIssues.STR_LIMIT_LEGEND.replace("%d", (await this._rules).limit_legend.toString()).replace("%d", counts[CardRarity.LEGENDARY].toString()));
         }
         if (counts[CardRarity.EPIC] > (await this._rules).limit_epic) {
-            this.issues.push(DeckIssue.STR_LIMIT_EPIC);
+            this.issues.push(DeckIssues.STR_LIMIT_EPIC.replace("%d", (await this._rules).limit_epic.toString()).replace("%d", counts[CardRarity.EPIC].toString()));
         }
         if (counts[CardRarity.RARE] > (await this._rules).limit_rare) {
-            this.issues.push(DeckIssue.STR_LIMIT_RARE);
+            this.issues.push(DeckIssues.STR_LIMIT_RARE.replace("%d", (await this._rules).limit_rare.toString()).replace("%d", counts[CardRarity.RARE].toString()));
         }
     }
 
@@ -96,10 +96,10 @@ export class DeckValidator implements IDeckValidator {
      */
     private async checkTotalCards(cards: ICard[]): Promise<void> {
         if (cards.length < (await this._rules).min_cards) {
-            this.issues.push(DeckIssue.STR_MIN_CARDS);
+            this.issues.push(DeckIssues.STR_MIN_CARDS.replace("%d", (await this._rules).min_cards.toString()).replace("%d", cards.length.toString()));
         }
         if (cards.length > (await this._rules).max_cards) {
-            this.issues.push(DeckIssue.STR_MAX_CARDS);
+            this.issues.push(DeckIssues.STR_MAX_CARDS.replace("%d", (await this._rules).max_cards.toString()).replace("%d", cards.length.toString()));
         }
     }
     
@@ -121,14 +121,14 @@ export class DeckValidator implements IDeckValidator {
         for (let i = 0; i < localOwnedCards.length; i++) {
             if (localOwnedCards[i].getItem().cardid === card.getItem().cardid) {
                 if (localOwnedCards[i].getAmount() < card.getAmount()) {
-                    this.issues.push(DeckIssue.STR_OWNED.replace("%d", localOwnedCards[i].getAmount().toString()).replace("%s", card.getItem().name).replace("%d", card.getAmount().toString()));
+                    this.issues.push(DeckIssues.STR_OWNED.replace("%d", localOwnedCards[i].getAmount().toString()).replace("%s", card.getItem().name).replace("%d", card.getAmount().toString()));
                     return true;
                 }else{
                     return false;
                 }
             }
         }
-        this.issues.push(DeckIssue.STR_OWNED.replace("%d", "0").replace("%s", card.getItem().name).replace("%d", card.getAmount().toString()));
+        this.issues.push(DeckIssues.STR_OWNED.replace("%d", "0").replace("%s", card.getItem().name).replace("%d", card.getAmount().toString()));
         return true;
     }
 
