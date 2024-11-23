@@ -1,3 +1,9 @@
+/**
+ * wallet.ts
+ * @created 2024-10-29
+ * @brief Routes for the wallet endpoints
+ */
+
 export const Routes = {
     User:{
         /**

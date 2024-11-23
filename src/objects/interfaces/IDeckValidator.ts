@@ -2,7 +2,9 @@ import {ICard} from "./ICard";
 import {IDeckValidity} from "./IDeckValidity";
 
 /**
- * Interface for a local deck validator.
+ * IDeckValidator.ts
+ * @created 2024-10-29
+ * @brief DeckValidator interface & DeckIssues enum
  */
 export interface IDeckValidator {
     /**

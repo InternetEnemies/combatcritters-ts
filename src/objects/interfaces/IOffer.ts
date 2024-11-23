@@ -5,6 +5,12 @@ import {IPack} from "./IPack";
 import {IUserOfferState} from "./IUserOfferState";
 import {IPurchaseStatus} from "./IPurchaseStatus";
 
+/**
+ * IOffer.ts
+ * @created 2024-10-29
+ * @brief Offer interface
+ */
+
 export interface IOffer {
   offerID: number;
   vendorID: number;

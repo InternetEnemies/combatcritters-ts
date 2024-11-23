@@ -1,5 +1,10 @@
 import {IItemStack, IUserPack} from "../../objects";
 
+/**
+ * IPacksManager.ts
+ * @created 2024-10-28
+ * @brief Interface for the packs manager
+ */
 
 export interface IPacksManager {
     /**

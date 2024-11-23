@@ -2,6 +2,12 @@ import {IPurchaseStatus, IVendorReputation} from "../interfaces";
 import {VendorReputation} from "../vendor";
 import {VendorReputation as VendorRepPayload} from "../../rest/payloads";
 
+/**
+ * PurchaseStatus.ts
+ * @created 2024-10-29
+ * @brief Purchase status object
+ */
+
 export class PurchaseStatus implements IPurchaseStatus{
     private readonly _isCompleted: boolean;
     private _vendorRep: IVendorReputation;

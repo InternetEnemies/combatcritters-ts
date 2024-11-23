@@ -1,7 +1,9 @@
 import { Card } from "./index";
 
 /**
- * Payloads for the packs
+ * packs.ts
+ * @created 2024-10-29
+ * @brief Payloads for the packs
  */
 export type Pack = {
     packid:number,

@@ -1,5 +1,7 @@
 /**
- * Payloads for the decks
+ * decks.ts
+ * @created 2024-10-29
+ * @brief Payloads for the decks
  */
 export type DeckDetails = {
     deckid: number,

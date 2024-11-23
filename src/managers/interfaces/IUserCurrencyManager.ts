@@ -1,5 +1,10 @@
 import {ICurrency} from "../../objects";
 
+/**
+ * IUserCurrencyManager.ts
+ * @created 2024-10-28
+ * @brief Interface for the user currency manager
+ */
 
 export interface IUserCurrencyManager {
     /**

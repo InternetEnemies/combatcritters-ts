@@ -1,3 +1,9 @@
+/**
+ * cards.ts
+ * @created 2024-10-29
+ * @brief Routes for the cards endpoints
+ */
+
 export const Routes = {
     /**
      * Route for:

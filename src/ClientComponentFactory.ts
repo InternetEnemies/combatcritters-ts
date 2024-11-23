@@ -2,6 +2,7 @@ import {CardsManager, ICardsManager, IClient, IVendorManager, VendorManager} fro
 import {IClientComponentFactory} from "./IClientComponentFactory";
 
 /**
+ * ClientComponentFactory.ts
  * @Created 2024-10-22
  * @Brief default implementation for getting components for the base client instance
  */

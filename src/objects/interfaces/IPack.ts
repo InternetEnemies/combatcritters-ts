@@ -1,6 +1,12 @@
 import {ICard} from "./ICard";
 import {IItemVisitor} from "../visitor";
 
+/**
+ * IPack.ts
+ * @created 2024-10-29
+ * @brief Pack interface
+ */
+
 export interface IPack {
   image: string;
   name: string;

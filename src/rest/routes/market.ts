@@ -1,3 +1,9 @@
+/**
+ * market.ts
+ * @created 2024-10-29
+ * @brief Routes for the market endpoints
+ */
+
 export const Routes = {
     /**
      * - GET

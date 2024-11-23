@@ -1,5 +1,11 @@
 import {ICard, ICardQuery, ICardQueryBuilder} from "../../objects";
 
+/**
+ * ICardsManager.ts
+ * @created 2024-09-28
+ * @brief Interface for the cards manager
+ */
+
 export interface ICardsManager {
     /**
      * Get a card by its id

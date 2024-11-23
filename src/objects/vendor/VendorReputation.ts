@@ -1,6 +1,11 @@
 import {IVendorReputation} from "../interfaces";
 import {VendorReputation as VendorReputationPayload} from "../../rest/payloads";
 
+/**
+ * VendorReputation.ts
+ * @created 2024-10-29
+ * @brief Vendor reputation object
+ */
 
 export class VendorReputation implements IVendorReputation {
     private readonly _current_xp: number;

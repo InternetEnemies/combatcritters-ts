@@ -4,6 +4,10 @@ import {wrapper} from "axios-cookiejar-support";
 import {CookieJar} from "tough-cookie";
 import {Client, ClientComponentFactory, IClient, Rest} from "../../src";
 
+/**
+ * BackendInstance
+ */
+
 const API_PORT = 4000;
 const API_URL = `http://localhost:${API_PORT}`;
 

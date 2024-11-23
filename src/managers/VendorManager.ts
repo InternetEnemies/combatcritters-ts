@@ -4,6 +4,12 @@ import {IVendor, Vendor} from "../objects";
 import {Routes} from "../rest";
 import {Vendor as VendorPayload} from "../rest/payloads";
 
+/**
+ * VendorManager.ts
+ * @created 2024-10-19
+ * @brief Manager for vendors
+ */
+
 export class VendorManager implements IVendorManager {
     private readonly _client: IClient;
 

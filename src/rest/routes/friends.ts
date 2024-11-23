@@ -1,3 +1,9 @@
+/**
+ * friends.ts
+ * @created 2024-10-29
+ * @brief Routes for the friends endpoints
+ */
+
 export const Routes = {
     User:{
         /**

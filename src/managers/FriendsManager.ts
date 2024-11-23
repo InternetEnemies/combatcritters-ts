@@ -3,6 +3,11 @@ import {IUser, User} from "../objects";
 import {IClient} from "../IClient";
 import {Routes, Payloads} from "../rest";
 
+/**
+ * FriendsManager.ts
+ * @created 2024-10-08
+ * @brief Manager for friends
+ */
 
 export class FriendsManager implements IFriendsManager {
     private readonly _user: IUser;

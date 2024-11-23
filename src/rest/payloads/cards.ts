@@ -1,5 +1,7 @@
 /**
- * Card related payloads
+ * cards.ts
+ * @created 2024-10-29
+ * @brief Card related payloads
  */
 export type Card = {
     cardid:number,

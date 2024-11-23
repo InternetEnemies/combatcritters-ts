@@ -1,5 +1,7 @@
 /**
- * Payloads for the auth routes
+ * auth.ts
+ * @created 2024-10-29
+ * @brief Payloads for the auth routes
  */
 export type LoginPayload = {
     username: string;

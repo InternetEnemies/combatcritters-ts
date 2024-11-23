@@ -3,6 +3,7 @@ import {ICardsManager, IVendorManager} from "./index";
 import {IRest} from "./rest";
 
 /**
+ * IClient.ts
  * @Created 2024-09-22
  * @Brief the interface for client, entry point for interacting with the API
  */

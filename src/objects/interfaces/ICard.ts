@@ -1,8 +1,10 @@
+import {ICardVisitor} from "../visitor";
+
 /**
+ * ICard.ts
  * @Created 2024-09-28
  * @Brief this file contains interfaces for handling both critter and item cards.
  */
-import {ICardVisitor} from "../visitor";
 
 export interface ICard {
   cardid: number;

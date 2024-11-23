@@ -2,6 +2,10 @@ import {BackendInstance} from "./ContainerUtil";
 import {IClient, IDeck, IDeckManager, IUserPack} from "../../src";
 import * as assert from "node:assert";
 
+/**
+ * Deck Manager integration test
+ */
+
 let client: IClient;
 let container: BackendInstance;
 let manager: IDeckManager;

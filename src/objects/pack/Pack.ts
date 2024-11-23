@@ -5,6 +5,12 @@ import {Card} from "../card";
 import {Routes} from "../../rest";
 import {Pack as PackPayload, Card as CardPayload} from "../../rest/payloads";
 
+/**
+ * Pack.ts
+ * @created 2024-10-29
+ * @brief Pack object
+ */
+
 export class Pack implements IPack, IItem{
 
     protected readonly _image: string;

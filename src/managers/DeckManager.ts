@@ -4,6 +4,12 @@ import {Deck, IDeck, IDeckValidator, IUser} from "../objects";
 import {DeckDetails, DeckRules} from "../rest/payloads";
 import {Routes} from "../rest";
 
+/**
+ * DeckManager.ts
+ * @created 2024-09-30
+ * @brief Manager for decks
+ */
+
 export class DeckManager implements IDeckManager {
     private readonly _client: IClient;
     private readonly _user: IUser;

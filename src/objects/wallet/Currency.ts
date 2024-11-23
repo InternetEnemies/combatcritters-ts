@@ -2,6 +2,11 @@ import {ICurrency, IItem} from "../interfaces";
 import {Wallet} from "../../rest/payloads";
 import {IItemVisitor} from "../visitor";
 
+/**
+ * Currency.ts
+ * @created 2024-10-29
+ * @brief Currency object
+ */
 
 export class Currency implements ICurrency, IItem {
     private readonly _coins: number;

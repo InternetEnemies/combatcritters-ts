@@ -4,6 +4,12 @@ import {CardQuery, CardQueryBuilder, ICard, ICardQuery, ICardQueryBuilder, IItem
 import {Routes} from "../rest";
 import {CardQuery as CardQueryPayload} from "../rest/payloads";
 
+/**
+ * UserCardsManager.ts
+ * @created 2024-09-30
+ * @brief Manager for user cards
+ */
+
 export class UserCardsManager implements IUserCardsManager {
     private readonly _client: IClient;
     private readonly _user: IUser;

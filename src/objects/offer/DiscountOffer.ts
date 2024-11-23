@@ -4,6 +4,11 @@ import {OfferDiscount} from "../../rest/payloads";
 import {ItemStack} from "../itemstack";
 import {IClient} from "../../IClient";
 
+/**
+ * DiscountOffer.ts
+ * @created 2024-10-29
+ * @brief Discount Offer object
+ */
 
 export class DiscountOffer extends Offer implements IDiscountOffer {
     private readonly _discountedGive: IItemStack<ICurrency | ICard | IPack>[];

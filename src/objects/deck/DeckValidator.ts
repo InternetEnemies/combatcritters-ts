@@ -7,6 +7,11 @@ import {DeckValidity} from "./DeckValidity";
 import {CardItem, CardQueryBuilder} from "../card";
 import {Routes} from "../../rest";
 
+/**
+ * DeckValidator.ts
+ * @created 2024-10-29
+ * @brief DeckValidator object, identical logic from the backend
+ */
 
 export class DeckValidator implements IDeckValidator {
     private _ownedCards!: Promise<IItemStack<ICard>[]>;

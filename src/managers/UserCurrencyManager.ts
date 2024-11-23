@@ -4,6 +4,12 @@ import {Currency, ICurrency, IUser} from "../objects";
 import {Wallet} from "../rest/payloads";
 import {Routes} from "../rest/routes/wallet";
 
+/**
+ * UserCurrencyManager.ts
+ * @created 2024-10-19
+ * @brief Manager for user currency
+ */
+
 export class UserCurrencyManager implements IUserCurrencyManager {
     private readonly _client: IClient;
     private readonly _user: IUser;

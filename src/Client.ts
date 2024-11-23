@@ -7,6 +7,7 @@ import {IClientComponentFactory} from "./IClientComponentFactory";
 import {UserPayload} from "./rest/payloads";
 
 /**
+ * Client.ts
  * @Created 2024-09-22
  * @Brief The client class is the main entry point for interacting with the API.
  */

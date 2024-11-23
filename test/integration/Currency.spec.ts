@@ -2,6 +2,10 @@ import {BackendInstance} from "./ContainerUtil";
 import {IClient, IUserPack} from "../../src";
 import * as assert from "node:assert";
 
+/**
+ * Currency integration test
+ */
+
 let client: IClient;
 let container: BackendInstance
 

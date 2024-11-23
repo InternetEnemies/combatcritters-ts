@@ -1,6 +1,12 @@
 import {ICard} from "./ICard";
 import {IDeckValidity} from "./IDeckValidity";
 
+/**
+ * IDeck.ts
+ * @created 2024-09-28
+ * @brief this file contains the interface for a deck
+ */
+
 export interface IDeck {
     deckid:number;
     name:string;
