@@ -15,26 +15,32 @@ export interface IBattleStateObserver {
     setPlayerTurn(isPlayerTurn: boolean): void;
     /**
      * set players health
+     * @param health the health of the player
      */
     setPlayerHealth(health: number): void;
     /**
      * set health of the enemy
+     * @param health the health of the enemy
      */
     setEnemyHealth(health: number): void;
     /**
      * set player energy
+     * @param energy the energy of the player
      */
     setPlayerEnergy(energy: number): void;
     /**
      * set enemy energy
+     * @param energy the energy of the enemy
      */
     setEnemyEnergy(energy: number): void;
     /**
      * set the cards in the player's hand
+     * @param cards the cards in the players hand
      */
     setHand(cards: ICard[]): void;
     /**
      * set the size of the players draw pile
+     * @param size the size of the players draw pile
      */
     setDrawPileSize(size: number): void;
     /**
@@ -46,7 +52,7 @@ export interface IBattleStateObserver {
      * set the buffer cards of the enemy
      * @param cardStates list of card states
      */
-    setEnemyBuffercards(cardStates: (ICardState | null)[]): void;
+    setEnemyBufferCards(cardStates: (ICardState | null)[]): void;
     /**
      * set the enemy cards
      * @param cardStates list of card states

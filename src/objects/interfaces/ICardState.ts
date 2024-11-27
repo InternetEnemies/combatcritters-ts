@@ -7,6 +7,6 @@ import {ICard} from "./ICard";
  */
 
 export interface ICardState {
-    card: ICard;
-    health: number;
+    card: ICard; // the card
+    health: number; // the health of the card on the battlefield
 }
