@@ -5,3 +5,4 @@ export type {IClientComponentFactory} from "./IClientComponentFactory";
 export * from "./rest";
 export * from "./objects";
 export * from "./managers";
+export * from "./ws"
