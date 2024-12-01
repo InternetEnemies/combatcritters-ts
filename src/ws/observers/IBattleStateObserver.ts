@@ -1,5 +1,5 @@
-import {ICard} from "./ICard";
-import {ICardState} from "./ICardState";
+import {ICard} from "../../objects";
+import {ICardState} from "../../objects";
 
 /**
  * IBattleStateObserver.ts
