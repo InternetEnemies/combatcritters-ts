@@ -2,11 +2,13 @@ import { IMatchController } from "./controllers/IMatchController";
 import {IBattleClient} from "./IBattleClient";
 import {ICritterSocket} from "./ICritterSocket";
 import {CritterSocket} from "./CritterSocket";
-import { IMatchStateObserver } from "./observers";
+import {IBattleStateObserver, IMatchStateObserver} from "./observers";
 import {getMatchStateAdapter} from "./observers/MatchStateAdapter";
 import {MatchController} from "./controllers/MatchController";
 import {IBattleController} from "./controllers/IBattleController";
 import {BattleController} from "./controllers/BattleController";
+import {getBattleStateAdapter} from "./observers/BattleStateAdapter";
+import {errorHandler} from "./observers/ErrorObserver";
 
 export class BattleClient implements IBattleClient {
     private readonly _matchController: IMatchController;
@@ -22,6 +24,7 @@ export class BattleClient implements IBattleClient {
         this.ws = ws;
         this._matchController = new MatchController(ws);
         this._battleController = new BattleController(ws);
+        ws.register(errorHandler)
     }
 
     setMatchStateObserver(observer: IMatchStateObserver): void {
@@ -34,5 +37,9 @@ export class BattleClient implements IBattleClient {
 
     get battleController(): IBattleController {
         return this._battleController;
+    }
+
+    setBattleStateObserver(observer: IBattleStateObserver): void {
+        this.ws.register(getBattleStateAdapter(observer));
     }
 }
