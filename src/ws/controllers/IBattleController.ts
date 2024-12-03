@@ -1,4 +1,4 @@
-import {Card} from "../../objects";
+import {ICard} from "../../objects";
 
 export interface IBattleController {
     /**
@@ -9,7 +9,7 @@ export interface IBattleController {
     /**
      * play a card at a position
      */
-    playCard(card:Card, pos:number):void;
+    playCard(card:ICard, pos:number):void;
 
     /**
      * sacrifice a card at a position
