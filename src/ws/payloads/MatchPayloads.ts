@@ -10,4 +10,6 @@ export type MatchCommand = {
 }
 
 export type CancelMatchCommand = {}
-export type MatchEndedEvent = {}
+export type MatchEndedEvent = {
+    "type":string
+}

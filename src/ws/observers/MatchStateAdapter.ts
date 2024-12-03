@@ -8,7 +8,7 @@ export function getMatchStateAdapter(matchStateObserver:IMatchStateObserver): Ha
             matchStateObserver.gameFound(body.opponent)
         },
         match_ended_event:(body:MatchEndedEvent) => {
-            matchStateObserver.matchEnded()
+            matchStateObserver.matchEnded(body.type)
         }
     }
 }

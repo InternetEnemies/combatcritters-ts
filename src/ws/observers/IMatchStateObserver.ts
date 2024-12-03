@@ -5,5 +5,5 @@
  */
 export interface IMatchStateObserver {
     gameFound(opponent:string):void;
-    matchEnded(): void;
+    matchEnded(type:string): void;
 }
