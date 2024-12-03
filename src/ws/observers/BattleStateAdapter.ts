@@ -7,6 +7,7 @@ import {
     HealthEvent,
     PlayerTurnEvent
 } from "../payloads/BattlePayloads";
+import {Card, ICardState} from "../../objects";
 
 export function getBattleStateAdapter(battleStateObserver:IBattleStateObserver) {
     return {
@@ -28,16 +29,34 @@ export function getBattleStateAdapter(battleStateObserver:IBattleStateObserver) 
             }
         },
         hand_event: (body:HandEvent) => {
-            // todo
-            console.log(body)
+            battleStateObserver.setHand(body.cards.map(Card.fromCardPayload))
         },
         draw_pile_event: (body:DrawPileEvent) => {
-            // todo
-            console.log(body)
+            battleStateObserver.setDrawPileSize(body.size)
         },
         board_state_event: (body:BoardStateEvent) => {
-            //todo
-            console.log(body)
+            const cardStates: (ICardState | null)[] = body.slots.map((slot) => {
+                if(slot.card) {
+                    return {
+                        card: Card.fromCardPayload(slot.card),
+                        health: slot.health
+                    }
+                } else {
+                    return null
+                }
+            })
+            switch (body.type) {
+                case "player":
+                    battleStateObserver.setPlayerCards(cardStates)
+                case "player_buffer":
+                    battleStateObserver.setPlayerBufferCards(cardStates)
+                case "opponent":
+                    battleStateObserver.setEnemyCards(cardStates)
+                case "opponent_buffer":
+                    battleStateObserver.setEnemyBufferCards(cardStates)
+                default:
+                    console.log("Unknown board state type: " + body.type)
+            }
         } //todo all the logs here should be removed
     }
 }
