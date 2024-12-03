@@ -1,4 +1,4 @@
-import { Card } from "../..";
+import { ICard } from "../..";
 import {CritterController} from "./CritterController";
 import {IBattleController} from "./IBattleController";
 
@@ -6,7 +6,7 @@ export class BattleController extends CritterController implements IBattleContro
     endTurn(): void {
         this.ws.send("end_turn_command",{})
     }
-    playCard(card: Card, pos: number): void {
+    playCard(card: ICard, pos: number): void {
         this.ws.send("play_card_command", {
             id:card.cardid,
             pos:pos
