@@ -10,3 +10,4 @@ export type MatchCommand = {
 }
 
 export type CancelMatchCommand = {}
+export type MatchEndedEvent = {}

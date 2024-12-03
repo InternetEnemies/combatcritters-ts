@@ -17,6 +17,12 @@ export interface ICritterSocket {
      * @param handler handler to register
      */
     register(handler: HandlerSet): void;
+
+    /**
+     * register an on socket close event handler
+     * @param cb callback to fire when socket closes
+     */
+    onClose(cb:()=>void):void
 }
 
 export type HandlerSet = {[id:string]:IRequestHandler};
