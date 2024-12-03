@@ -48,15 +48,19 @@ export function getBattleStateAdapter(battleStateObserver:IBattleStateObserver) 
             switch (body.type) {
                 case "player":
                     battleStateObserver.setPlayerCards(cardStates)
+                    break;
                 case "player_buffer":
                     battleStateObserver.setPlayerBufferCards(cardStates)
+                    break;
                 case "opponent":
                     battleStateObserver.setEnemyCards(cardStates)
+                    break;
                 case "opponent_buffer":
                     battleStateObserver.setEnemyBufferCards(cardStates)
+                    break;
                 default:
                     console.log("Unknown board state type: " + body.type)
             }
-        } //todo all the logs here should be removed
+        }
     }
 }
