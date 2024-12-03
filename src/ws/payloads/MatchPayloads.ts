@@ -6,7 +6,8 @@ export type GameFoundEvent = {
 }
 
 export type MatchCommand = {
-    "type": string
+    "type": string,
+    "deckid": number
 }
 
 export type CancelMatchCommand = {}
