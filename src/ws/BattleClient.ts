@@ -27,6 +27,10 @@ export class BattleClient implements IBattleClient {
         ws.register(errorHandler)
     }
 
+    onStopped(cb: () => void): void {
+        this.ws.onClose(cb)
+    }
+
     setMatchStateObserver(observer: IMatchStateObserver): void {
         this.ws.register(getMatchStateAdapter(observer));
     }

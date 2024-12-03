@@ -21,13 +21,16 @@ export class CritterSocket implements ICritterSocket {
             this.handleRequest(message.data)
         })
         socket.addEventListener("close", () => {
-            console.log("CritterSocket closed")
-            //todo
+            console.debug("CritterSocket closed")
         })
         socket.addEventListener("error",(error) => {
             this.handleError(error);
         })
         //todo add BattleError handling
+    }
+
+    onClose(cb: () => void): void {
+        this.socket.addEventListener("close", cb)
     }
 
     send(resource: string, body: any): void {
@@ -48,6 +51,7 @@ export class CritterSocket implements ICritterSocket {
             handler(body)
         } else {
             console.error(`CritterSocket received unhandled request with resource: ${resource}`)
+            console.debug(this.handlers)
         }
     }
 

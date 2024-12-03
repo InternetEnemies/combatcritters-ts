@@ -7,4 +7,9 @@ export interface IBattleClient {
     battleController:IBattleController;
     setMatchStateObserver(observer:IMatchStateObserver):void;
     setBattleStateObserver(observer:IBattleStateObserver):void;
+
+    /**
+     * add callback for when the client shuts down
+     */
+    onStopped(cb:()=>void):void
 }
