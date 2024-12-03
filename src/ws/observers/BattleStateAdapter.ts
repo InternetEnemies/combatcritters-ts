@@ -36,7 +36,7 @@ export function getBattleStateAdapter(battleStateObserver:IBattleStateObserver) 
         },
         board_state_event: (body:BoardStateEvent) => {
             const cardStates: (ICardState | null)[] = body.slots.map((slot) => {
-                if(slot.card) {
+                if(slot) {
                     return {
                         card: Card.fromCardPayload(slot.card),
                         health: slot.health
