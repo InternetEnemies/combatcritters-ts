@@ -53,7 +53,7 @@ export interface IWagerStateObserver {
    *
    * @param currency - The currency the user has wagered.
    */
-  setWageredCurrency(currency: ICurrency): void;
+  setWageredCurrency(currency: ICurrency | null): void;
 
   /**
    * Sets the opponent's wagered cards.
@@ -74,7 +74,7 @@ export interface IWagerStateObserver {
    *
    * @param currency - The opponent's wagered currency.
    */
-  setOppWageredCurrency(currency: ICurrency): void;
+  setOppWageredCurrency(currency: ICurrency | null): void;
 
   /**
    * Set the user ready state.
