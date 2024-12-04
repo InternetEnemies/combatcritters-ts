@@ -54,10 +54,9 @@ export interface IWagerController {
   removePack(pack: IPack): void;
 
   /**
-   * Removes currency from the user's wagerd items. If currency is already wagered this
-   * will subtract from that amount.
+   * Removes currency from the user's wagerd items (sets the currency to null).
    *
    * @param currency - Currency amount to remove.
    */
-  removeCurrency(currency: ICurrency): void;
+  removeCurrency(): void;
 }
