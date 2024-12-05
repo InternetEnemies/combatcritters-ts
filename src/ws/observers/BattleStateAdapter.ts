@@ -14,6 +14,9 @@ export function getBattleStateAdapter(battleStateObserver:IBattleStateObserver) 
         player_turn_event: (body:PlayerTurnEvent) => {
             battleStateObserver.setPlayerTurn(body.is_turn)
         },
+        enemy_turn_event: (body:PlayerTurnEvent) => {
+            battleStateObserver.setEnemyTurn(body.is_turn)
+        },
         health_event: (body:HealthEvent) => {
             if(body.is_player) {
                 battleStateObserver.setPlayerHealth(body.health)
