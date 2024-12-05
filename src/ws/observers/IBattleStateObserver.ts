@@ -14,6 +14,11 @@ export interface IBattleStateObserver {
      */
     setPlayerTurn(isPlayerTurn: boolean): void;
     /**
+     * Set whether it is the enemies turn.
+     * @param isEnemyTurn - is it the enemies turn?
+     */
+    setEnemyTurn(isEnemyTurn: boolean):void;
+    /**
      * set players health
      * @param health the health of the player
      */
