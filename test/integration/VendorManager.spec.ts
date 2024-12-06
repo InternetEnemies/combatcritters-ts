@@ -37,12 +37,12 @@ describe("Vendor Manager", () => {
 
     it("Test offer.compareItems", async () => {
         let vendors = await client.vendors.getVendors();
-        let offers1 = await vendors[1].getOffers();
+        let offers1 = await vendors[3].getOffers();
         let offerstate1 = await offers1[0].compareUserItems();
         assert.ok(offerstate1.canPurchase)
         assert.ok(offerstate1.userOfferItems.length === 1)
         assert.ok(offerstate1.userOfferItems[0].userItem.getAmount() === 100)
-        assert.ok(offerstate1.userOfferItems[0].giveItem.getAmount() === 1)
+        assert.ok(offerstate1.userOfferItems[0].giveItem.getAmount() === 5)
     })
 
     it("Test offer.accept", async () => {
@@ -62,7 +62,7 @@ describe("Vendor Manager", () => {
     it("User can look at vendor's special offer", async () => {
         // ok to fail if no special offers
         let vendors = await client.vendors.getVendors();
-        let offers = await vendors[0].getSpecialOffers();
+        let offers = await vendors[1].getSpecialOffers();
         assert.ok(offers.length > 0)
     })
 })

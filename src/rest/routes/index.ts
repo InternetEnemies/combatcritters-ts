@@ -6,6 +6,7 @@ import {Routes as Profiles} from './profiles'
 import {Routes as Packs} from './packs'
 import {Routes as Wallet} from './wallet'
 import {Routes as Market} from './market'
+import {Routes as TRADING} from './trading'
 
 export const Routes = {
     Auth,
@@ -15,5 +16,6 @@ export const Routes = {
     Profiles,
     Packs,
     Wallet,
-    Market
+    Market,
+    TRADING
 }
