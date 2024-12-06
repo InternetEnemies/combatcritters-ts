@@ -9,19 +9,22 @@ import {IBattleController} from "./controllers/IBattleController";
 import {BattleController} from "./controllers/BattleController";
 import {getBattleStateAdapter} from "./observers/BattleStateAdapter";
 import {errorHandler} from "./observers/ErrorObserver";
+import {IRest} from "../rest";
 
 export class BattleClient implements IBattleClient {
     private readonly _matchController: IMatchController;
     private readonly _battleController: IBattleController;
     private ws: ICritterSocket;
+    private rest: IRest;
 
-    public static async getClient(uri: string): Promise<IBattleClient> {
+    public static async getClient(uri: string, rest:IRest): Promise<IBattleClient> {
         let socket = await CritterSocket.getWebsocket(uri)
-        return new BattleClient(socket);
+        return new BattleClient(socket, rest);
     }
 
-    private constructor(ws: ICritterSocket) {
+    private constructor(ws: ICritterSocket, rest:IRest) {
         this.ws = ws;
+        this.rest=rest;
         this._matchController = new MatchController(ws);
         this._battleController = new BattleController(ws);
         ws.register(errorHandler)
@@ -32,7 +35,7 @@ export class BattleClient implements IBattleClient {
     }
 
     setMatchStateObserver(observer: IMatchStateObserver): void {
-        this.ws.register(getMatchStateAdapter(observer));
+        this.ws.register(getMatchStateAdapter(observer,this.rest));
     }
 
     get matchController(): IMatchController {

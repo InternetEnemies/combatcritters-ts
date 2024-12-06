@@ -1,3 +1,5 @@
+import {OfferItem} from "../../rest/payloads";
+
 /**
  * Event for when a game is found, contains the name of the opponent
  */
@@ -12,5 +14,6 @@ export type MatchCommand = {
 
 export type CancelMatchCommand = {}
 export type MatchEndedEvent = {
-    "type":string
+    "type":string,
+    "rewards":OfferItem[]
 }

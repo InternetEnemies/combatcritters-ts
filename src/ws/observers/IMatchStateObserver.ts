@@ -1,3 +1,4 @@
+import {IItem, IItemStack} from "../../objects";
 
 /**
  * @Created 2024-11-30
@@ -5,5 +6,5 @@
  */
 export interface IMatchStateObserver {
     gameFound(opponent:string):void;
-    matchEnded(type:string): void;
+    matchEnded(type:string, rewards:IItemStack<IItem>[]): void;
 }
