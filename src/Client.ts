@@ -4,7 +4,7 @@ import {IRest, Rest, Routes} from "./rest";
 import {IUser, User} from "./objects";
 import {ClientComponentFactory} from "./ClientComponentFactory";
 import {IClientComponentFactory} from "./IClientComponentFactory";
-import {UserPayload} from "./rest/payloads";
+import {UserPayload} from "./rest/payloads"; 
 
 /**
  * Client.ts
